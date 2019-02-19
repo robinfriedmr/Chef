@@ -10,11 +10,12 @@ public class BattleReady : MonoBehaviour {
 
     Vector3 battlingPlayer;
     Vector3 battlingEnemy;
-
+    Quaternion noRotation;
 
 	void Start () {
-        battlingPlayer = new Vector3(-6, 2, 1);
-        battlingEnemy = new Vector3(6, 2, 1);
+        battlingPlayer = new Vector3(-3, 2, 1);
+        battlingEnemy = new Vector3(3, 2, 1);
+        noRotation = new Quaternion(0, 0, 0, 0);
     }
 	
 	void Update () {
@@ -40,15 +41,15 @@ public class BattleReady : MonoBehaviour {
             SceneManager.LoadScene("BattleScene", LoadSceneMode.Single);
         }
         Debug.Log("Active scene: " + SceneManager.GetActiveScene().name);
-            }
+    }
 
     void Reposition (Collision enemy) {
         // Stabilize Player
-        GetComponent<Transform>().position = battlingPlayer;
+        this.GetComponent<Transform>().position = battlingPlayer;
 
-        Rigidbody enemyBody = GetComponent<Rigidbody>();
-        enemyBody.velocity = new Vector3(0, 0, 0);
-        enemyBody.rotation = new Quaternion(0, 0, 0, 0); // NOT WORKING*****
+        Rigidbody myBody = this.GetComponent<Rigidbody>();
+        myBody.constraints = RigidbodyConstraints.FreezeAll;
+        //myBody.velocity = Vector3.zero;
 
         // Stabilize Enemy
         enemy.gameObject.GetComponent<Transform>().position = battlingEnemy;
