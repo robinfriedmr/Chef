@@ -11,13 +11,41 @@ public class CombatantStats : MonoBehaviour {
     public int magic;
     public int speed;
     public int luck;
+
+    // This variable will need to be accessed by other scripts in order...
+    //...to determine level and thus stat increases.
     public int exp;
 
 	void Start () {
-		
+        level = 1;
 	}
 	
 	void Update () {
-		
+        if (Input.GetKeyDown(KeyCode.E)) {
+            exp++;
+            Debug.Log("Exp now " + exp);
+        }
+
+        //ExperienceGain(0);
 	}
+
+    public void ExperienceGain (int gain) {
+        exp += gain;
+
+        if (exp%10 == 0) {
+            LevelUp();
+            Debug.Log("Level up");
+        }
+    }
+
+    public void LevelUp () {
+        if (this.name == "PlayerCharacter") {
+            power++;
+            magic++;
+            speed++;
+
+            level++;
+            Debug.Log("New level: " + level);
+        }
+    }
 }
