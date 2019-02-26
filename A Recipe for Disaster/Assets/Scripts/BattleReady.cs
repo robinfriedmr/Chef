@@ -11,13 +11,13 @@ public class BattleReady : MonoBehaviour {
     Vector3 battlingPlayer;
     Vector3 battlingEnemy;
 
-    CombatantStats _stats; //*****
+    //CombatantStats _stats; //*****
 
 	void Start () {
         battlingPlayer = new Vector3(-3, 2, 1);
         battlingEnemy = new Vector3(3, 2, 1);
 
-        _stats = GetComponent<CombatantStats>(); //*****
+        //_stats = GetComponent<CombatantStats>(); //*****
     }
 	
 	void Update () {
@@ -35,15 +35,16 @@ public class BattleReady : MonoBehaviour {
             DontDestroyOnLoad(this.gameObject);
 
             // But move the player and enemy into position.
-            //*****Reposition(collision);
-            _stats.ExperienceGain(5); //*****
+            Reposition(collision);
+
+            //_stats.ExperienceGain(5); //*****
 
             // Switch scenes on collision
             Scene currentScene = SceneManager.GetActiveScene();
             string sceneName = currentScene.name;
             if (sceneName != "BattleScene")
             {
-            //*****    SceneManager.LoadScene("BattleScene", LoadSceneMode.Single);
+                SceneManager.LoadScene("BattleScene", LoadSceneMode.Single);
             }
             Debug.Log("Active scene: " + SceneManager.GetActiveScene().name);
         }
@@ -53,7 +54,6 @@ public class BattleReady : MonoBehaviour {
     void Reposition (Collision enemy) {
         // Stabilize Player
         this.GetComponent<Transform>().position = battlingPlayer;
-
         Rigidbody myBody = this.GetComponent<Rigidbody>();
         myBody.constraints = RigidbodyConstraints.FreezeAll;
 
