@@ -40,6 +40,7 @@ public class CombatantStats : MonoBehaviour {
 
     public void LevelUp () {
         if (this.name == "PlayerCharacter") {
+            HP += level + 1;
             power++;
             magic++;
             speed++;
