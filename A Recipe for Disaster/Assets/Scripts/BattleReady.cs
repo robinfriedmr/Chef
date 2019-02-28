@@ -5,19 +5,36 @@ using UnityEngine.SceneManagement;
 
 public class BattleReady : MonoBehaviour {
 
+    public bool ready;
+    public GameObject[] order = new GameObject[3];
+
+    CombatantStats myStats;
+    int mySpeed;
+
+    public CombatantStats partnerStats;
+    int partnerSpeed;
+
     GameObject enemyEncounter;
-    public Scene battle;
+    CombatantStats enemyStats;
+    int enemySpeed;
 
     Vector3 battlingPlayer;
     Vector3 battlingEnemy;
 
-    //CombatantStats _stats; //*****
+    private void Awake()
+    {
+        ready = true;
+    }
 
-	void Start () {
-        battlingPlayer = new Vector3(-3, 2, 1);
+    void Start () {
+        battlingPlayer = new Vector3(-3f, 0.8f, 1f); // May need experimentation as sprites change.
         battlingEnemy = new Vector3(3, 2, 1);
 
-        //_stats = GetComponent<CombatantStats>(); //*****
+        myStats = GetComponent<CombatantStats>();
+        mySpeed = myStats.speed;
+        if (partnerStats != null) {
+            partnerSpeed = partnerStats.speed;
+        }
     }
 	
 	void Update () {
@@ -27,28 +44,55 @@ public class BattleReady : MonoBehaviour {
 	private void OnCollisionEnter(Collision collision)
 	{
         Debug.Log("Collision detected.");
-
-        if (collision.gameObject.tag == "Enemy") {
-            // Keep these when loading battle scene!
-            enemyEncounter = collision.gameObject;
-            DontDestroyOnLoad(enemyEncounter);
-            DontDestroyOnLoad(this.gameObject);
-
-            // But move the player and enemy into position.
-            Reposition(collision);
-
-            //_stats.ExperienceGain(5); //*****
-
-            // Switch scenes on collision
-            Scene currentScene = SceneManager.GetActiveScene();
-            string sceneName = currentScene.name;
-            if (sceneName != "BattleScene")
+        if (ready == true) {
+            if (collision.gameObject.tag == "Enemy" && this.gameObject.tag == "Player")
             {
-                SceneManager.LoadScene("BattleScene", LoadSceneMode.Single);
-            }
-            Debug.Log("Active scene: " + SceneManager.GetActiveScene().name);
-        }
+                // Identify enemy speed stat. 
+                enemyStats = collision.gameObject.GetComponent<CombatantStats>();
+                enemySpeed = enemyStats.speed;
 
+                // Keep these when loading battle scene!
+                enemyEncounter = collision.gameObject;
+                DontDestroyOnLoad(enemyEncounter);
+                DontDestroyOnLoad(this.gameObject);
+
+                // Compute turn-order.
+                OrderTurns(mySpeed, partnerSpeed, enemySpeed);
+
+                // Move the player and enemy into position.
+                Reposition(collision);
+
+                // Switch scenes on collision, change battle readiness
+                Scene currentScene = SceneManager.GetActiveScene();
+                string sceneName = currentScene.name;
+                if (sceneName != "BattleScene")
+                {
+                    SceneManager.LoadScene("BattleScene", LoadSceneMode.Single);
+                }
+                Debug.Log("Active scene: " + SceneManager.GetActiveScene().name);
+
+                ready = false;
+            }
+        }
+    }
+
+    void OrderTurns (int player, int partner, int enemy) {
+        // The partner (delivery girl) is always faster than the player (chef).
+        if (player >= enemy) {
+            order[0] = partnerStats.gameObject; // The gameObject referenced for partnerStats.
+            order[1] = this.gameObject; // The chef/player character.
+            order[2] = enemyEncounter; // The enemy collided with/referenced for enemyStats.
+        } else if (player < enemy) {
+            if (partner < enemy) {
+                order[0] = enemyEncounter;
+                order[1] = partnerStats.gameObject;
+                order[2] = this.gameObject;
+            } else if (partner >= enemy) {
+                order[0] = partnerStats.gameObject;
+                order[1] = enemyEncounter;
+                order[2] = this.gameObject;
+            }
+        }
     }
 
     void Reposition (Collision enemy) {

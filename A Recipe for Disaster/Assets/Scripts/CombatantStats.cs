@@ -22,11 +22,9 @@ public class CombatantStats : MonoBehaviour {
 	
 	void Update () {
         if (Input.GetKeyDown(KeyCode.E)) {
-            exp++;
+            ExperienceGain(2);
             Debug.Log("Exp now " + exp);
         }
-
-        //ExperienceGain(0);
 	}
 
     public void ExperienceGain (int gain) {

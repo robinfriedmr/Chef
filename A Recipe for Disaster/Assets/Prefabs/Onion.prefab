@@ -20,8 +20,8 @@ GameObject:
   m_Component:
   - component: {fileID: 4164637714857008}
   - component: {fileID: 212211495691541302}
-  - component: {fileID: 114555704302367472}
   - component: {fileID: 65190073739644186}
+  - component: {fileID: 114555704302367472}
   m_Layer: 0
   m_Name: Onion
   m_TagString: Enemy

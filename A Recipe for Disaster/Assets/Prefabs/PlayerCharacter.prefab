@@ -20,8 +20,8 @@ GameObject:
   m_Component:
   - component: {fileID: 4348608591693634}
   - component: {fileID: 212756552187818134}
-  - component: {fileID: 54914370325306048}
   - component: {fileID: 65228120120107254}
+  - component: {fileID: 54914370325306048}
   - component: {fileID: 114135248512923026}
   - component: {fileID: 114971008443488318}
   - component: {fileID: 114715017873328118}
@@ -114,6 +114,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9dc52a5c3f648405dad950e00645cf1d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ready: 0
+  order:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  partnerStats: {fileID: 0}
 --- !u!212 &212756552187818134
 SpriteRenderer:
   m_ObjectHideFlags: 1
