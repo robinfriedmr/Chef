@@ -6,8 +6,7 @@ using UnityEngine.SceneManagement;
 public class Attacks : MonoBehaviour {
 
     BattleReady battleReady;
-//    GameObject[] order;
-    List<int> order;
+    GameObject[] order;
 
     CombatantStats stats;
 
@@ -18,13 +17,13 @@ public class Attacks : MonoBehaviour {
 	
 	void Update () {
         if (battleReady.ready == false) {
-            Debug.Log("battleReady bool is " + battleReady.ready + ". We are in " + SceneManager.GetActiveScene().name + ". Engage!");
+            Debug.Log("battleReady bool is " + battleReady.ready + ". We are in " + SceneManager.GetActiveScene() + "Engage!");
             order = battleReady.order;
 
             // Use the order to check against what gameObject.name or .tag this is, determine if this.gameObject
             //...is allowed to make its move.
 
-            PlayerAttacks();
+//            PlayerAttacks();
         }
     }
 

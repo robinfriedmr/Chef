@@ -6,8 +6,7 @@ using UnityEngine.SceneManagement;
 public class BattleReady : MonoBehaviour {
 
     public bool ready;
-//    public List<GameObject> order = new List<GameObject>();
-    public List<int> order = new List<int>();
+    public GameObject[] order = new GameObject[3];
 
     CombatantStats myStats;
     int mySpeed;
@@ -36,8 +35,6 @@ public class BattleReady : MonoBehaviour {
         if (partnerStats != null) {
             partnerSpeed = partnerStats.speed;
         }
-
-        Debug.Log(mySpeed + " is my speed.");
     }
 	
 	void Update () {
@@ -53,7 +50,6 @@ public class BattleReady : MonoBehaviour {
                 // Identify enemy speed stat. 
                 enemyStats = collision.gameObject.GetComponent<CombatantStats>();
                 enemySpeed = enemyStats.speed;
-                Debug.Log(enemySpeed + " is the enemy's speed.");
 
                 // Keep these when loading battle scene!
                 enemyEncounter = collision.gameObject;
@@ -61,7 +57,7 @@ public class BattleReady : MonoBehaviour {
                 DontDestroyOnLoad(this.gameObject);
 
                 // Compute turn-order.
-                OrderTurns();
+                OrderTurns(mySpeed, partnerSpeed, enemySpeed);
 
                 // Move the player and enemy into position.
                 Reposition(collision);
@@ -80,39 +76,8 @@ public class BattleReady : MonoBehaviour {
         }
     }
 
-    void OrderTurns () {
+    void OrderTurns (int player, int partner, int enemy) {
         // The partner (delivery girl) is always faster than the player (chef).
-
-        order.Add(mySpeed);
-        order.Add(enemySpeed);
-        if (partnerStats != null)
-        {
-            Debug.Log("adding partnerSpeed because partnerStats is " + partnerStats);
-            order.Add(partnerSpeed);
-        } else {
-            Debug.Log("partnerStats is " + partnerStats + "; trim excess.");
-            order.TrimExcess();
-            Debug.Log("capactiy of order is " + order.Capacity);
-        }
-
-        order.Sort();
-        order.Reverse();
-
-        foreach(int speed in order)
-        { Debug.Log(speed); }
-        
-
-        //Adds these as GameObjects.
-        /*
-        order.Add(this.gameObject);
-        order.Add(enemyEncounter);
-        if (partnerStats.gameObject != null)
-        {
-            order.Add(partnerStats.gameObject);
-        }
-        */
-
-        /*
         if (player >= enemy) {
             order[0] = partnerStats.gameObject; // The gameObject referenced for partnerStats.
             order[1] = this.gameObject; // The chef/player character.
@@ -127,7 +92,7 @@ public class BattleReady : MonoBehaviour {
                 order[1] = enemyEncounter;
                 order[2] = this.gameObject;
             }
-        } */
+        }
     }
 
     void Reposition (Collision enemy) {
