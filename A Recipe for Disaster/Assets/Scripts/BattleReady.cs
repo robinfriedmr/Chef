@@ -1,13 +1,14 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class BattleReady : MonoBehaviour {
 
     public bool ready;
-//    public List<GameObject> order = new List<GameObject>();
-    public List<int> order = new List<int>();
+    public List<GameObject> order = new List<GameObject>();
+    //public List<int> order = new List<int>();
 
     CombatantStats myStats;
     int mySpeed;
@@ -80,38 +81,32 @@ public class BattleReady : MonoBehaviour {
         }
     }
 
+/*    static int CompareSpeeds(CombatantStats stats1, CombatantStats stats2) {
+        int retval = stats1.speed.CompareTo(stats2.speed);
+        return retval;
+    } */
+
     void OrderTurns () {
         // The partner (delivery girl) is always faster than the player (chef).
 
-        order.Add(mySpeed);
-        order.Add(enemySpeed);
-        if (partnerStats != null)
-        {
-            Debug.Log("adding partnerSpeed because partnerStats is " + partnerStats);
-            order.Add(partnerSpeed);
-        } else {
-            Debug.Log("partnerStats is " + partnerStats + "; trim excess.");
-            order.TrimExcess();
-            Debug.Log("capactiy of order is " + order.Capacity);
-        }
-
-        order.Sort();
-        order.Reverse();
-
-        foreach(int speed in order)
-        { Debug.Log(speed); }
-        
-
         //Adds these as GameObjects.
-        /*
         order.Add(this.gameObject);
         order.Add(enemyEncounter);
         if (partnerStats.gameObject != null)
         {
             order.Add(partnerStats.gameObject);
         }
-        */
 
+//        SHOULD I MAKE A STATS CLASS?
+        //var newOrder = order.OrderBy(CombatantStats => CombatantStats.);
+
+        //order.Sort(CompareSpeeds);
+
+
+  
+        order.Reverse();
+
+        // Uses integers given as arguments.
         /*
         if (player >= enemy) {
             order[0] = partnerStats.gameObject; // The gameObject referenced for partnerStats.
