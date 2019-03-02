@@ -25,6 +25,7 @@ GameObject:
   - component: {fileID: 114135248512923026}
   - component: {fileID: 114971008443488318}
   - component: {fileID: 114715017873328118}
+  - component: {fileID: 114878114724477296}
   m_Layer: 0
   m_Name: PlayerCharacter
   m_TagString: Player
@@ -103,6 +104,17 @@ MonoBehaviour:
   speed: 1
   luck: 0
   exp: 0
+--- !u!114 &114878114724477296
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1422462143574244}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: de05c863f4a78d84791eb9a80a51912f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114971008443488318
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -115,10 +127,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ready: 0
-  order:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  order: 000000000000000000000000
   partnerStats: {fileID: 0}
 --- !u!212 &212756552187818134
 SpriteRenderer:

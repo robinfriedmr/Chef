@@ -7,7 +7,7 @@ public class Attacks : MonoBehaviour {
 
     BattleReady battleReady;
 //    GameObject[] order;
-    List<int> order;
+    List<GameObject> order;
 
     CombatantStats stats;
 

@@ -80,31 +80,40 @@ public class BattleReady : MonoBehaviour {
             }
         }
     }
-
-/*    static int CompareSpeeds(CombatantStats stats1, CombatantStats stats2) {
-        int retval = stats1.speed.CompareTo(stats2.speed);
-        return retval;
-    } */
-
+    
     void OrderTurns () {
         // The partner (delivery girl) is always faster than the player (chef).
 
         //Adds these as GameObjects.
         order.Add(this.gameObject);
-        order.Add(enemyEncounter);
-        if (partnerStats.gameObject != null)
+        if (partnerStats != null)
         {
+            Debug.Log("partnerStats is not null; adding its gameObject to list.");
             order.Add(partnerStats.gameObject);
+        } else
+        {
+            Debug.Log("There is no partnerStats value; no partner gameObject added to list.");
+        }
+        order.Add(enemyEncounter);
+
+        // SHOULD I MAKE A STATS CLASS?
+        // I already have! Each of these scripts creates a new class, by default deriving from MonoBehavior.
+
+        IEnumerable<GameObject> newOrder = order.OrderByDescending(combatant => combatant.GetComponent<CombatantStats>().speed); 
+        foreach (GameObject combatant in newOrder) {
+            if (combatant.name == "PlayerCharacter")
+            {
+                Debug.Log("The combatant is named playercharacter.");
+            } else
+            {
+                Debug.Log("Well, shoot.");
+            }
+            //Debug.Log(combatant.CombatantStats.speed); // Assets/Scripts/BattleReady.cs(100,33): error CS1061: 
+                                                       //Type `UnityEngine.GameObject' does not contain a definition for `CombatantStats' and 
+                                                       //no extension method `CombatantStats' of type `UnityEngine.GameObject' could be found. 
+                                                       //Are you missing an assembly reference?
         }
 
-//        SHOULD I MAKE A STATS CLASS?
-        //var newOrder = order.OrderBy(CombatantStats => CombatantStats.);
-
-        //order.Sort(CompareSpeeds);
-
-
-  
-        order.Reverse();
 
         // Uses integers given as arguments.
         /*

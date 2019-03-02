@@ -2,30 +2,23 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Stats
-{
-    public int Level { get; set; }
-    public int HP { get; set; }
-    public int Defense { get; set; }
-    public int Power { get; set; }
-    public int Magic { get; set; }
-    public int Speed { get; set; }
-    public int Luck { get; set; }
-    public int EXP { get; set; }
-}
-
 public class CombatantStats : MonoBehaviour
 {
-    public Stats stats;
-    public int levelFromStatsClass;
 
+    public int level;
+    public int HP;
+    public int defense;
+    public int power;
+    public int magic;
+    public int speed;
+    public int luck;
     // This variable will need to be accessed by other scripts in order...
     //...to determine level and thus stat increases.
+    public int exp;
 
     void Start()
     {
-        stats = this.GetComponent<Stats>();
-        level = stats.Level;
+        
     }
 
     void Update()
