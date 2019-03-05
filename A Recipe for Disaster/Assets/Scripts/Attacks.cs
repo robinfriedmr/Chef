@@ -9,7 +9,7 @@ public class Attacks : MonoBehaviour {
     BattleReady battleReady;
     List<GameObject> order;
 
-    List<CombatantStats> _combatantStats;
+    CombatantStats theseStats;
 
     bool battleStarted;
     int indexNo;
@@ -17,7 +17,7 @@ public class Attacks : MonoBehaviour {
     void Start () {
         battleReady = GetComponent<BattleReady>();
         battleStarted = false;
-        //stats = this.GetComponent<CombatantStats>();	
+        theseStats = this.GetComponent<CombatantStats>();	
     }
 	
 	void Update () {
@@ -42,39 +42,57 @@ public class Attacks : MonoBehaviour {
         {
             PlayerAttacks();
         }
-        else if (order.ElementAt<GameObject>(i).tag == "Enemy")
+        else if (order.ElementAt<GameObject>(i).name == "Beet")
         {
-            EnemyAttacks();
+            BeetAttacks();
+        }
+        else if (order.ElementAt<GameObject>(i).name == "Carrot")
+        {
+            CarrotAttacks();
+        }
+        else if (order.ElementAt<GameObject>(i).name == "Onion")
+        {
+            OnionAttacks();
         }
         else
         {
-            Debug.Log("Error! No element available.");
-            indexNo = 0;
+            Debug.Log("Error! No named combatants match.");
+            indexNo++;
         }
     }
 
     void PlayerAttacks () {
+        if (theseStats.level >= 2) {
+            if (Input.GetKeyDown(KeyCode.Alpha2))
+            {
+                Debug.Log("Attack type: 2");
+                indexNo++;
+                //;
+            }
+        }
+
         if (Input.GetKeyDown(KeyCode.Alpha1))
         {
             Debug.Log("Attack type: 1");
             indexNo++;
             //;
         }
-
-        if (Input.GetKeyDown(KeyCode.Alpha2))
-        {
-            Debug.Log("Attack type: 2");
-            indexNo++;
-            //;
-        }
-    }
-
-    void EnemyAttacks () { // *** Generic name for testing.
-        Debug.Log("The enemy attacks!");
-        indexNo++;
     }
 
     void BeetAttacks () {
+        Debug.Log("The beet attacks!");
+        indexNo++;
+    }
 
+    void CarrotAttacks()
+    { // *** Generic name for testing.
+        Debug.Log("The carrot attacks!");
+        indexNo++;
+    }
+
+    void OnionAttacks()
+    { // *** Generic name for testing.
+        Debug.Log("The onion attacks!");
+        indexNo++;
     }
 }

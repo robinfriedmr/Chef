@@ -16,6 +16,8 @@ public class CombatantStats : MonoBehaviour
     //...to determine level and thus stat increases.
     public int exp;
 
+    bool leveled;
+
     void Start()
     {
         
@@ -33,11 +35,13 @@ public class CombatantStats : MonoBehaviour
     public void ExperienceGain(int gain)
     {
         exp += gain;
+        leveled = false;
 
-        if (exp % 10 == 0)
+        if (exp % 10 == 0 && leveled == false)
         {
             LevelUp();
             Debug.Log("Level up");
+            leveled = true;
         }
     }
 

@@ -5,20 +5,19 @@ using UnityEngine.SceneManagement;
 
 [RequireComponent(typeof(CharacterController))]
     [AddComponentMenu("Control Script/Movement Input")]
-    public class Movement : MonoBehaviour
-    {
-        public float speed = 10.0f;
-        public float gravity = -9.8f;
-        Animator myAnimator;
-        //Rigidbody MyRigidBody;
-        CharacterController _charController;
-        SpriteRenderer mySpriteRenderer;
+public class Movement : MonoBehaviour {
+
+    public float speed = 10.0f;
+    public float gravity = -9.8f;
+        
+    Animator myAnimator;
+    CharacterController _charController;
+    SpriteRenderer mySpriteRenderer;
 
     // Use this for initialization
     void Start()
         {
              myAnimator = GetComponent<Animator>();
-             //MyRigidBody = GetComponent<Rigidbody>();
              _charController = GetComponent<CharacterController>();
              mySpriteRenderer = GetComponent<SpriteRenderer>();
         }
@@ -58,14 +57,14 @@ using UnityEngine.SceneManagement;
 
             if (_charController.velocity.magnitude > 0f)
             {
-                myAnimator.SetBool("Movement", true);
+//               myAnimator.SetBool("Movement", true);
             }
             else if (_charController.velocity.magnitude < 8f)
             {
-                myAnimator.SetBool("Movement", false);
+//               myAnimator.SetBool("Movement", false);
             }
             //Debug.Log(_charController.velocity.magnitude);
 
         }
     }
-    }
+}
