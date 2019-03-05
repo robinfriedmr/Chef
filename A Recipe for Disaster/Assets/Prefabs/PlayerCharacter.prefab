@@ -19,13 +19,15 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4348608591693634}
+  - component: {fileID: 114135248512923026}
   - component: {fileID: 212756552187818134}
   - component: {fileID: 65228120120107254}
-  - component: {fileID: 54914370325306048}
-  - component: {fileID: 114135248512923026}
   - component: {fileID: 114971008443488318}
   - component: {fileID: 114715017873328118}
   - component: {fileID: 114878114724477296}
+  - component: {fileID: 114561447017528850}
+  - component: {fileID: 143776731489464512}
+  - component: {fileID: 95513331303124360}
   m_Layer: 0
   m_Name: PlayerCharacter
   m_TagString: Player
@@ -46,21 +48,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!54 &54914370325306048
-Rigidbody:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1422462143574244}
-  serializedVersion: 2
-  m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0.05
-  m_UseGravity: 0
-  m_IsKinematic: 0
-  m_Interpolate: 0
-  m_Constraints: 116
-  m_CollisionDetection: 0
 --- !u!65 &65228120120107254
 BoxCollider:
   m_ObjectHideFlags: 1
@@ -73,7 +60,37 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 3.5, y: 6.25, z: 0.2}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!95 &95513331303124360
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1422462143574244}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 0}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!114 &114135248512923026
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1422462143574244}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 30c7dc4992b589e4ea34408f5b4bd853, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 0.2
+--- !u!114 &114561447017528850
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
@@ -81,10 +98,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 1422462143574244}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 30c7dc4992b589e4ea34408f5b4bd853, type: 3}
+  m_Script: {fileID: 11500000, guid: 3802dd2e5f5363f4499783206769b2cf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 0.2
+  speed: 10
+  gravity: -9.8
 --- !u!114 &114715017873328118
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -127,8 +145,26 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ready: 0
-  order: 000000000000000000000000
+  combatants: []
   partnerStats: {fileID: 0}
+  attackOrder: []
+--- !u!143 &143776731489464512
+CharacterController:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1422462143574244}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Height: 1.39
+  m_Radius: 0.535
+  m_SlopeLimit: 45
+  m_StepOffset: 0.3
+  m_SkinWidth: 0.08
+  m_MinMoveDistance: 0.001
+  m_Center: {x: 0, y: 0.05, z: 0}
 --- !u!212 &212756552187818134
 SpriteRenderer:
   m_ObjectHideFlags: 1
