@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -18,8 +19,8 @@ public class Attacks : MonoBehaviour {
 	
 	void Update () {
         if (battleReady.ready == false) {
-            Debug.Log("battleReady bool is " + battleReady.ready + ". We are in " + SceneManager.GetActiveScene().name + ". Engage!");
-            order = battleReady.order;
+            // Pull in the IOrderedEnumerable from BattleReady and call it "order".
+            order = battleReady.attackOrder;
 
             // Use the order to check against what gameObject.name or .tag this is, determine if this.gameObject
             //...is allowed to make its move.

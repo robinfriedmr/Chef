@@ -7,8 +7,7 @@ using UnityEngine.SceneManagement;
 public class BattleReady : MonoBehaviour {
 
     public bool ready;
-    public List<GameObject> order = new List<GameObject>();
-    //public List<int> order = new List<int>();
+    public List<GameObject> combatants = new List<GameObject>();
 
     CombatantStats myStats;
     int mySpeed;
@@ -19,6 +18,9 @@ public class BattleReady : MonoBehaviour {
     GameObject enemyEncounter;
     CombatantStats enemyStats;
     int enemySpeed;
+
+    public IOrderedEnumerable<GameObject> newOrder;
+    public List<GameObject> attackOrder;
 
     Vector3 battlingPlayer;
     Vector3 battlingEnemy;
@@ -80,58 +82,31 @@ public class BattleReady : MonoBehaviour {
             }
         }
     }
-    
-    void OrderTurns () {
+
+    void OrderTurns() {
         // The partner (delivery girl) is always faster than the player (chef).
 
         //Adds these as GameObjects.
-        order.Add(this.gameObject);
+        combatants.Add(this.gameObject);
         if (partnerStats != null)
         {
             Debug.Log("partnerStats is not null; adding its gameObject to list.");
-            order.Add(partnerStats.gameObject);
+            combatants.Add(partnerStats.gameObject);
         } else
         {
             Debug.Log("There is no partnerStats value; no partner gameObject added to list.");
         }
-        order.Add(enemyEncounter);
-
-        // SHOULD I MAKE A STATS CLASS?
-        // I already have! Each of these scripts creates a new class, by default deriving from MonoBehavior.
-
-        IEnumerable<GameObject> newOrder = order.OrderByDescending(combatant => combatant.GetComponent<CombatantStats>().speed); 
-        foreach (GameObject combatant in newOrder) {
-            if (combatant.name == "PlayerCharacter")
-            {
-                Debug.Log("The combatant is named playercharacter.");
-            } else
-            {
-                Debug.Log("Well, shoot.");
-            }
-            //Debug.Log(combatant.CombatantStats.speed); // Assets/Scripts/BattleReady.cs(100,33): error CS1061: 
-                                                       //Type `UnityEngine.GameObject' does not contain a definition for `CombatantStats' and 
-                                                       //no extension method `CombatantStats' of type `UnityEngine.GameObject' could be found. 
-                                                       //Are you missing an assembly reference?
-        }
-
-
-        // Uses integers given as arguments.
-        /*
-        if (player >= enemy) {
-            order[0] = partnerStats.gameObject; // The gameObject referenced for partnerStats.
-            order[1] = this.gameObject; // The chef/player character.
-            order[2] = enemyEncounter; // The enemy collided with/referenced for enemyStats.
-        } else if (player < enemy) {
-            if (partner < enemy) {
-                order[0] = enemyEncounter;
-                order[1] = partnerStats.gameObject;
-                order[2] = this.gameObject;
-            } else if (partner >= enemy) {
-                order[0] = partnerStats.gameObject;
-                order[1] = enemyEncounter;
-                order[2] = this.gameObject;
-            }
-        } */
+        combatants.Add(enemyEncounter);
+    
+        newOrder = from combatant in combatants
+                  orderby combatant.GetComponent<CombatantStats>().speed descending
+                  select combatant;
+        attackOrder = newOrder.ToList();
+        
+        for (var i = 0; i < attackOrder.Count(); i++) // ****
+        {
+            Debug.Log("The combatant is " + attackOrder[i] + ", and its speed is " + attackOrder[i].GetComponent<CombatantStats>().speed);
+        } // **** 
     }
 
     void Reposition (Collision enemy) {
