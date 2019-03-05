@@ -7,6 +7,7 @@ using UnityEngine.SceneManagement;
 public class BattleReady : MonoBehaviour {
 
     public bool ready;
+
     public List<GameObject> combatants = new List<GameObject>();
 
     CombatantStats myStats;
@@ -56,7 +57,7 @@ public class BattleReady : MonoBehaviour {
                 // Identify enemy speed stat. 
                 enemyStats = collision.gameObject.GetComponent<CombatantStats>();
                 enemySpeed = enemyStats.speed;
-                Debug.Log(enemySpeed + " is the enemy's speed.");
+                Debug.Log(enemySpeed + " is enemy speed.");
 
                 // Keep these when loading battle scene!
                 enemyEncounter = collision.gameObject;
@@ -76,9 +77,9 @@ public class BattleReady : MonoBehaviour {
                 {
                     SceneManager.LoadScene("BattleScene", LoadSceneMode.Single);
                 }
-                Debug.Log("Active scene: " + SceneManager.GetActiveScene().name);
 
-                ready = false;
+                ready = false; // Since we're already moving to the BattleScene,
+                               // we don't need to be ready to enter it.
             }
         }
     }
@@ -94,7 +95,7 @@ public class BattleReady : MonoBehaviour {
             combatants.Add(partnerStats.gameObject);
         } else
         {
-            Debug.Log("There is no partnerStats value; no partner gameObject added to list.");
+            //Debug.Log("There is no partnerStats value; no partner gameObject added to list.");
         }
         combatants.Add(enemyEncounter);
     
