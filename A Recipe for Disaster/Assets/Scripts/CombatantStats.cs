@@ -12,7 +12,7 @@ public class CombatantStats : MonoBehaviour
     public int magic;
     public int speed;
     public int luck;
-    // This variable will need to be accessed by other scripts in order...
+    // This variable will need to be accessed by other scripts...
     //...to determine level and thus stat increases.
     public int exp;
 
