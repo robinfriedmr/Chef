@@ -57,14 +57,16 @@ public class Movement : MonoBehaviour {
 
             if (_charController.velocity.magnitude > 0f)
             {
-//               myAnimator.SetBool("Movement", true);
+               myAnimator.SetBool("Movement", true);
             }
             else if (_charController.velocity.magnitude < 8f)
             {
-//               myAnimator.SetBool("Movement", false);
+               myAnimator.SetBool("Movement", false);
             }
             //Debug.Log(_charController.velocity.magnitude);
 
+        } else {
+            myAnimator.SetBool("Movement", false);
         }
     }
 }

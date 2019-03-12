@@ -50,38 +50,41 @@ public class BattleReady : MonoBehaviour {
 
 	private void OnCollisionEnter(Collision collision)
 	{
-        Debug.Log("Collision detected.");
         if (ready == true) {
             if (collision.gameObject.tag == "Enemy" && this.gameObject.tag == "Player")
             {
-                // Identify enemy speed stat. 
-                enemyStats = collision.gameObject.GetComponent<CombatantStats>();
-                enemySpeed = enemyStats.speed;
-                Debug.Log(enemySpeed + " is enemy speed.");
-
-                // Keep these when loading battle scene!
-                enemyEncounter = collision.gameObject;
-                DontDestroyOnLoad(enemyEncounter);
-                DontDestroyOnLoad(this.gameObject);
-
-                // Compute turn-order.
-                OrderTurns();
-
-                // Move the player and enemy into position.
-                Reposition(collision);
-
-                // Switch scenes on collision, change battle readiness
-                Scene currentScene = SceneManager.GetActiveScene();
-                string sceneName = currentScene.name;
-                if (sceneName != "BattleScene")
-                {
-                    SceneManager.LoadScene("BattleScene", LoadSceneMode.Single);
-                }
-
-                ready = false; // Since we're already moving to the BattleScene,
-                               // we don't need to be ready to enter it.
+                PrepareForBattle(collision);
             }
         }
+    }
+
+    void PrepareForBattle (Collision collision) {
+        // Identify enemy speed stat. 
+        enemyStats = collision.gameObject.GetComponent<CombatantStats>();
+        enemySpeed = enemyStats.speed;
+        Debug.Log(enemySpeed + " is enemy speed.");
+
+        // Keep these when loading battle scene!
+        enemyEncounter = collision.gameObject;
+        DontDestroyOnLoad(enemyEncounter);
+        DontDestroyOnLoad(this.gameObject);
+
+        // Compute turn-order.
+        OrderTurns();
+
+        // Move the player and enemy into position.
+        Reposition(collision);
+
+        // Switch scenes on collision.
+        Scene currentScene = SceneManager.GetActiveScene();
+        string sceneName = currentScene.name;
+        if (sceneName != "BattleScene")
+        {
+            SceneManager.LoadScene("BattleScene", LoadSceneMode.Single);
+        }
+
+        // Change battle readiness. (Since we're  moving to the BattleScene, ...
+        ready = false; //...we don't need to be ready to enter it.)
     }
 
     void OrderTurns() {
