@@ -26,26 +26,22 @@ public class Attacks : MonoBehaviour {
 
 
     void Start () {
-        battleReady = GetComponent<BattleReady>();
+        battleReady = FindObjectOfType<BattleReady>().GetComponent<BattleReady>();
         battleStarted = false;
         theseStats = this.GetComponent<CombatantStats>();
         me = this.gameObject;
+        Debug.Log("my name is " + me.name);
     }
 	
 	void Update () {
         if (battleReady.ready == false) { // The battle has started!
-            if (battleStarted == false)
-            { // Battle not initialized.
-                order = battleReady.attackOrder; // Pull in the list from BattleReady and call it "order".
-                enemies = order.FindAll(combatant => combatant.tag.Equals("Enemy")); // For targeting enemies, 
-                                                                                     // make a list of enemies from "order" list.
-                allies = order;
-                allies.RemoveAll(combatant => combatant.tag.Equals("Enemy"));
-
-                foreach (GameObject combatant in allies)
-                {
-                    Debug.Log("Ally: " + combatant.name);
-                }
+            if (battleStarted == false) { // Battle not initialized.
+                Debug.Log("Initializing.");
+                
+                // Pull in the lists from BattleReady.
+                order = battleReady.attackOrder;
+                enemies = battleReady.enemies;
+                allies = battleReady.allies;
 
                 indexNo = 0; // Reset to the first index position.
                 battleStarted = true; // Battle initialized.
@@ -56,11 +52,11 @@ public class Attacks : MonoBehaviour {
                 battleReady.ready = true;
                 battleStarted = false;
                 order.Clear();
-
                 Debug.Log("Battle ends.");
             } else { // Battle is started and is on-going.
                 if (indexNo < order.Count()) {
                     Fight(indexNo);
+                    Debug.Log("Before the attack: indexNo is " + indexNo); //***
                 } else {
                     indexNo = 0;
                 }
@@ -68,29 +64,26 @@ public class Attacks : MonoBehaviour {
         }
     }
 
-    void Fight(int i) {    
+    void Fight(int i) {
+        Debug.Log("Fight (int i) says, i = " + i); //***
         if (order.ElementAt<GameObject>(i) == me)
         {
-            if (me.name == "PlayerCharacter")
-            {
+            Debug.Log("The name of the element at indexNo is " + 
+                order.ElementAt<GameObject>(i).name); //***
+
+            if (me.name == "PlayerCharacter") {
                 PlayerAttacks();
-            }
-            if (me.name == "Beet")
-            {
+            } else if (me.name == "Beet") {
                 BeetAttacks();
-            }
-            if (me.name == "Carrot")
-            {
+            } else if (me.name == "Carrot") {
                 CarrotAttacks();
-            }
-            if (me.name == "Onion")
-            {
+            } else if (me.name == "Onion") {
                 OnionAttacks();
             }
-        } else
+        } /* else
         {
             Debug.Log("It's not my turn.");
-        }
+        } */
     }
 
     void CalculateDamage (int raw, GameObject me, GameObject foe) {
@@ -160,6 +153,7 @@ public class Attacks : MonoBehaviour {
                 dmg = 0;
                 target = null;
                 indexNo++;
+                Debug.Log("After the attack: indexNo is " + indexNo); //***
             }
         }
     }

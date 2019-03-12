@@ -22,6 +22,7 @@ GameObject:
   - component: {fileID: 212211495691541302}
   - component: {fileID: 65190073739644186}
   - component: {fileID: 114555704302367472}
+  - component: {fileID: 114331367391787444}
   m_Layer: 0
   m_Name: Onion
   m_TagString: Enemy
@@ -54,6 +55,17 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.5, y: 10, z: 0.2}
   m_Center: {x: -0.02, y: 0, z: 0}
+--- !u!114 &114331367391787444
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1724807304947688}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: de05c863f4a78d84791eb9a80a51912f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114555704302367472
 MonoBehaviour:
   m_ObjectHideFlags: 1
