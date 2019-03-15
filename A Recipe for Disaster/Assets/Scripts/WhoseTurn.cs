@@ -1,40 +1,31 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class WhoseTurn : MonoBehaviour {
 
     public BattleReady battleReady; //Ready to begin battle if true. If false, combat is ongoing.
     List<GameObject> order;
-    List<GameObject> enemies;
-    List<GameObject> allies;
+//    List<GameObject> enemies;
+//    List<GameObject> allies;
 
-    bool battleStarted; //Initialized?
-    public int indexNo; //What turn are we on?
+    public bool battleStarted; //Initialized?
+    public int indexNo; //What turn are we on? Can be modified from Attacks b/c it's public.
 
     Attacks _attacks;
 
     void Start () {
-        battleReady = GetComponent<BattleReady>();
+        battleReady = GetComponent<BattleReady>(); 
         battleStarted = false;
+        //indexNo = 0; // Start it at 0 though.
+        _attacks = GetComponent<Attacks>(); // Get player's Attacks to report back the indexNo.
     }
 
     void Update () {
-        if (battleReady.ready == false)
-        { // The battle has started!
-            if (battleStarted == false)
-            { // Battle not initialized.
-                Debug.Log("Initializing.");
-
-                // Pull in the lists from BattleReady.
-                order = battleReady.attackOrder;
-                enemies = battleReady.enemies;
-                allies = battleReady.allies;
-
-                indexNo = 0; // Reset to the first index position.
-                battleStarted = true; // Battle initialized.
-            }
-            else if (enemies.Count == 0 || allies.Count == 0)
+        if (_attacks.battleStarted == true) {
+            if (_attacks.enemies.Count == 0 || _attacks.allies.Count == 0) // is it ()?
             {
                 //end battle
                 battleReady.ready = true;
@@ -43,15 +34,21 @@ public class WhoseTurn : MonoBehaviour {
                 Debug.Log("Battle ends.");
             }
             else
-            { // Battle is started and is on-going.
-                if (indexNo < order.Count())
-                {
-                    Fight(indexNo);
+            { // Battle is on-going.
+                if (order != null) {
+                    Debug.Log("Hello from WhoseTurn; the indexNo is " + indexNo + ". ALSO, order is " + order);
+                    if (indexNo < order.Count()) //***ARGUMENT NULL EXCEPTION. ARGUMENT CANNOT BE NULL.
+                    {
+                        Debug.Log("Hello from WhoseTurn; the indexNo is less than order.Count()!");
+                    }
+                    else
+                    {
+                        indexNo = 0;
+                    }
+                } else {
+                    order = _attacks.order;
                 }
-                else
-                {
-                    indexNo = 0;
-                }
+
             }
         }
     }

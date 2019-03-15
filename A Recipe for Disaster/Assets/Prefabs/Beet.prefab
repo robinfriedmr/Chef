@@ -66,6 +66,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: de05c863f4a78d84791eb9a80a51912f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  whoseTurn: {fileID: 0}
+  battleReady: {fileID: 0}
 --- !u!114 &114433131573071842
 MonoBehaviour:
   m_ObjectHideFlags: 1

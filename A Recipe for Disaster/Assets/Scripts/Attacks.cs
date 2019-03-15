@@ -6,13 +6,16 @@ using UnityEngine.SceneManagement;
 
 public class Attacks : MonoBehaviour {
 
-    public WhoseTurn whoseTurn;
-    int indexNo; //Steal this from "WhoseTurn" script on player.
-
     public BattleReady battleReady;
-    List<GameObject> order;
-    List<GameObject> enemies;
-    List<GameObject> allies;
+    public bool battleStarted;
+
+    public WhoseTurn whoseTurn;
+    public int indexNo; //Steal this from WhoseTurn script on player.
+
+    // Pull these during intialization from BattleReady script.
+    public List<GameObject> order;
+    public List<GameObject> enemies;
+    public List<GameObject> allies;
 
     CombatantStats theseStats; //Stats for GO this script is attached to (all combatants)
     CombatantStats targetStats; 
@@ -26,7 +29,6 @@ public class Attacks : MonoBehaviour {
 
 
     void Start () {
-
         indexNo = whoseTurn.GetComponent<WhoseTurn>().indexNo; // Grab indexNo
         theseStats = this.GetComponent<CombatantStats>();
         me = this.gameObject;
@@ -34,12 +36,33 @@ public class Attacks : MonoBehaviour {
     }
 	
 	void Update () {
+        if (battleReady.ready == false)
+        { // The battle has started!
+            if (battleStarted == false)
+            { // Battle not initialized.
+                Debug.Log("Initializing.");
 
+                // Pull in the lists from BattleReady.
+                order = battleReady.attackOrder;
+                enemies = battleReady.enemies;
+                allies = battleReady.allies;
+
+                whoseTurn.indexNo = 0; // Reset to the first index position.
+                battleStarted = true; // Battle initialized.
+            } else {
+                Debug.Log("The battle has started/continues. whoseTurn.indexNo is " + whoseTurn.indexNo);
+                Fight(whoseTurn.indexNo); //******************************ERROR***
+            }
+            
+        }
+
+        //indexNo = whoseTurn.indexNo;
+        //Fight(indexNo);
     }
 
     void Fight(int i) {
-//        Debug.Log("Fight (int i) says, i = " + i); //***
-        if (order.ElementAt<GameObject>(i) == me)
+        Debug.Log("Hello from the Fight() in Attacks.");
+        if (order.ElementAt<GameObject>(i) == me) //******************************ERROR***
         {
             Debug.Log("The name of the element at indexNo is " + 
                 order.ElementAt<GameObject>(i).name); //***
@@ -125,8 +148,8 @@ public class Attacks : MonoBehaviour {
                 CalculateDamage(dmg, me, target);
                 dmg = 0;
                 target = null;
-                indexNo++;
-                Debug.Log("After the attack: indexNo is " + indexNo); //***
+                whoseTurn.indexNo++;
+//                Debug.Log("After the attack: indexNo is " + indexNo); //***
             }
         }
     }
@@ -159,7 +182,7 @@ public class Attacks : MonoBehaviour {
             CalculateDamage(dmg, me, target);
             dmg = 0;
             target = null;
-            indexNo++;
+            whoseTurn.indexNo++;
         }
     }
 
