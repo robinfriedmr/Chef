@@ -6,16 +6,16 @@ using UnityEngine.SceneManagement;
 
 public class Attacks : MonoBehaviour {
 
-    BattleReady battleReady; //Ready to begin battle if true. If false, combat is ongoing.
+    public WhoseTurn whoseTurn;
+    int indexNo; //Steal this from "WhoseTurn" script on player.
+
+    public BattleReady battleReady;
     List<GameObject> order;
     List<GameObject> enemies;
     List<GameObject> allies;
 
     CombatantStats theseStats; //Stats for GO this script is attached to (all combatants)
     CombatantStats targetStats; 
-
-    bool battleStarted; //Initialized?
-    int indexNo; //What turn are we on?
 
     int chooseAttack; //For random move choice of enemies.
     int chooseTarget; //For random target choice of enemies.
@@ -26,46 +26,19 @@ public class Attacks : MonoBehaviour {
 
 
     void Start () {
-        battleReady = FindObjectOfType<BattleReady>().GetComponent<BattleReady>();
-        battleStarted = false;
+
+        indexNo = whoseTurn.GetComponent<WhoseTurn>().indexNo; // Grab indexNo
         theseStats = this.GetComponent<CombatantStats>();
         me = this.gameObject;
         Debug.Log("my name is " + me.name);
     }
 	
 	void Update () {
-        if (battleReady.ready == false) { // The battle has started!
-            if (battleStarted == false) { // Battle not initialized.
-                Debug.Log("Initializing.");
-                
-                // Pull in the lists from BattleReady.
-                order = battleReady.attackOrder;
-                enemies = battleReady.enemies;
-                allies = battleReady.allies;
 
-                indexNo = 0; // Reset to the first index position.
-                battleStarted = true; // Battle initialized.
-            }
-            else if (enemies.Count == 0 || allies.Count == 0)
-            {
-                //end battle
-                battleReady.ready = true;
-                battleStarted = false;
-                order.Clear();
-                Debug.Log("Battle ends.");
-            } else { // Battle is started and is on-going.
-                if (indexNo < order.Count()) {
-                    Fight(indexNo);
-                    Debug.Log("Before the attack: indexNo is " + indexNo); //***
-                } else {
-                    indexNo = 0;
-                }
-            }
-        }
     }
 
     void Fight(int i) {
-        Debug.Log("Fight (int i) says, i = " + i); //***
+//        Debug.Log("Fight (int i) says, i = " + i); //***
         if (order.ElementAt<GameObject>(i) == me)
         {
             Debug.Log("The name of the element at indexNo is " + 
