@@ -218,6 +218,19 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 1422462143574244, guid: 7002def3750854748a6fb9c348c4339a,
     type: 2}
   m_PrefabInternal: {fileID: 1433081009}
+--- !u!136 &238916063
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 238916062}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 0.535
+  m_Height: 1.39
+  m_Direction: 1
+  m_Center: {x: 0, y: 0.695, z: 0}
 --- !u!114 &238916068 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 114104607798825820, guid: 7002def3750854748a6fb9c348c4339a,
@@ -905,6 +918,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Player: {fileID: 238916062}
+  MinDist: 2.5
   myAnimator: {fileID: 1423197169}
   mySpriteRenderer: {fileID: 1423197171}
 --- !u!212 &1423197171
@@ -1033,6 +1047,7 @@ Prefab:
       propertyPath: m_RootOrder
       value: 4
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 65228120120107254, guid: 7002def3750854748a6fb9c348c4339a, type: 2}
   m_SourcePrefab: {fileID: 100100000, guid: 7002def3750854748a6fb9c348c4339a, type: 2}
   m_IsPrefabAsset: 0

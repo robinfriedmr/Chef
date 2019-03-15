@@ -7,7 +7,7 @@ public class Follow : MonoBehaviour
     public GameObject Player;
     private Vector3 PlayerPos;
     int MoveSpeed = 10;
-    float MinDist = 1.5f;
+    public float MinDist;
     public Animator myAnimator;
     public SpriteRenderer mySpriteRenderer;
 
