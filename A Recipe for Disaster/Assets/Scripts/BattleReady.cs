@@ -15,20 +15,20 @@ public class BattleReady : MonoBehaviour {
     CombatantStats myStats;
     int mySpeed;
 
-    public CombatantStats partnerStats;
+    CombatantStats partnerStats; //*** Later implementation.
     int partnerSpeed;
 
     GameObject enemyEncounter;
     CombatantStats enemyStats;
     int enemySpeed;
 
-    public IOrderedEnumerable<GameObject> order;
-    public List<GameObject> attackOrder;
+    public IOrderedEnumerable<GameObject> attackOrder;
+    public List<GameObject> order;
 
     Vector3 battlingPlayer;
     Vector3 battlingEnemy;
 
-    private void Awake()
+    void Awake()
     {
         ready = true;
     }
@@ -45,15 +45,11 @@ public class BattleReady : MonoBehaviour {
 
         Debug.Log(mySpeed + " is my speed.");
     }
-	
-	void Update () {
-		
-	}
 
-	private void OnCollisionEnter(Collision collision)
+	void OnCollisionEnter(Collision collision)
 	{
         if (ready == true) {
-            if (collision.gameObject.tag == "Enemy" && this.gameObject.tag == "Player")
+            if (collision.gameObject.tag == "Enemy" && this.gameObject.tag == "Ally")
             {
                 PrepareForBattle(collision);
             }
@@ -61,7 +57,7 @@ public class BattleReady : MonoBehaviour {
     }
 
     void PrepareForBattle (Collision collision) {
-        // Keep the enemy GameObject when loading battle scene!
+        // Keep the enemy (and player) GameObject when loading battle scene!
         enemyEncounter = collision.gameObject;
         DontDestroyOnLoad(enemyEncounter);
         DontDestroyOnLoad(this.gameObject);
@@ -75,9 +71,26 @@ public class BattleReady : MonoBehaviour {
         OrderTurns(); 
 
         // Create separate lists from "combatants" for enemies and allies.
-        enemies = attackOrder.FindAll(combatant => combatant.tag.Equals("Enemy"));
-        allies = attackOrder;
+        enemies = order.FindAll(combatant => combatant.tag.Equals("Enemy"));
+        allies = order.Except<GameObject>(enemies).ToList<GameObject>(); //*** experimental
         allies.RemoveAll(combatant => combatant.tag.Equals("Enemy"));
+
+        //***
+
+        for (var i = 0; i < allies.Count; i++) //***
+        {
+            Debug.Log("The ally objects are " + allies.ElementAt<GameObject>(i).name);
+        }
+
+        for (var i = 0; i < order.Count; i++)
+        {
+            Debug.Log("The order objects are " + order.ElementAt<GameObject>(i).name);
+        }
+
+
+        Debug.Log("The enemies count is " + enemies.Count + ", the allies count is " +
+            allies.Count + ", and the order count is " + order.Count);
+        //***
 
         // Move the player and enemy into position.
         Reposition(enemyEncounter);
@@ -87,7 +100,7 @@ public class BattleReady : MonoBehaviour {
         string sceneName = currentScene.name;
         if (sceneName != "BattleScene")
         {
-            SceneManager.LoadScene("BattleScene", LoadSceneMode.Single);
+            SceneManager.LoadScene("BattleScene", LoadSceneMode.Single); //CHANGE THIS TO ADDITIVE/ASYNC.
         }
 
         // Change battle readiness. (Since we're moving to the BattleScene, ...
@@ -105,22 +118,30 @@ public class BattleReady : MonoBehaviour {
         }
         combatants.Add(enemyEncounter);
     
-        order = from combatant in combatants
+        attackOrder = from combatant in combatants
                   orderby combatant.GetComponent<CombatantStats>().speed descending
                   select combatant;
-        attackOrder = order.ToList(); // IOrderedEnumerator --> List
+        order = attackOrder.ToList(); // IOrderedEnumerator --> List
         
-        for (var i = 0; i < attackOrder.Count(); i++) //***
+        //***
+        Debug.Log(order.Count + " is the order.Count from the OrderTurns() method.");
+        //***
+
+        for (var i = 0; i < order.Count; i++) //***
         {
-            Debug.Log("The combatant is " + attackOrder[i] + ", and its speed is " + attackOrder[i].GetComponent<CombatantStats>().speed);
+            Debug.Log("The combatant is " + order.ElementAt<GameObject>(i).name + 
+                ", and its speed is " + order.ElementAt<GameObject>(i).GetComponent<CombatantStats>().speed);
         } //*** 
     }
 
     void Reposition (GameObject enemy) {
-        // Place and stabilize Player
+        // Place Player
         this.GetComponent<Transform>().position = battlingPlayer;
+        
+        //***
         Rigidbody myBody = this.GetComponent<Rigidbody>();
         myBody.constraints = RigidbodyConstraints.FreezeAll;
+        //***
 
         // Place Enemy
         enemy.GetComponent<Transform>().position = battlingEnemy;

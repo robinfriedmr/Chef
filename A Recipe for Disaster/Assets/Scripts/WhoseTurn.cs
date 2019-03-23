@@ -6,52 +6,73 @@ using UnityEngine.SceneManagement;
 
 public class WhoseTurn : MonoBehaviour {
 
-    public BattleReady battleReady; //Ready to begin battle if true. If false, combat is ongoing.
-    List<GameObject> order;
-//    List<GameObject> enemies;
-//    List<GameObject> allies;
-
-    public bool battleStarted; //Initialized?
-    public int indexNo; //What turn are we on? Can be modified from Attacks b/c it's public.
-
+    BattleReady _br;
     Attacks _attacks;
+    bool battleStarted;
+    List<GameObject> order;
+    public int indexNo;
+    GameObject turnTaker;
 
-    void Start () {
-        battleReady = GetComponent<BattleReady>(); 
-        battleStarted = false;
-        //indexNo = 0; // Start it at 0 though.
-        _attacks = GetComponent<Attacks>(); // Get player's Attacks to report back the indexNo.
+    private void Start()
+    {
+        _attacks = GetComponent<Attacks>();
+        indexNo = 0;
     }
 
-    void Update () {
-        if (_attacks.battleStarted == true) {
-            if (_attacks.enemies.Count == 0 || _attacks.allies.Count == 0) // is it ()?
+    private void Update()
+    {
+        // Battle is on-going!
+        if (battleStarted == true) // If battleStarted is false...
+        {
+            Debug.Log("The battle has started/continues. indexNo is " + indexNo + 
+                ", order.Count() is " + order.Count);
+            if (indexNo < order.Count) // Count()
+            {
+                Fight(indexNo);
+            }
+            else
+            {
+                Debug.Log("Resetting indexNo to 0.");
+                indexNo = 0;
+            }
+
+            // Check for defeat
+            if (_attacks.enemies.Count == 0 || _attacks.allies.Count == 0) 
             {
                 //end battle
-                battleReady.ready = true;
+                _br.ready = true;
                 battleStarted = false;
                 order.Clear();
                 Debug.Log("Battle ends.");
             }
-            else
-            { // Battle is on-going.
-                if (order != null) {
-                    Debug.Log("Hello from WhoseTurn; the indexNo is " + indexNo + ". ALSO, order is " + order);
-                    if (indexNo < order.Count()) //***ARGUMENT NULL EXCEPTION. ARGUMENT CANNOT BE NULL.
-                    {
-                        Debug.Log("Hello from WhoseTurn; the indexNo is less than order.Count()!");
-                    }
-                    else
-                    {
-                        indexNo = 0;
-                    }
-                } else {
-                    order = _attacks.order;
-                }
 
-            }
-        }
+        } else
+        {
+                //Initialization
+            _br = GameObject.FindGameObjectWithTag("Ally").GetComponent<BattleReady>();
+            Debug.Log("_br.order has a Count of " + _br.order.Count);
+            order = _br.order;
+
+            _attacks.enemies = _br.enemies;
+            _attacks.allies = _br.allies;
+
+            indexNo = 0;
+            battleStarted = true;
+        }   
     }
 
+    void Fight(int i)
+    {
+        turnTaker = order.ElementAt<GameObject>(i);
+        Debug.Log("Hello from the Fight() in WhoseTurn. " +
+            "The name of the element at indexNo is " +
+            turnTaker);
 
+        if (turnTaker.tag == "Ally")
+        {
+            _attacks.AllyAttacks(turnTaker);
+        } else if (turnTaker.tag == "Enemy"){
+            _attacks.EnemyAttacks(turnTaker);
+        }
+    }
 }

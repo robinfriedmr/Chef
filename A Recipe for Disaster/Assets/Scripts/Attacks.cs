@@ -6,113 +6,83 @@ using UnityEngine.SceneManagement;
 
 public class Attacks : MonoBehaviour {
 
-    public BattleReady battleReady;
-    public bool battleStarted;
-
     public WhoseTurn whoseTurn;
-    public int indexNo; //Steal this from WhoseTurn script on player.
+    public int indexNo; //WhoseTurn needs indexNo++ after a turn.
 
-    // Pull these during intialization from BattleReady script.
-    public List<GameObject> order;
     public List<GameObject> enemies;
     public List<GameObject> allies;
-
-    CombatantStats theseStats; //Stats for GO this script is attached to (all combatants)
-    CombatantStats targetStats; 
 
     int chooseAttack; //For random move choice of enemies.
     int chooseTarget; //For random target choice of enemies.
 
     int dmg; //Raw damage of a move, before calculation.
-    GameObject me;
-    GameObject target;
+    GameObject target; //Refers to the GameObject targeted by an attack (except in CalcDam)
 
-
-    void Start () {
-        indexNo = whoseTurn.GetComponent<WhoseTurn>().indexNo; // Grab indexNo
-        theseStats = this.GetComponent<CombatantStats>();
-        me = this.gameObject;
-        Debug.Log("my name is " + me.name);
-    }
-	
-	void Update () {
-        if (battleReady.ready == false)
-        { // The battle has started!
-            if (battleStarted == false)
-            { // Battle not initialized.
-                Debug.Log("Initializing.");
-
-                // Pull in the lists from BattleReady.
-                order = battleReady.attackOrder;
-                enemies = battleReady.enemies;
-                allies = battleReady.allies;
-
-                whoseTurn.indexNo = 0; // Reset to the first index position.
-                battleStarted = true; // Battle initialized.
-            } else {
-                Debug.Log("The battle has started/continues. whoseTurn.indexNo is " + whoseTurn.indexNo);
-                Fight(whoseTurn.indexNo); //******************************ERROR***
-            }
-            
-        }
-
-        //indexNo = whoseTurn.indexNo;
-        //Fight(indexNo);
-    }
-
-    void Fight(int i) {
-        Debug.Log("Hello from the Fight() in Attacks.");
-        if (order.ElementAt<GameObject>(i) == me) //******************************ERROR***
-        {
-            Debug.Log("The name of the element at indexNo is " + 
-                order.ElementAt<GameObject>(i).name); //***
-
-            if (me.name == "PlayerCharacter") {
-                PlayerAttacks();
-            } else if (me.name == "Beet") {
-                BeetAttacks();
-            } else if (me.name == "Carrot") {
-                CarrotAttacks();
-            } else if (me.name == "Onion") {
-                OnionAttacks();
-            }
-        } /* else
-        {
-            Debug.Log("It's not my turn.");
-        } */
-    }
-
-    void CalculateDamage (int raw, GameObject me, GameObject foe) {
-        targetStats = foe.GetComponent<CombatantStats>();
-
+    void CalculateDamage (int raw, CombatantStats attacker, CombatantStats target) {
         // Method A - Inspired by Pokemon Go.
-        //int finDmg = Mathf.FloorToInt(0.5f * raw * (theseStats.power / targetStats.defense)) + 1; // Minimum hit is 1.
+        //int finDmg = Mathf.FloorToInt(0.5f * raw * (attacker.power / target.defense)) + 1; // Minimum hit is 1.
 
         // Method B - Abby's idea
-        int finDmg = raw - targetStats.defense;
+        int finDmg = raw - target.defense;
         finDmg = (finDmg < 0) ? 0 : finDmg;
 
         Debug.Log("Enemy is hit for " + finDmg); //***
-        targetStats.HP -= finDmg; // Subtract damage from target's HP.
-        Debug.Log("Enemy HP is " + targetStats.HP); //***
+        target.HP -= finDmg; // Subtract damage from target's HP.
+        Debug.Log("Enemy HP is " + target.HP); //***
 
-        if (targetStats.HP <= 0)
+        if (target.HP <= 0)
         {
-            order.Remove(foe);
-            enemies.Remove(foe);
-            Destroy(foe);
+            //Remove target from list of combatants, list of allies/enemies
+            Destroy(target);
             Debug.Log("Enemy defeated!");
         }
     }
 
-    void PlayerAttacks () {
-        if (theseStats.level >= 2) {
+    public void EnemyAttacks (GameObject enemy)
+    {
+        if (enemy.name == "Beet")
+        {
+            BeetAttacks(enemy.GetComponent<CombatantStats>());
+        }
+        else if (enemy.name == "Carrot")
+        {
+            CarrotAttacks(enemy.GetComponent<CombatantStats>());
+        }
+        else if (enemy.name == "Onion")
+        {
+            OnionAttacks(enemy.GetComponent<CombatantStats>());
+        } else
+        {
+            Debug.Log("Enemy name not understood.");
+        }
+    }
+
+    public void AllyAttacks(GameObject ally) {
+        if (ally.name == "PlayerCharacter")
+        {
+            ChefAttacks(ally.GetComponent<CombatantStats>());
+        } else
+        {
+            DeliveryMoves(ally.GetComponent<CombatantStats>());
+        }
+    }
+
+    void DeliveryMoves(CombatantStats dG)
+    {
+        Debug.Log("Delivery girl moves!");
+        //for Partner
+    }
+
+    void ChefAttacks (CombatantStats chef) {
+        Debug.Log("Chef attacks!");
+
+        if (chef.level >= 2) {
             if (Input.GetKeyDown(KeyCode.Alpha2)) {
                 Debug.Log("Attack type: 2");
-                if (theseStats.magic >= 3)
+                if (chef.magic >= 3)
                 {
-                    dmg = theseStats.level + theseStats.power;
-                    theseStats.magic -= 3;
+                    dmg = chef.level + chef.power;
+                    chef.magic -= 3;
                 } else
                 {
                     Debug.Log("Not enough magic left!");
@@ -145,7 +115,7 @@ public class Attacks : MonoBehaviour {
 
             if (target != null) {
                 Debug.Log("The target is " + target.name); //***
-                CalculateDamage(dmg, me, target);
+                CalculateDamage(dmg, chef, target.GetComponent<CombatantStats>());
                 dmg = 0;
                 target = null;
                 whoseTurn.indexNo++;
@@ -154,14 +124,15 @@ public class Attacks : MonoBehaviour {
         }
     }
 
-    void BeetAttacks () {
+    void BeetAttacks (CombatantStats attacker) {
         Debug.Log("The beet attacks!");
+
         chooseAttack = Random.Range(1, 2); // choose an attack
-        if (theseStats.level >= 3 && chooseAttack == 2) {
+        if (attacker.level >= 3 && chooseAttack == 2) {
             Debug.Log("Attack type: 2");
-            if (theseStats.magic >= 1) {
-                dmg = theseStats.level + theseStats.power;
-                theseStats.magic -= 1;
+            if (attacker.magic >= 1) {
+                dmg = attacker.level + attacker.power;
+                attacker.magic -= 1;
             } else {
                 Debug.Log("Not enough magic left!");
                 chooseAttack = 1;
@@ -171,7 +142,7 @@ public class Attacks : MonoBehaviour {
             Debug.Log("Attack type: 1");
             dmg = 4;
         } else {
-            Debug.Log("Error. Choice 1 and 2 not chosen for some reason.");
+            Debug.Log("Error. Choice 1 or 2 not chosen for some reason.");
         }
 
         chooseTarget = Random.Range(0, allies.Count() - 1); // Choose a target
@@ -179,21 +150,21 @@ public class Attacks : MonoBehaviour {
         if (target != null)
         {
             Debug.Log("The target is " + target.name); //***
-            CalculateDamage(dmg, me, target);
+            CalculateDamage(dmg, attacker, target.GetComponent<CombatantStats>());
             dmg = 0;
             target = null;
             whoseTurn.indexNo++;
         }
     }
 
-    void CarrotAttacks()
+    void CarrotAttacks(CombatantStats attacker)
     {
         Debug.Log("The carrot attacks!");
         //;
         indexNo++;
     }
 
-    void OnionAttacks()
+    void OnionAttacks(CombatantStats attacker)
     { 
         Debug.Log("The onion attacks!");
         //;
