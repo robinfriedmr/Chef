@@ -24,9 +24,15 @@ public class WhoseTurn : MonoBehaviour {
         // Battle is on-going!
         if (battleStarted == true) // If battleStarted is false...
         {
-            Debug.Log("The battle has started/continues. indexNo is " + indexNo + 
-                ", order.Count() is " + order.Count);
-            if (indexNo < order.Count) // Count()
+            // Check for defeat first
+            if (_attacks.enemies.Count == 0 || _attacks.allies.Count == 0) 
+            {
+                //end battle
+                _br.ready = true;
+                battleStarted = false;
+                order.Clear();
+                Debug.Log("Battle ends.");
+            } else if (indexNo < order.Count)
             {
                 Fight(indexNo);
             }
@@ -36,21 +42,10 @@ public class WhoseTurn : MonoBehaviour {
                 indexNo = 0;
             }
 
-            // Check for defeat
-            if (_attacks.enemies.Count == 0 || _attacks.allies.Count == 0) 
-            {
-                //end battle
-                _br.ready = true;
-                battleStarted = false;
-                order.Clear();
-                Debug.Log("Battle ends.");
-            }
-
         } else
         {
                 //Initialization
             _br = GameObject.FindGameObjectWithTag("Ally").GetComponent<BattleReady>();
-            Debug.Log("_br.order has a Count of " + _br.order.Count);
             order = _br.order;
 
             _attacks.enemies = _br.enemies;
@@ -64,9 +59,9 @@ public class WhoseTurn : MonoBehaviour {
     void Fight(int i)
     {
         turnTaker = order.ElementAt<GameObject>(i);
-        Debug.Log("Hello from the Fight() in WhoseTurn. " +
-            "The name of the element at indexNo is " +
-            turnTaker);
+        //Debug.Log("Hello from the Fight() in WhoseTurn. " +
+        //    "The name of the element at indexNo is " +
+        //    turnTaker);
 
         if (turnTaker.tag == "Ally")
         {

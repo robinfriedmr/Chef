@@ -75,23 +75,6 @@ public class BattleReady : MonoBehaviour {
         allies = order.Except<GameObject>(enemies).ToList<GameObject>(); //*** experimental
         allies.RemoveAll(combatant => combatant.tag.Equals("Enemy"));
 
-        //***
-
-        for (var i = 0; i < allies.Count; i++) //***
-        {
-            Debug.Log("The ally objects are " + allies.ElementAt<GameObject>(i).name);
-        }
-
-        for (var i = 0; i < order.Count; i++)
-        {
-            Debug.Log("The order objects are " + order.ElementAt<GameObject>(i).name);
-        }
-
-
-        Debug.Log("The enemies count is " + enemies.Count + ", the allies count is " +
-            allies.Count + ", and the order count is " + order.Count);
-        //***
-
         // Move the player and enemy into position.
         Reposition(enemyEncounter);
 
@@ -123,10 +106,6 @@ public class BattleReady : MonoBehaviour {
                   select combatant;
         order = attackOrder.ToList(); // IOrderedEnumerator --> List
         
-        //***
-        Debug.Log(order.Count + " is the order.Count from the OrderTurns() method.");
-        //***
-
         for (var i = 0; i < order.Count; i++) //***
         {
             Debug.Log("The combatant is " + order.ElementAt<GameObject>(i).name + 
@@ -138,7 +117,7 @@ public class BattleReady : MonoBehaviour {
         // Place Player
         this.GetComponent<Transform>().position = battlingPlayer;
         
-        //***
+        //*** Yes we need this. Because the player totally rocketed off into space.
         Rigidbody myBody = this.GetComponent<Rigidbody>();
         myBody.constraints = RigidbodyConstraints.FreezeAll;
         //***

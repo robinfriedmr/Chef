@@ -26,15 +26,15 @@ public class Attacks : MonoBehaviour {
         int finDmg = raw - target.defense;
         finDmg = (finDmg < 0) ? 0 : finDmg;
 
-        Debug.Log("Enemy is hit for " + finDmg); //***
+        Debug.Log(target.gameObject.name + " is hit for " + finDmg); //***
         target.HP -= finDmg; // Subtract damage from target's HP.
-        Debug.Log("Enemy HP is " + target.HP); //***
+        Debug.Log("HP is " + target.HP); //***
 
         if (target.HP <= 0)
         {
             //Remove target from list of combatants, list of allies/enemies
             Destroy(target);
-            Debug.Log("Enemy defeated!");
+            Debug.Log(target.gameObject.name + " defeated!");
         }
     }
 
@@ -74,7 +74,7 @@ public class Attacks : MonoBehaviour {
     }
 
     void ChefAttacks (CombatantStats chef) {
-        Debug.Log("Chef attacks!");
+        //Debug.Log("Chef attacks!");
 
         if (chef.level >= 2) {
             if (Input.GetKeyDown(KeyCode.Alpha2)) {
@@ -119,7 +119,6 @@ public class Attacks : MonoBehaviour {
                 dmg = 0;
                 target = null;
                 whoseTurn.indexNo++;
-//                Debug.Log("After the attack: indexNo is " + indexNo); //***
             }
         }
     }
@@ -141,9 +140,9 @@ public class Attacks : MonoBehaviour {
         } else if (chooseAttack == 1) {
             Debug.Log("Attack type: 1");
             dmg = 4;
-        } else {
+        } /* else {
             Debug.Log("Error. Choice 1 or 2 not chosen for some reason.");
-        }
+        } */
 
         chooseTarget = Random.Range(0, allies.Count() - 1); // Choose a target
         target = allies.ElementAt<GameObject>(chooseTarget);
