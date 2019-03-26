@@ -21,17 +21,15 @@ GameObject:
   - component: {fileID: 4348608591693634}
   - component: {fileID: 212756552187818134}
   - component: {fileID: 95513331303124360}
-  - component: {fileID: 65228120120107254}
   - component: {fileID: 114971008443488318}
-  - component: {fileID: 114104607798825820}
-  - component: {fileID: 114878114724477296}
   - component: {fileID: 114715017873328118}
   - component: {fileID: 114561447017528850}
   - component: {fileID: 143776731489464512}
   - component: {fileID: 54626782260033110}
+  - component: {fileID: 136711991995170984}
   m_Layer: 8
   m_Name: PlayerCharacter
-  m_TagString: Player
+  m_TagString: Ally
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -43,8 +41,8 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1422462143574244}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.16, y: 0.005, z: -2.59}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 1.16, y: 0.8, z: -2.59}
+  m_LocalScale: {x: 0.25, y: 0.25, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -64,18 +62,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 116
   m_CollisionDetection: 0
---- !u!65 &65228120120107254
-BoxCollider:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1422462143574244}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 3.5, y: 6.25, z: 0.2}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!95 &95513331303124360
 Animator:
   serializedVersion: 3
@@ -85,7 +71,7 @@ Animator:
   m_GameObject: {fileID: 1422462143574244}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 1c68dccd200c83c4dabe5d704a09d1e7, type: 2}
+  m_Controller: {fileID: 9100000, guid: 11909fea6c67e1c4ea24bf0607cabb86, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -94,20 +80,6 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!114 &114104607798825820
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1422462143574244}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 010ddb1e8dcc6864ba588c579c50af34, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  battleReady: {fileID: 114971008443488318}
-  battleStarted: 0
-  indexNo: 0
 --- !u!114 &114561447017528850
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -140,24 +112,6 @@ MonoBehaviour:
   speed: 1
   luck: 0
   exp: 0
---- !u!114 &114878114724477296
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1422462143574244}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: de05c863f4a78d84791eb9a80a51912f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  battleReady: {fileID: 114971008443488318}
-  battleStarted: 0
-  whoseTurn: {fileID: 114104607798825820}
-  indexNo: 0
-  order: []
-  enemies: []
-  allies: []
 --- !u!114 &114971008443488318
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -173,8 +127,20 @@ MonoBehaviour:
   combatants: []
   enemies: []
   allies: []
-  partnerStats: {fileID: 0}
-  attackOrder: []
+  order: []
+--- !u!136 &136711991995170984
+CapsuleCollider:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1422462143574244}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 0.535
+  m_Height: 1.39
+  m_Direction: 1
+  m_Center: {x: 0, y: 0.695, z: 0}
 --- !u!143 &143776731489464512
 CharacterController:
   m_ObjectHideFlags: 1
@@ -227,7 +193,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 6f57ff947622a9b42a9a9654cecf8455, type: 3}
+  m_Sprite: {fileID: 21300004, guid: b1fb9f161d11a4322baf25dde62f936f, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0

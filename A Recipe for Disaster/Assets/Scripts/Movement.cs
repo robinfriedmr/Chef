@@ -9,17 +9,16 @@ public class Movement : MonoBehaviour {
 
     public float speed = 10.0f;
     public float gravity = -9.8f;
+    public float movementThreshold = 5.0f;
         
     Animator myAnimator;
     CharacterController _charController;
-    SpriteRenderer mySpriteRenderer;
 
     // Use this for initialization
     void Start()
         {
              myAnimator = GetComponent<Animator>();
              _charController = GetComponent<CharacterController>();
-             mySpriteRenderer = GetComponent<SpriteRenderer>();
         }
 
     void Update()
@@ -33,40 +32,44 @@ public class Movement : MonoBehaviour {
             float deltaZ = Input.GetAxis("Vertical") * speed;
             Vector3 movement = new Vector3(deltaX, 0, deltaZ);
             movement = Vector3.ClampMagnitude(movement, speed);
-            //movement.y = gravity;
 
             movement *= Time.deltaTime;
             movement = transform.TransformDirection(movement); // what does this do?
             _charController.Move(movement);
 
-            // This code can be refined.
-            if (Input.GetKey(KeyCode.A))
+            // This code may need to be refined.
+            if (Input.GetAxis("Horizontal") > 0)
             {
-                if (mySpriteRenderer != null)
-                {
-                    mySpriteRenderer.flipX = true;
-                }
+                myAnimator.SetInteger("facing", 0);
             }
-            else if (Input.GetKey(KeyCode.D))
+            else if (Input.GetAxis("Vertical") > 0)
             {
-                if (mySpriteRenderer != null)
-                {
-                    mySpriteRenderer.flipX = false;
-                }
+                myAnimator.SetInteger("facing", 1);
+            }
+            else if (Input.GetAxis("Horizontal") < 0)
+            {
+                myAnimator.SetInteger("facing", 2);
+            }
+            else if (Input.GetAxis("Vertical") < 0)
+            {
+                myAnimator.SetInteger("facing", 3);    
             }
 
-            if (_charController.velocity.magnitude > 0f)
+            if (_charController.velocity.magnitude > movementThreshold - 0.01)
             {
-               myAnimator.SetBool("Movement", true);
+               myAnimator.SetBool("walking", true);
             }
-            else if (_charController.velocity.magnitude < 8f)
+            else if (_charController.velocity.magnitude < movementThreshold)
             {
-               myAnimator.SetBool("Movement", false);
+               myAnimator.SetBool("walking", false);
             }
-            //Debug.Log(_charController.velocity.magnitude);
+            //Debug.Log(_charController.velocity.magnitude 
+            //    + ", walking is " + myAnimator.GetBool("walking")
+            //    + ", facing is " + myAnimator.GetInteger("facing"));
 
         } else {
-            myAnimator.SetBool("Movement", false);
+            myAnimator.SetBool("walking", false);
+            myAnimator.SetInteger("facing", 3);
         }
     }
 }
