@@ -1,13 +1,13 @@
 fileFormatVersion: 2
-guid: 287ca240ae60abe46994b20d9052c17b
+guid: 4027dbd671ba24c43960c264d91d7b90
 TextureImporter:
   fileIDToRecycleName:
-    21300000: Chef_Move_West_SpriteSheet_0
-    21300002: Chef_Move_West_SpriteSheet_1
-    21300004: Chef_Move_West_SpriteSheet_2
-    21300006: Chef_Move_West_SpriteSheet_3
-    21300008: Chef_Move_West_SpriteSheet_4
-    21300010: Chef_Move_West_SpriteSheet_5
+    21300000: Chef_Move_North-ResizedSpritesheet_0
+    21300002: Chef_Move_North-ResizedSpritesheet_1
+    21300004: Chef_Move_North-ResizedSpritesheet_2
+    21300006: Chef_Move_North-ResizedSpritesheet_3
+    21300008: Chef_Move_North-ResizedSpritesheet_4
+    21300010: Chef_Move_North-ResizedSpritesheet_5
   externalObjects: {}
   serializedVersion: 7
   mipmaps:
@@ -90,121 +90,121 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Chef_Move_West_SpriteSheet_0
+      name: Chef_Move_North-ResizedSpritesheet_0
       rect:
         serializedVersion: 2
-        x: 5
+        x: 58
         y: 0
-        width: 32
-        height: 64
+        width: 334
+        height: 640
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: aff3299c97a9c544db214176c44480af
+      spriteID: 61147acfef10fa74c9e7d8b41275de72
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Chef_Move_West_SpriteSheet_1
+      name: Chef_Move_North-ResizedSpritesheet_1
       rect:
         serializedVersion: 2
-        x: 52
+        x: 528
         y: 0
-        width: 33
-        height: 64
+        width: 343
+        height: 640
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 7786ce517a8a79246bbc9d08059469ac
+      spriteID: 8fc42ddfee2fd4c4286bd194c1416b63
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Chef_Move_West_SpriteSheet_2
+      name: Chef_Move_North-ResizedSpritesheet_2
       rect:
         serializedVersion: 2
-        x: 105
+        x: 1008
         y: 0
-        width: 30
-        height: 65
+        width: 344
+        height: 640
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: c6b5f51c3d2f36549954463ca5dd7706
+      spriteID: 4cbabdb6e2e06b64fa899146b7aa151c
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Chef_Move_West_SpriteSheet_3
+      name: Chef_Move_North-ResizedSpritesheet_3
       rect:
         serializedVersion: 2
-        x: 147
+        x: 1489
         y: 0
-        width: 42
-        height: 64
+        width: 333
+        height: 640
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 8a975d6bd30f83b45a670c958290edf6
+      spriteID: 1fcd94bb4d872d644834862faca01dce
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Chef_Move_West_SpriteSheet_4
+      name: Chef_Move_North-ResizedSpritesheet_4
       rect:
         serializedVersion: 2
-        x: 193
+        x: 1968
         y: 0
-        width: 42
-        height: 63
+        width: 343
+        height: 640
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 7bbade52b0d15c1409f1c0680513102c
+      spriteID: bf3373771b4e6444f8c7f7707a3cbd3e
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Chef_Move_West_SpriteSheet_5
+      name: Chef_Move_North-ResizedSpritesheet_5
       rect:
         serializedVersion: 2
-        x: 246
+        x: 2448
         y: 0
-        width: 34
-        height: 64
+        width: 344
+        height: 640
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 712164f5e84aa084db905714d7f9a1fa
+      spriteID: 32e8ce8a2217cef4b849dd24ac97e88a
       vertices: []
       indices: 
       edges: []
@@ -212,7 +212,7 @@ TextureImporter:
     outline: []
     physicsShape: []
     bones: []
-    spriteID: 2aa0d492660e9c344a0dfb353b9d2464
+    spriteID: ebd00144d1b79de41a0e150b685bcd90
     vertices: []
     indices: 
     edges: []

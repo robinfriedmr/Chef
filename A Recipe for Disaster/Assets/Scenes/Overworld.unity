@@ -976,6 +976,32 @@ Prefab:
       propertyPath: m_Center.y
       value: 0.3
       objectReference: {fileID: 0}
+    - target: {fileID: 212756552187818134, guid: 7002def3750854748a6fb9c348c4339a,
+        type: 2}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300014, guid: b1fb9f161d11a4322baf25dde62f936f,
+        type: 3}
+    - target: {fileID: 212756552187818134, guid: 7002def3750854748a6fb9c348c4339a,
+        type: 2}
+      propertyPath: m_Size.x
+      value: 3.8
+      objectReference: {fileID: 0}
+    - target: {fileID: 212756552187818134, guid: 7002def3750854748a6fb9c348c4339a,
+        type: 2}
+      propertyPath: m_Size.y
+      value: 6.4
+      objectReference: {fileID: 0}
+    - target: {fileID: 212756552187818134, guid: 7002def3750854748a6fb9c348c4339a,
+        type: 2}
+      propertyPath: m_WasSpriteAssigned
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114561447017528850, guid: 7002def3750854748a6fb9c348c4339a,
+        type: 2}
+      propertyPath: movementThreshold
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7002def3750854748a6fb9c348c4339a, type: 2}
   m_IsPrefabAsset: 0

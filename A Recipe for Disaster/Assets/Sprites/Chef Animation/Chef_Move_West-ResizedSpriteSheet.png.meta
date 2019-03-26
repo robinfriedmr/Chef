@@ -1,13 +1,13 @@
 fileFormatVersion: 2
-guid: 39fbca1fb13fa154ca02354e2b0945c2
+guid: 9127e7dd5633e0744b544fef1e65248e
 TextureImporter:
   fileIDToRecycleName:
-    21300000: Chef_Walk_Forward_Sheet_0
-    21300002: Chef_Walk_Forward_Sheet_1
-    21300004: Chef_Walk_Forward_Sheet_2
-    21300006: Chef_Walk_Forward_Sheet_3
-    21300008: Chef_Walk_Forward_Sheet_4
-    21300010: Chef_Walk_Forward_Sheet_5
+    21300000: Chef_Move_West-ResizedSpriteSheet_0
+    21300002: Chef_Move_West-ResizedSpriteSheet_1
+    21300004: Chef_Move_West-ResizedSpriteSheet_2
+    21300006: Chef_Move_West-ResizedSpriteSheet_3
+    21300008: Chef_Move_West-ResizedSpriteSheet_4
+    21300010: Chef_Move_West-ResizedSpriteSheet_5
   externalObjects: {}
   serializedVersion: 7
   mipmaps:
@@ -90,13 +90,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Chef_Walk_Forward_Sheet_0
+      name: Chef_Move_West-ResizedSpriteSheet_0
       rect:
         serializedVersion: 2
-        x: 45
-        y: 32
-        width: 38
-        height: 64
+        x: 49
+        y: 0
+        width: 323
+        height: 640
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -104,19 +104,19 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: f599af5feb497e7428499d6dad2b55ed
+      spriteID: c7b9b22f165b31d4cb9b6214dd38c25e
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Chef_Walk_Forward_Sheet_1
+      name: Chef_Move_West-ResizedSpriteSheet_1
       rect:
         serializedVersion: 2
-        x: 174
-        y: 32
-        width: 35
-        height: 64
+        x: 518
+        y: 0
+        width: 333
+        height: 640
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -124,19 +124,19 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 855a393f589ddf045b559c99cddfe56d
+      spriteID: 3603292228bf6a4438be0c692c129175
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Chef_Walk_Forward_Sheet_2
+      name: Chef_Move_West-ResizedSpriteSheet_2
       rect:
         serializedVersion: 2
-        x: 304
-        y: 32
-        width: 35
-        height: 64
+        x: 1048
+        y: 1
+        width: 304
+        height: 650
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -144,19 +144,19 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 4fd3a8d9343d1d945b154029abe61ad2
+      spriteID: 170c285ea7efbe7448f8ff3d39c7d6f1
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Chef_Walk_Forward_Sheet_3
+      name: Chef_Move_West-ResizedSpriteSheet_3
       rect:
         serializedVersion: 2
-        x: 429
-        y: 32
-        width: 38
-        height: 64
+        x: 1469
+        y: 0
+        width: 423
+        height: 640
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -164,19 +164,19 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 9919df4261842784fac3630b5862fc2b
+      spriteID: 59f254992f282fe48b8602b83588a2d8
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Chef_Walk_Forward_Sheet_4
+      name: Chef_Move_West-ResizedSpriteSheet_4
       rect:
         serializedVersion: 2
-        x: 559
-        y: 32
-        width: 35
-        height: 64
+        x: 1929
+        y: 0
+        width: 423
+        height: 630
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -184,19 +184,19 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: d4e9b727f8d7b0f4dbc5e18548617a55
+      spriteID: c2fe5befcf42c8840b040c7378771e6b
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Chef_Walk_Forward_Sheet_5
+      name: Chef_Move_West-ResizedSpriteSheet_5
       rect:
         serializedVersion: 2
-        x: 685
-        y: 32
-        width: 37
-        height: 64
+        x: 2459
+        y: 0
+        width: 343
+        height: 640
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -204,7 +204,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: f3a5ba51daa74ff4c8cb0df9ed41d810
+      spriteID: c4564458005beb649b4b035142188829
       vertices: []
       indices: 
       edges: []
@@ -212,7 +212,7 @@ TextureImporter:
     outline: []
     physicsShape: []
     bones: []
-    spriteID: 700979667aec74f43adc132b185ce80e
+    spriteID: 95196ef2f15b25d45933faab33179982
     vertices: []
     indices: 
     edges: []

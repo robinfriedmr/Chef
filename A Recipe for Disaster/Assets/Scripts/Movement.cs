@@ -17,8 +17,9 @@ public class Movement : MonoBehaviour {
     // Use this for initialization
     void Start()
         {
-             myAnimator = GetComponent<Animator>();
-             _charController = GetComponent<CharacterController>();
+        _charController = GetComponent<CharacterController>();
+        myAnimator = GetComponent<Animator>();
+        myAnimator.SetInteger("facing", 3);     
         }
 
     void Update()

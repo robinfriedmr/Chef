@@ -6,35 +6,46 @@ using UnityEngine.SceneManagement;
 
 public class Attacks : MonoBehaviour {
 
-    public WhoseTurn whoseTurn;
-    public int indexNo; //WhoseTurn needs indexNo++ after a turn.
+    public WhoseTurn whoseTurn; //WhoseTurn needs indexNo++ after a turn.
 
-    public List<GameObject> enemies;
-    public List<GameObject> allies;
+    public List<GameObject> enemies; //Public list populated by BattleReady.
+    public List<GameObject> allies; //Public list populated by BattleReady.
 
     int chooseAttack; //For random move choice of enemies.
     int chooseTarget; //For random target choice of enemies.
 
     int dmg; //Raw damage of a move, before calculation.
-    GameObject target; //Refers to the GameObject targeted by an attack (except in CalcDam)
+    string sfx; //Special effect(s). Not yet implemented.
+    GameObject target; //Refers to the GameObject targeted by an attack
+    CombatantStats targetStats; //and this to the target's stats.
 
-    void CalculateDamage (int raw, CombatantStats attacker, CombatantStats target) {
+    void CalculateDamage (int raw, CombatantStats attacker, CombatantStats targetStats) {
         // Method A - Inspired by Pokemon Go.
-        //int finDmg = Mathf.FloorToInt(0.5f * raw * (attacker.power / target.defense)) + 1; // Minimum hit is 1.
+        //int finDmg = Mathf.FloorToInt(0.5f * raw * (attacker.power / targetStats.defense)) + 1; // Minimum hit is 1.
 
         // Method B - Abby's idea
-        int finDmg = raw - target.defense;
+        int finDmg = raw - targetStats.defense;
         finDmg = (finDmg < 0) ? 0 : finDmg;
 
-        Debug.Log(target.gameObject.name + " is hit for " + finDmg); //***
-        target.HP -= finDmg; // Subtract damage from target's HP.
-        Debug.Log("HP is " + target.HP); //***
+        Debug.Log(targetStats.gameObject.name + " is hit for " + finDmg); //***
+        targetStats.HP -= finDmg; // Subtract damage from target's HP.
+        Debug.Log("HP is " + targetStats.HP); //***
 
-        if (target.HP <= 0)
+        if (targetStats.HP <= 0)
         {
             //Remove target from list of combatants, list of allies/enemies
-            Destroy(target);
-            Debug.Log(target.gameObject.name + " defeated!");
+            whoseTurn.order.Remove(targetStats.gameObject);
+            enemies.Remove(targetStats.gameObject);
+            Destroy(targetStats.gameObject);
+            Debug.Log(targetStats.gameObject.name + " defeated!");
+        }
+    }
+
+    void ApplySFX (string sfx, CombatantStats targetStats)
+    {
+        if (sfx == "defense debuff")
+        {
+            targetStats.defense -= 1; //*** MAKE THIS A TEMPORARY DEBUFF! WITH 10% CHANCE OF HAPPENING.
         }
     }
 
@@ -82,6 +93,7 @@ public class Attacks : MonoBehaviour {
                 if (chef.magic >= 3)
                 {
                     dmg = chef.level + chef.power;
+
                     chef.magic -= 3;
                 } else
                 {
@@ -116,11 +128,17 @@ public class Attacks : MonoBehaviour {
             if (target != null) {
                 Debug.Log("The target is " + target.name); //***
                 CalculateDamage(dmg, chef, target.GetComponent<CombatantStats>());
-                dmg = 0;
-                target = null;
-                whoseTurn.indexNo++;
+                ResetAttacks();
             }
         }
+    }
+
+    void ResetAttacks ()
+    {
+        dmg = 0;
+        sfx = null;
+        target = null;
+        whoseTurn.indexNo++;
     }
 
     void BeetAttacks (CombatantStats attacker) {
@@ -131,6 +149,7 @@ public class Attacks : MonoBehaviour {
             Debug.Log("Attack type: 2");
             if (attacker.magic >= 1) {
                 dmg = attacker.level + attacker.power;
+
                 attacker.magic -= 1;
             } else {
                 Debug.Log("Not enough magic left!");
@@ -150,23 +169,93 @@ public class Attacks : MonoBehaviour {
         {
             Debug.Log("The target is " + target.name); //***
             CalculateDamage(dmg, attacker, target.GetComponent<CombatantStats>());
-            dmg = 0;
-            target = null;
-            whoseTurn.indexNo++;
+            ResetAttacks();
         }
     }
 
     void CarrotAttacks(CombatantStats attacker)
     {
         Debug.Log("The carrot attacks!");
-        //;
-        indexNo++;
+
+        chooseAttack = Random.Range(1, 2); // choose an attack
+        if (attacker.level >= 4 && chooseAttack == 2)
+        {
+            Debug.Log("Attack type: 2");
+            if (attacker.magic >= 2)
+            {
+                dmg = attacker.level + attacker.power;
+
+                attacker.magic -= 2;
+            }
+            else
+            {
+                Debug.Log("Not enough magic left!");
+                chooseAttack = 1;
+                Debug.Log("New choice is " + chooseAttack);
+            }
+        }
+        else if (chooseAttack == 1)
+        {
+            Debug.Log("Attack type: 1");
+            dmg = 3;
+        } /* else {
+            Debug.Log("Error. Choice 1 or 2 not chosen for some reason.");
+        } */
+
+        chooseTarget = Random.Range(0, allies.Count() - 1); // Choose a target
+        target = allies.ElementAt<GameObject>(chooseTarget);
+        if (target != null)
+        {
+            Debug.Log("The target is " + target.name); //***
+            CalculateDamage(dmg, attacker, target.GetComponent<CombatantStats>());
+            ResetAttacks();
+        }
     }
 
     void OnionAttacks(CombatantStats attacker)
     { 
         Debug.Log("The onion attacks!");
-        //;
-        indexNo++;
+
+        chooseAttack = Random.Range(1, 2); // choose an attack
+        if (attacker.level >= 2 && chooseAttack == 2)
+        {
+            Debug.Log("Attack type: 2");
+            if (attacker.magic >= 2)
+            {
+                dmg = attacker.level + attacker.power;
+                sfx = "defense debuff";
+
+                attacker.magic -= 2;
+                float recoil = (attacker.level + attacker.power) / 2;
+                attacker.HP -= Mathf.FloorToInt(recoil);
+            }
+            else
+            {
+                Debug.Log("Not enough magic left!");
+                chooseAttack = 1;
+                Debug.Log("New choice is " + chooseAttack);
+            }
+        }
+        else if (chooseAttack == 1)
+        {
+            Debug.Log("Attack type: 1");
+            dmg = 3;
+        } /* else {
+            Debug.Log("Error. Choice 1 or 2 not chosen for some reason.");
+        } */
+
+        chooseTarget = Random.Range(0, allies.Count() - 1); // Choose a target
+        target = allies.ElementAt<GameObject>(chooseTarget);
+        targetStats = target.GetComponent<CombatantStats>();
+        if (target != null)
+        {
+            Debug.Log("The target is " + target.name); //***
+            CalculateDamage(dmg, attacker, targetStats);
+            if (sfx != null)
+            {
+                ApplySFX(sfx, target.GetComponent<CombatantStats>());
+            }
+            ResetAttacks();
+        }
     }
 }

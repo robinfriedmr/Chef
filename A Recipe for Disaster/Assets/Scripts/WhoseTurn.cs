@@ -9,7 +9,7 @@ public class WhoseTurn : MonoBehaviour {
     BattleReady _br;
     Attacks _attacks;
     bool battleStarted;
-    List<GameObject> order;
+    public List<GameObject> order;
     public int indexNo;
     GameObject turnTaker;
 

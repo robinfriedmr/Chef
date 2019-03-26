@@ -13,7 +13,7 @@ public class CamFollow : MonoBehaviour {
 	}
 	
 	void Update () {
-        Vector3 targetPosition = target.TransformPoint(new Vector3(0, 3, -4));
+        Vector3 targetPosition = target.TransformPoint(new Vector3(0, 6, -4));
         transform.position = Vector3.SmoothDamp(transform.position, targetPosition, ref velocity, smoothTime);
 	}
 }

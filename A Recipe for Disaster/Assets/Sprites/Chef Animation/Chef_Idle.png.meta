@@ -6,6 +6,10 @@ TextureImporter:
     21300002: Chef New Colors (1)_1
     21300004: Chef New Colors (1)_2
     21300006: Chef New Colors (1)_3
+    21300008: Chef_Idle_0
+    21300010: Chef_Idle_1
+    21300012: Chef_Idle_2
+    21300014: Chef_Idle_3
   externalObjects: {}
   serializedVersion: 7
   mipmaps:
@@ -121,53 +125,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Chef New Colors (1)_0
+      name: Chef_Idle_0
       rect:
         serializedVersion: 2
-        x: 0
-        y: 700
-        width: 700
-        height: 700
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: f9679b47be9954bf28fbfd903f6985cb
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Chef New Colors (1)_1
-      rect:
-        serializedVersion: 2
-        x: 700
-        y: 700
-        width: 700
-        height: 700
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 47e3d981cdbfe495c86b1b769a146146
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Chef New Colors (1)_2
-      rect:
-        serializedVersion: 2
-        x: 0
+        x: 40
         y: 0
-        width: 700
-        height: 700
+        width: 210
+        height: 640
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -175,19 +139,19 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: deceaed47d4d14be19c0918fc433851f
+      spriteID: 63aac56a66934fa4986e23e22f9aa6e4
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Chef New Colors (1)_3
+      name: Chef_Idle_1
       rect:
         serializedVersion: 2
-        x: 700
+        x: 288
         y: 0
-        width: 700
-        height: 700
+        width: 380
+        height: 640
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -195,7 +159,47 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 77dd4a7ad2bdd4dc8b9f69b2dea4d5b7
+      spriteID: 6f58bcd618a7e1143bdc5af8bcd82a90
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Chef_Idle_2
+      rect:
+        serializedVersion: 2
+        x: 717
+        y: 0
+        width: 210
+        height: 640
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 016465a95b6f3f74ca33a39525479cc0
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Chef_Idle_3
+      rect:
+        serializedVersion: 2
+        x: 970
+        y: 0
+        width: 380
+        height: 640
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ba7bc32e0c300fb4c9ac7939f03a9628
       vertices: []
       indices: 
       edges: []
