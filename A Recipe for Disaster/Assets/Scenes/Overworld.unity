@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657868, g: 0.49641263, b: 0.57481706, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -449,7 +449,7 @@ GameObject:
   - component: {fileID: 732904287}
   - component: {fileID: 732904289}
   m_Layer: 0
-  m_Name: Melody
+  m_Name: Music and Ambience
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -465,7 +465,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 243891072662324464, guid: 9b8c8296beb5d304c9670067d2b29c6b,
     type: 2}
-  m_audioClip: {fileID: 8300000, guid: bfc1bfa0f8e274e5c81d05e896bfd7c3, type: 3}
+  m_audioClip: {fileID: 8300000, guid: 69d4f4cb84dfc39469e65cfb48635d47, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1
