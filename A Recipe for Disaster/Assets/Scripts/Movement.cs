@@ -72,5 +72,15 @@ public class Movement : MonoBehaviour {
             myAnimator.SetBool("walking", false);
             myAnimator.SetInteger("facing", 3);
         }
+       
     }
+   /* if (_rb.velocity.magnitude > 1f && GetComponent<AudioSource>().isPlaying == false 
+            && (Input.GetKey("up") || Input.GetKey("down") || Input.GetKey("left") || Input.GetKey("right")))
+        {
+            GetComponent<AudioSource>().volume = Random.Range(0.8f, 1f); 
+            GetComponent<AudioSource>().pitch = Random.Range(0.8f, 1.1f);
+            GetComponent<AudioSource>().Play();
+       }*/
 }
+
+
