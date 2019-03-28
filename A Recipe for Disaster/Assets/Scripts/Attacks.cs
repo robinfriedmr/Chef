@@ -21,11 +21,11 @@ public class Attacks : MonoBehaviour {
 
     void CalculateDamage (int raw, CombatantStats attacker, CombatantStats targetStats) {
         // Method A - Inspired by Pokemon Go.
-        //int finDmg = Mathf.FloorToInt(0.5f * raw * (attacker.power / targetStats.defense)) + 1; // Minimum hit is 1.
+        int finDmg = Mathf.FloorToInt(0.5f * raw * (attacker.power / targetStats.defense)) + 1; // Minimum hit is 1.
 
         // Method B - Abby's idea
-        int finDmg = raw - targetStats.defense;
-        finDmg = (finDmg < 0) ? 0 : finDmg;
+        //int finDmg = raw - targetStats.defense;
+        //finDmg = (finDmg < 0) ? 0 : finDmg;
 
         Debug.Log(targetStats.gameObject.name + " is hit for " + finDmg); //***
         targetStats.HP -= finDmg; // Subtract damage from target's HP.

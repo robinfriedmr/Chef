@@ -56,6 +56,7 @@ public class Movement : MonoBehaviour {
                 myAnimator.SetInteger("facing", 3);    
             }
 
+            // NO MOON-WALKING!
             if (_charController.velocity.magnitude > movementThreshold - 0.01)
             {
                myAnimator.SetBool("walking", true);

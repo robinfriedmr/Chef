@@ -6,33 +6,28 @@ public class CombatantStats : MonoBehaviour
 {
 
     public int level;
+//    public int exp;
+
     public int HP;
     public int defense;
     public int power;
     public int magic;
     public int speed;
-    public int luck;
-    // This variable will need to be accessed by other scripts...
-    //...to determine level and thus stat increases.
-    public int exp;
+//    public int luck;
 
-    bool leveled;
+//    bool leveled;
 
-    void Start()
-    {
-        
-    }
-
-    void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.E))
+    /*    void Update()
         {
-            ExperienceGain(2);
-            Debug.Log("Exp now " + exp);
+            if (Input.GetKeyDown(KeyCode.E))
+            {
+                ExperienceGain(2);
+                Debug.Log("Exp now " + exp);
+            }
         }
-    }
+    */
 
-    public void ExperienceGain(int gain)
+    /*    public void ExperienceGain(int gain)
     {
         exp += gain;
         leveled = false;
@@ -44,8 +39,9 @@ public class CombatantStats : MonoBehaviour
             leveled = true;
         }
     }
+    */
 
-    public void LevelUp()
+    /*    public void LevelUp()
     {
         if (this.name == "PlayerCharacter")
         {
@@ -59,4 +55,5 @@ public class CombatantStats : MonoBehaviour
             Debug.Log("New level: " + level);
         }
     }
+    */
 }
