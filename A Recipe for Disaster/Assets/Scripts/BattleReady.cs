@@ -35,7 +35,7 @@ public class BattleReady : MonoBehaviour {
 
     void Start () {
         battlingPlayer = new Vector3(-3f, 0.8f, 1f); // May need experimentation as sprites change.
-        battlingEnemy = new Vector3(3, 2, 1);
+        battlingEnemy = new Vector3(3f, 0f, 1f);
 
         myStats = GetComponent<CombatantStats>();
         mySpeed = myStats.speed;
@@ -58,9 +58,9 @@ public class BattleReady : MonoBehaviour {
 
     void PrepareForBattle (Collision collision) {
         // Keep the enemy (and player) GameObject when loading battle scene!
-        enemyEncounter = collision.gameObject;
-        DontDestroyOnLoad(enemyEncounter);
-        DontDestroyOnLoad(this.gameObject);
+        enemyEncounter = collision.gameObject;  
+        DontDestroyOnLoad(enemyEncounter); //***
+        DontDestroyOnLoad(this.gameObject); //***
 
         // Identify enemy speed stat. 
         enemyStats = enemyEncounter.GetComponent<CombatantStats>();
@@ -72,7 +72,7 @@ public class BattleReady : MonoBehaviour {
 
         // Create separate lists from "combatants" for enemies and allies.
         enemies = order.FindAll(combatant => combatant.tag.Equals("Enemy"));
-        allies = order.Except<GameObject>(enemies).ToList<GameObject>(); //*** experimental
+        allies = order.Except<GameObject>(enemies).ToList<GameObject>();
         allies.RemoveAll(combatant => combatant.tag.Equals("Enemy"));
 
         // Move the player and enemy into position.
@@ -83,12 +83,34 @@ public class BattleReady : MonoBehaviour {
         string sceneName = currentScene.name;
         if (sceneName != "BattleScene")
         {
-            SceneManager.LoadScene("BattleScene", LoadSceneMode.Single); //CHANGE THIS TO ADDITIVE/ASYNC.
+            SceneManager.LoadScene("BattleScene", LoadSceneMode.Single);
+            //StartCoroutine(LoadBattleScene(enemyEncounter)); //***
         }
 
         // Change battle readiness. (Since we're moving to the BattleScene, ...
         ready = false; //...we don't need to be ready to enter it.)
     }
+
+   /* IEnumerator LoadBattleScene(GameObject enemyEncounter)
+    {
+        yield return null;
+
+        AsyncOperation asyncOperation = SceneManager.LoadSceneAsync("BattleScene", LoadSceneMode.Additive);
+        //Don't let the Scene activate until you allow it to
+        asyncOperation.allowSceneActivation = true; //????????
+
+        Scene battleScene = SceneManager.GetSceneByName("BattleScene");
+        if (battleScene.IsValid())
+        {
+            Debug.Log("Scene is Valid");
+            SceneManager.MoveGameObjectToScene(enemyEncounter, battleScene);
+            SceneManager.MoveGameObjectToScene(this.gameObject, battleScene);
+
+            SceneManager.SetActiveScene(battleScene);
+        }
+
+
+    } */
 
     void OrderTurns() {
         //Add GameObjects to combatants list.

@@ -57,14 +57,17 @@ public class Movement : MonoBehaviour {
             }
 
             // NO MOON-WALKING!
-            if (_charController.velocity.magnitude > movementThreshold - 0.01)
+            if (Input.GetAxis("Horizontal") != 0 || Input.GetAxis("Vertical") != 0)
             {
-               myAnimator.SetBool("walking", true);
+                myAnimator.SetBool("walking", true);
             }
-            else if (_charController.velocity.magnitude < movementThreshold)
+
+            if (_charController.velocity.magnitude < movementThreshold)
             {
                myAnimator.SetBool("walking", false);
             }
+            
+            
             //Debug.Log(_charController.velocity.magnitude 
             //    + ", walking is " + myAnimator.GetBool("walking")
             //    + ", facing is " + myAnimator.GetInteger("facing"));
