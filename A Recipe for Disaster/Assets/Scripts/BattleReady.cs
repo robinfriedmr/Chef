@@ -6,6 +6,9 @@ using UnityEngine.SceneManagement;
 
 public class BattleReady : MonoBehaviour {
 
+    public GameObject persistence;
+    Vector3 overworldPos;
+
     public bool ready;
 
     public List<GameObject> combatants = new List<GameObject>();
@@ -57,6 +60,9 @@ public class BattleReady : MonoBehaviour {
     }
 
     void PrepareForBattle (Collision collision) {
+        // Let the enemy array persist.
+        DontDestroyOnLoad(persistence);
+
         // Keep the enemy (and player) GameObject when loading battle scene!
         enemyEncounter = collision.gameObject;  
         DontDestroyOnLoad(enemyEncounter); //***
@@ -75,8 +81,11 @@ public class BattleReady : MonoBehaviour {
         allies = order.Except<GameObject>(enemies).ToList<GameObject>();
         allies.RemoveAll(combatant => combatant.tag.Equals("Enemy"));
 
+        // Save position of player.
+        overworldPos = this.transform.position;
+
         // Move the player and enemy into position.
-        Reposition(enemyEncounter);
+        BattlePosition(enemyEncounter);
 
         // Switch scenes on collision.
         Scene currentScene = SceneManager.GetActiveScene();
@@ -135,7 +144,7 @@ public class BattleReady : MonoBehaviour {
         } //*** 
     }
 
-    void Reposition (GameObject enemy) {
+    void BattlePosition (GameObject enemy) {
         // Place Player
         this.GetComponent<Transform>().position = battlingPlayer;
         
@@ -146,5 +155,9 @@ public class BattleReady : MonoBehaviour {
 
         // Place Enemy
         enemy.GetComponent<Transform>().position = battlingEnemy;
+    }
+
+    public void OverworldPosition () {
+        this.transform.position = overworldPos;
     }
 }

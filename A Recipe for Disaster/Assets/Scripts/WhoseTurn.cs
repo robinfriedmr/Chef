@@ -32,6 +32,10 @@ public class WhoseTurn : MonoBehaviour {
                 battleStarted = false;
                 order.Clear();
                 Debug.Log("Battle ends.");
+
+                //reload overworld
+                _br.OverworldPosition();
+                SceneManager.LoadScene("Overworld");
             } else if (indexNo < order.Count)
             {
                 Fight(indexNo);
