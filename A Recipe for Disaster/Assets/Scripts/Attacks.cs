@@ -6,7 +6,8 @@ using UnityEngine.SceneManagement;
 
 public class Attacks : MonoBehaviour {
 
-    public WhoseTurn whoseTurn; //WhoseTurn needs indexNo++ after a turn.
+    public PersistentData _pd;
+    public WhoseTurn _wt; //WhoseTurn needs indexNo++ after a turn.
 
     public List<GameObject> enemies; //Public list populated by BattleReady.
     public List<GameObject> allies; //Public list populated by BattleReady.
@@ -34,8 +35,12 @@ public class Attacks : MonoBehaviour {
         if (targetStats.HP <= 0)
         {
             //Remove target from list of combatants, list of allies/enemies
-            whoseTurn.order.Remove(targetStats.gameObject);
+            _wt.order.Remove(targetStats.gameObject);
             enemies.Remove(targetStats.gameObject);
+            _pd = FindObjectOfType<PersistentData>().GetComponent<PersistentData>();
+            _pd.enemyList.Remove(targetStats.gameObject);
+            _pd.Reactivate();
+
             Destroy(targetStats.gameObject);
             Debug.Log(targetStats.gameObject.name + " defeated!");
         }
@@ -51,15 +56,15 @@ public class Attacks : MonoBehaviour {
 
     public void EnemyAttacks (GameObject enemy)
     {
-        if (enemy.name == "Beet")
+        if (enemy.name.Contains("Beet"))
         {
             BeetAttacks(enemy.GetComponent<CombatantStats>());
         }
-        else if (enemy.name == "Carrot")
+        else if (enemy.name.Contains("Carrot"))
         {
             CarrotAttacks(enemy.GetComponent<CombatantStats>());
         }
-        else if (enemy.name == "Onion")
+        else if (enemy.name.Contains("Onion"))
         {
             OnionAttacks(enemy.GetComponent<CombatantStats>());
         } else
@@ -138,7 +143,7 @@ public class Attacks : MonoBehaviour {
         dmg = 0;
         sfx = null;
         target = null;
-        whoseTurn.indexNo++;
+        _wt.indexNo++;
     }
 
     void BeetAttacks (CombatantStats attacker) {

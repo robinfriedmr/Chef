@@ -6,7 +6,8 @@ using UnityEngine.SceneManagement;
 
 public class BattleReady : MonoBehaviour {
 
-    public GameObject persistence;
+    public PersistentData _pd;
+
     Vector3 overworldPos;
 
     public bool ready;
@@ -60,13 +61,15 @@ public class BattleReady : MonoBehaviour {
     }
 
     void PrepareForBattle (Collision collision) {
-        // Let the enemy array persist.
-        DontDestroyOnLoad(persistence);
-
-        // Keep the enemy (and player) GameObject when loading battle scene!
         enemyEncounter = collision.gameObject;  
+
+        // Keep the enemy and player GameObjects when loading battle scene!
         DontDestroyOnLoad(enemyEncounter); //***
         DontDestroyOnLoad(this.gameObject); //***
+
+        // Let the enemy array persist, but set everyone (except the enemyEncounter) as inactive
+        DontDestroyOnLoad(_pd.gameObject);
+        _pd.BeforeSwitch(enemyEncounter);
 
         // Identify enemy speed stat. 
         enemyStats = enemyEncounter.GetComponent<CombatantStats>();
@@ -99,27 +102,6 @@ public class BattleReady : MonoBehaviour {
         // Change battle readiness. (Since we're moving to the BattleScene, ...
         ready = false; //...we don't need to be ready to enter it.)
     }
-
-   /* IEnumerator LoadBattleScene(GameObject enemyEncounter)
-    {
-        yield return null;
-
-        AsyncOperation asyncOperation = SceneManager.LoadSceneAsync("BattleScene", LoadSceneMode.Additive);
-        //Don't let the Scene activate until you allow it to
-        asyncOperation.allowSceneActivation = true; //????????
-
-        Scene battleScene = SceneManager.GetSceneByName("BattleScene");
-        if (battleScene.IsValid())
-        {
-            Debug.Log("Scene is Valid");
-            SceneManager.MoveGameObjectToScene(enemyEncounter, battleScene);
-            SceneManager.MoveGameObjectToScene(this.gameObject, battleScene);
-
-            SceneManager.SetActiveScene(battleScene);
-        }
-
-
-    } */
 
     void OrderTurns() {
         //Add GameObjects to combatants list.

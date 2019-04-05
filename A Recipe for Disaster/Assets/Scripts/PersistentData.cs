@@ -4,25 +4,30 @@ using UnityEngine;
 
 public class PersistentData : MonoBehaviour {
 
-    GameObject[] enemyArray;
+    public List<GameObject> enemyList;
+    public GameObject beet;
+    public GameObject carrot;
+    public GameObject onion;
 
-	void Start () {
-		enemyArray = GameObject.FindGameObjectsWithTag("Enemy");
-    }
+	private void Awake()
+	{
+        // Instantiate enemies in places specified
+        enemyList.Add(Instantiate(carrot, new Vector3(2.15f, 1f, 2.66f), Quaternion.identity) as GameObject);
+	}
 
-    void Reinstantiate () {
-        foreach(GameObject enemy in enemyArray) {
+    public void Reactivate () {
+        foreach(GameObject enemy in enemyList) {
             if (enemy != null) {
                 enemy.SetActive(true);
-                //Instantiate(enemy);
             }
         }
     }
 	
-    void BeforeSwitch () {
-        enemyArray = GameObject.FindGameObjectsWithTag("Enemy");
-        foreach (GameObject enemy in enemyArray) {
+    public void BeforeSwitch (GameObject except) {
+
+        foreach (GameObject enemy in enemyList) {
             enemy.SetActive(false);
         }
+        except.SetActive(true);
     }
 }
