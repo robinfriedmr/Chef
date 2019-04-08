@@ -7,7 +7,7 @@ using UnityEngine.SceneManagement;
 public class Attacks : MonoBehaviour {
 
     public PersistentData _pd;
-    public WhoseTurn _wt; //WhoseTurn needs indexNo++ after a turn.
+    WhoseTurn _wt; //WhoseTurn needs indexNo++ after a turn.
 
     public List<GameObject> enemies; //Public list populated by BattleReady.
     public List<GameObject> allies; //Public list populated by BattleReady.
@@ -19,6 +19,12 @@ public class Attacks : MonoBehaviour {
     string sfx; //Special effect(s). Not yet implemented.
     GameObject target; //Refers to the GameObject targeted by an attack
     CombatantStats targetStats; //and this to the target's stats.
+
+    private void Start()
+    {
+        _wt = GetComponent<WhoseTurn>();
+
+    }
 
     void CalculateDamage (int raw, CombatantStats attacker, CombatantStats targetStats) {
         // Method A - Inspired by Pokemon Go.
@@ -36,10 +42,20 @@ public class Attacks : MonoBehaviour {
         {
             //Remove target from list of combatants, list of allies/enemies
             _wt.order.Remove(targetStats.gameObject);
-            enemies.Remove(targetStats.gameObject);
+
+            if (targetStats.gameObject.tag == "Enemy")
+            {
+                enemies.Remove(targetStats.gameObject);
+            } else if (targetStats.gameObject.tag == "Ally") 
+            {
+                allies.Remove(targetStats.gameObject);
+            } else
+            {
+                Debug.Log("Error trying to remove " + targetStats.gameObject.name + " from its list! Check tag: " + targetStats.gameObject.tag);
+            }
+
             _pd = FindObjectOfType<PersistentData>().GetComponent<PersistentData>();
             _pd.enemyList.Remove(targetStats.gameObject);
-            _pd.Reactivate();
 
             Destroy(targetStats.gameObject);
             Debug.Log(targetStats.gameObject.name + " defeated!");

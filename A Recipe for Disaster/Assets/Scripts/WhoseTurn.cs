@@ -6,6 +6,7 @@ using UnityEngine.SceneManagement;
 
 public class WhoseTurn : MonoBehaviour {
 
+    PersistentData _pd;
     BattleReady _br;
     Attacks _attacks;
     bool battleStarted;
@@ -35,8 +36,11 @@ public class WhoseTurn : MonoBehaviour {
                 Debug.Log("Battle ends.");
 
                 //reload overworld
+                _pd = FindObjectOfType<PersistentData>().GetComponent<PersistentData>();
+                _pd.Reactivate();
+
                 _br.OverworldPosition();
-                SceneManager.LoadScene("Overworld", LoadSceneMode.Single);
+                SceneManager.UnloadSceneAsync("BattleScene");
             } else if (indexNo < order.Count)
             {
                 Fight(indexNo);

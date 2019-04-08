@@ -66,8 +66,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: de05c863f4a78d84791eb9a80a51912f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  whoseTurn: {fileID: 0}
-  battleReady: {fileID: 0}
+  _pd: {fileID: 0}
+  enemies: []
+  allies: []
 --- !u!114 &114555704302367472
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -81,12 +82,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   level: 1
   HP: 7
-  defense: 0
+  defense: 1
   power: 2
   magic: 2
   speed: 2
-  luck: 0
-  exp: 0
 --- !u!212 &212211495691541302
 SpriteRenderer:
   m_ObjectHideFlags: 1

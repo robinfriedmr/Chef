@@ -13,21 +13,30 @@ public class PersistentData : MonoBehaviour {
 	{
         // Instantiate enemies in places specified
         enemyList.Add(Instantiate(carrot, new Vector3(2.15f, 1f, 2.66f), Quaternion.identity) as GameObject);
-	}
+        enemyList.Add(Instantiate(beet, new Vector3(-2.15f, 1.12f, 1.63f), Quaternion.identity) as GameObject);
+        enemyList.Add(Instantiate(onion, new Vector3(-2.84f, 0.78f, -4.11f), Quaternion.identity) as GameObject);
 
-    public void Reactivate () {
-        foreach(GameObject enemy in enemyList) {
-            if (enemy != null) {
-                enemy.SetActive(true);
-            }
-        }
     }
 	
     public void BeforeSwitch (GameObject except) {
 
         foreach (GameObject enemy in enemyList) {
-            enemy.SetActive(false);
+            if (enemy != null)
+            {
+                enemy.SetActive(false);
+            } 
         }
         except.SetActive(true);
+    }
+
+    public void Reactivate()
+    {
+        foreach (GameObject enemy in enemyList)
+        {
+            if (enemy != null)
+            {
+                enemy.SetActive(true);
+            }
+        }
     }
 }

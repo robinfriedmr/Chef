@@ -91,12 +91,10 @@ public class BattleReady : MonoBehaviour {
         BattlePosition(enemyEncounter);
 
         // Switch scenes on collision.
-        Scene currentScene = SceneManager.GetActiveScene();
-        string sceneName = currentScene.name;
+        string sceneName = SceneManager.GetActiveScene().name;
         if (sceneName != "BattleScene")
         {
-            SceneManager.LoadScene("BattleScene", LoadSceneMode.Single);
-            //StartCoroutine(LoadBattleScene(enemyEncounter)); //***
+            StartCoroutine(LoadBattleScene(enemyEncounter)); //***
         }
 
         // Change battle readiness. (Since we're moving to the BattleScene, ...
@@ -137,6 +135,20 @@ public class BattleReady : MonoBehaviour {
 
         // Place Enemy
         enemy.GetComponent<Transform>().position = battlingEnemy;
+    }
+
+    IEnumerator LoadBattleScene(GameObject enemyException)
+    {
+        //yield return null;
+
+        AsyncOperation asyncLoad = SceneManager.LoadSceneAsync("BattleScene", LoadSceneMode.Additive);
+        asyncLoad.allowSceneActivation = true;
+
+        // Wait until the asynchronous scene fully loads
+        while (!asyncLoad.isDone)
+        {
+            yield return null;
+        }
     }
 
     public void OverworldPosition () {

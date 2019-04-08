@@ -377,6 +377,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 010ddb1e8dcc6864ba588c579c50af34, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  order: []
   indexNo: 0
 --- !u!114 &320465156
 MonoBehaviour:
@@ -389,8 +390,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: de05c863f4a78d84791eb9a80a51912f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  whoseTurn: {fileID: 320465155}
-  indexNo: 0
+  _pd: {fileID: 0}
+  _wt: {fileID: 320465155}
   enemies: []
   allies: []
 --- !u!4 &320465157
