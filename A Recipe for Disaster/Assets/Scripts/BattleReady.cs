@@ -32,14 +32,20 @@ public class BattleReady : MonoBehaviour {
     Vector3 battlingPlayer;
     Vector3 battlingEnemy;
 
+    public Camera overworldCam;
+    public Camera battleCam;
+    public AudioSource overworldMusic;
+
     void Awake()
     {
         ready = true;
+        battleCam.enabled = false;
+        overworldCam.enabled = true;
     }
 
     void Start () {
-        battlingPlayer = new Vector3(-3f, 0.8f, 1f); // May need experimentation as sprites change.
-        battlingEnemy = new Vector3(3f, 0f, 1f);
+        battlingPlayer = new Vector3(-3f, -39.2f, 1f); // May need experimentation as sprites change.
+        battlingEnemy = new Vector3(3f, -39f, 1f);
 
         myStats = GetComponent<CombatantStats>();
         mySpeed = myStats.speed;
@@ -89,6 +95,12 @@ public class BattleReady : MonoBehaviour {
 
         // Move the player and enemy into position.
         BattlePosition(enemyEncounter);
+        // Move camera, too.
+        overworldCam.enabled = false;
+        battleCam.enabled = true;
+
+        // Disable overworld theme.
+        overworldMusic.enabled = false;
 
         // Switch scenes on collision.
         string sceneName = SceneManager.GetActiveScene().name;
@@ -153,5 +165,10 @@ public class BattleReady : MonoBehaviour {
 
     public void OverworldPosition () {
         this.transform.position = overworldPos;
+        battleCam.enabled = false;
+        overworldCam.enabled = true;
+
+        // Re-enable overworld theme.
+        overworldMusic.enabled = true;
     }
 }
