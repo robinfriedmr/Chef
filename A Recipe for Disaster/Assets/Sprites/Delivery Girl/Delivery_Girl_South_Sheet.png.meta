@@ -94,9 +94,9 @@ TextureImporter:
       name: Delivery_South_Sheet_0
       rect:
         serializedVersion: 2
-        x: 68
+        x: 0
         y: 0
-        width: 374
+        width: 480
         height: 660
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -105,7 +105,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 7e3486a908c6edd4eb91f40ef99326c5
+      spriteID: e741d8f14dce87142addcf842cff0ee1
       vertices: []
       indices: 
       edges: []
@@ -114,9 +114,9 @@ TextureImporter:
       name: Delivery_South_Sheet_1
       rect:
         serializedVersion: 2
-        x: 578
+        x: 480
         y: 0
-        width: 324
+        width: 480
         height: 660
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -125,7 +125,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 395c44a7a0a25204d90046833f90efaf
+      spriteID: 603e2c246581d1f4799022512abe77d9
       vertices: []
       indices: 
       edges: []
@@ -134,9 +134,9 @@ TextureImporter:
       name: Delivery_South_Sheet_2
       rect:
         serializedVersion: 2
-        x: 1057
+        x: 960
         y: 0
-        width: 325
+        width: 480
         height: 660
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -145,7 +145,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: e0e04d18938aa4e4c84bdfef54653254
+      spriteID: a65039cc38001134f8960f9c0e58ab7c
       vertices: []
       indices: 
       edges: []
@@ -154,9 +154,9 @@ TextureImporter:
       name: Delivery_South_Sheet_3
       rect:
         serializedVersion: 2
-        x: 1538
+        x: 1440
         y: 0
-        width: 323
+        width: 480
         height: 660
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -165,7 +165,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: e5cc47e44d341144796060eca5b0d33e
+      spriteID: 791efd25d96d5314297afbd4e7f35913
       vertices: []
       indices: 
       edges: []
@@ -174,9 +174,9 @@ TextureImporter:
       name: Delivery_South_Sheet_4
       rect:
         serializedVersion: 2
-        x: 2007
+        x: 1920
         y: 0
-        width: 325
+        width: 480
         height: 660
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -185,7 +185,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: bd806cf679fcea84aa4b4ba2b8a2fbba
+      spriteID: 78b87a4a24826724c8380737b3c2489c
       vertices: []
       indices: 
       edges: []
@@ -194,9 +194,9 @@ TextureImporter:
       name: Delivery_South_Sheet_5
       rect:
         serializedVersion: 2
-        x: 2488
+        x: 2400
         y: 0
-        width: 324
+        width: 480
         height: 660
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -205,7 +205,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 814c7c6b94529124ab328d4a0aa1a6a1
+      spriteID: 6e919b268d1758b418cf20468f8c99e1
       vertices: []
       indices: 
       edges: []
@@ -214,9 +214,9 @@ TextureImporter:
       name: Delivery_South_Sheet_6
       rect:
         serializedVersion: 2
-        x: 2957
+        x: 2880
         y: 0
-        width: 335
+        width: 480
         height: 660
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -225,7 +225,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 37b2657dfb4ab5f47908be8a259da746
+      spriteID: 3e84f45dc1aae044d83372c6aea216ee
       vertices: []
       indices: 
       edges: []

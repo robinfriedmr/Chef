@@ -94,9 +94,9 @@ TextureImporter:
       name: Delivery_Girl_North_Sheet_0
       rect:
         serializedVersion: 2
-        x: 68
+        x: 0
         y: 0
-        width: 374
+        width: 480
         height: 660
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -105,7 +105,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: e5ee4d0c8b05fed409fbe0ea4245a99e
+      spriteID: b17597c6aaff7164db701766bdd21962
       vertices: []
       indices: 
       edges: []
@@ -114,9 +114,9 @@ TextureImporter:
       name: Delivery_Girl_North_Sheet_1
       rect:
         serializedVersion: 2
-        x: 578
+        x: 480
         y: 0
-        width: 324
+        width: 480
         height: 660
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -125,7 +125,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: b0cb8bfb3bf80824789af027664cd7e2
+      spriteID: 3876bcdfe1a89744f954fbfd8d60754d
       vertices: []
       indices: 
       edges: []
@@ -134,9 +134,9 @@ TextureImporter:
       name: Delivery_Girl_North_Sheet_2
       rect:
         serializedVersion: 2
-        x: 1057
+        x: 960
         y: 0
-        width: 325
+        width: 480
         height: 660
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -145,7 +145,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 76c4d06188765f240b1587c58d90d62c
+      spriteID: 2b2eeac704e21174d95a563ebae52248
       vertices: []
       indices: 
       edges: []
@@ -154,9 +154,9 @@ TextureImporter:
       name: Delivery_Girl_North_Sheet_3
       rect:
         serializedVersion: 2
-        x: 1538
+        x: 1440
         y: 0
-        width: 323
+        width: 480
         height: 660
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -165,7 +165,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 9b3c44b186940b14a86e75c62d0cf439
+      spriteID: f89fadd51c1275f48bedd9f9216a9dec
       vertices: []
       indices: 
       edges: []
@@ -174,9 +174,9 @@ TextureImporter:
       name: Delivery_Girl_North_Sheet_4
       rect:
         serializedVersion: 2
-        x: 2007
+        x: 1920
         y: 0
-        width: 325
+        width: 480
         height: 660
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -185,7 +185,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 0f08c4fadec38c947af6bf7eb78981a5
+      spriteID: 30db8095006fef94b9483978b489b691
       vertices: []
       indices: 
       edges: []
@@ -194,9 +194,9 @@ TextureImporter:
       name: Delivery_Girl_North_Sheet_5
       rect:
         serializedVersion: 2
-        x: 2488
+        x: 2400
         y: 0
-        width: 324
+        width: 480
         height: 660
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -205,7 +205,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 511c8caeb6ed35e46bd008798bea23f8
+      spriteID: 704c6182b4c0f384ab8350d4d7e64acb
       vertices: []
       indices: 
       edges: []
@@ -214,9 +214,9 @@ TextureImporter:
       name: Delivery_Girl_North_Sheet_6
       rect:
         serializedVersion: 2
-        x: 2957
+        x: 2880
         y: 0
-        width: 335
+        width: 480
         height: 660
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -225,7 +225,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: ccabfe496aec6284296affd6fd3cf56f
+      spriteID: 9fca419919da9ba4c81dbd3b0167ae9a
       vertices: []
       indices: 
       edges: []

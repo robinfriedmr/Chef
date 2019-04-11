@@ -6,8 +6,9 @@ public class Follow : MonoBehaviour
 {
     public GameObject player;
 
-    int moveSpeed = 10;
     public float minDist;
+    public float moveSpeed = 10f;
+    public float smoothDamp;
 
     Animator myAnimator;
     public float allowance;
@@ -29,8 +30,10 @@ public class Follow : MonoBehaviour
         // MOVING -- Currently jittery due to rapid alternation between walking and not.
         if (Vector3.Distance(myPos, playerPos) > minDist) // + allowance)
         {
-         transform.position = Vector3.MoveTowards(myPos, playerPos, moveSpeed * Time.deltaTime);
-         myAnimator.SetBool("walking", true);
+            Vector3 velocity = Vector3.zero;
+         transform.position = 
+                Vector3.SmoothDamp(myPos, playerPos, ref velocity, smoothDamp, moveSpeed); //from MoveTowards (moveSpeed * Time.deltaTime)
+            myAnimator.SetBool("walking", true);
         }
         else if (Vector3.Distance(myPos, playerPos) <= minDist)
         {
