@@ -28,11 +28,11 @@ public class Attacks : MonoBehaviour {
 
     void CalculateDamage (int raw, CombatantStats attacker, CombatantStats targetStats) {
         // Method A - Inspired by Pokemon Go.
-        int finDmg = Mathf.FloorToInt(0.5f * raw * (attacker.power / targetStats.defense)) + 1; // Minimum hit is 1.
+        int finDmg = Mathf.FloorToInt(0.5f * raw * (attacker.power / targetStats.defense)) + 1; // Minimum hit is 1. Defense CANNOT be 0!
 
         // Method B - Abby's idea
         //int finDmg = raw - targetStats.defense;
-        //finDmg = (finDmg < 0) ? 0 : finDmg;
+        //finDmg = (finDmg < 0) ? 0 : finDmg; // Minimum hit is 0.
 
         Debug.Log(targetStats.gameObject.name + " is hit for " + finDmg); //***
         targetStats.HP -= finDmg; // Subtract damage from target's HP.
@@ -101,31 +101,26 @@ public class Attacks : MonoBehaviour {
 
     void DeliveryMoves(CombatantStats dG)
     {
-        Debug.Log("Delivery girl moves!");
         //for Partner
+        Debug.Log("Delivery girl moves!");
     }
 
     void ChefAttacks (CombatantStats chef) {
-        //Debug.Log("Chef attacks!");
-
-        if (chef.level >= 2) {
-            if (Input.GetKeyDown(KeyCode.Alpha2)) {
-                Debug.Log("Attack type: 2");
-                if (chef.magic >= 3)
-                {
-                    dmg = chef.level + chef.power;
-
-                    chef.magic -= 3;
-                } else
-                {
-                    Debug.Log("Not enough magic left!");
-                }
-            }
-        }
-
-        if (Input.GetKeyDown(KeyCode.Alpha1)) {
+        if (Input.GetKeyDown(KeyCode.Alpha1))
+        {
             Debug.Log("Attack type: 1");
             dmg = 3;
+        }
+
+        if (Input.GetKeyDown(KeyCode.Alpha2)) {
+            Debug.Log("Attack type: 2");
+            if (chef.magic >= 3) {
+                dmg = 3 + chef.power;
+
+                chef.magic -= 3;
+            } else {
+                Debug.Log("Not enough magic left!");
+            }
         }
 
         if (dmg != 0) {
@@ -166,23 +161,24 @@ public class Attacks : MonoBehaviour {
         Debug.Log("The beet attacks!");
 
         chooseAttack = Random.Range(1, 2); // choose an attack
-        if (attacker.level >= 3 && chooseAttack == 2) {
+        if (chooseAttack == 1)
+        {
+            Debug.Log("Attack type: 1");
+            dmg = 4;
+        } else if (chooseAttack == 2)
+        {
             Debug.Log("Attack type: 2");
             if (attacker.magic >= 1) {
-                dmg = attacker.level + attacker.power;
+                dmg = 3 + attacker.power;
 
                 attacker.magic -= 1;
-            } else {
+            } else
+            {
                 Debug.Log("Not enough magic left!");
                 chooseAttack = 1;
                 Debug.Log("New choice is " + chooseAttack);
             }
-        } else if (chooseAttack == 1) {
-            Debug.Log("Attack type: 1");
-            dmg = 4;
-        } /* else {
-            Debug.Log("Error. Choice 1 or 2 not chosen for some reason.");
-        } */
+        }
 
         chooseTarget = Random.Range(0, allies.Count() - 1); // Choose a target
         target = allies.ElementAt<GameObject>(chooseTarget);
@@ -199,12 +195,17 @@ public class Attacks : MonoBehaviour {
         Debug.Log("The carrot attacks!");
 
         chooseAttack = Random.Range(1, 2); // choose an attack
-        if (attacker.level >= 4 && chooseAttack == 2)
+
+        if (chooseAttack == 1)
+        {
+            Debug.Log("Attack type: 1");
+            dmg = 3;
+        } else if (chooseAttack == 2)
         {
             Debug.Log("Attack type: 2");
             if (attacker.magic >= 2)
             {
-                dmg = attacker.level + attacker.power;
+                dmg = 4 + attacker.power;
 
                 attacker.magic -= 2;
             }
@@ -215,13 +216,6 @@ public class Attacks : MonoBehaviour {
                 Debug.Log("New choice is " + chooseAttack);
             }
         }
-        else if (chooseAttack == 1)
-        {
-            Debug.Log("Attack type: 1");
-            dmg = 3;
-        } /* else {
-            Debug.Log("Error. Choice 1 or 2 not chosen for some reason.");
-        } */
 
         chooseTarget = Random.Range(0, allies.Count() - 1); // Choose a target
         target = allies.ElementAt<GameObject>(chooseTarget);

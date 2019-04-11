@@ -12,13 +12,10 @@ public class Follow : MonoBehaviour
 
     Animator myAnimator;
     public float allowance;
-    int facing;
 
     void Start()
     {
         myAnimator = GetComponent<Animator>();
-        facing = 3;
-
         Physics.IgnoreLayerCollision(8, 10);
     }
 
@@ -27,12 +24,11 @@ public class Follow : MonoBehaviour
         Vector3 myPos = transform.position;
         Vector3 playerPos = player.transform.position;
 
-        // MOVING -- Currently jittery due to rapid alternation between walking and not.
-        if (Vector3.Distance(myPos, playerPos) > minDist) // + allowance)
+        if (Vector3.Distance(myPos, playerPos) > minDist)
         {
             Vector3 velocity = Vector3.zero;
-         transform.position = 
-                Vector3.SmoothDamp(myPos, playerPos, ref velocity, smoothDamp, moveSpeed); //from MoveTowards (moveSpeed * Time.deltaTime)
+            transform.position = Vector3.SmoothDamp(myPos, playerPos, //from MoveTowards...
+             ref velocity, smoothDamp, moveSpeed); //...third parameter was: (moveSpeed * Time.deltaTime)
             myAnimator.SetBool("walking", true);
         }
         else if (Vector3.Distance(myPos, playerPos) <= minDist)
