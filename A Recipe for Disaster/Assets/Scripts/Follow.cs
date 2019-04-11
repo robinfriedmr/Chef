@@ -4,51 +4,53 @@ using UnityEngine;
 
 public class Follow : MonoBehaviour
 {
-    public GameObject Player;
-    private Vector3 PlayerPos;
-    int MoveSpeed = 10;
+    public GameObject player;
+    Transform pTrans;
+
+    int moveSpeed = 10;
     public float MinDist;
-    public Animator myAnimator;
-    public SpriteRenderer mySpriteRenderer;
+
+    Animator myAnimator;
+    Transform myTrans;
+    int facing;
 
     // Use this for initialization
     void Start()
     {
+        pTrans = player.GetComponent<Transform>();
+
         myAnimator = GetComponent<Animator>();
+        myTrans = GetComponent<Transform>();
+        facing = 3;
+
         Physics.IgnoreLayerCollision(8, 10);
     }
 
     // Update is called once per frame
-    void Update()
+    void LateUpdate() // Changed from Update to LateUpdate
     {
-        PlayerPos = new Vector3(Player.transform.position.x, transform.position.y, Player.transform.position.z);
+        Vector3 myPos = myTrans.position;
+        Vector3 playerPos = pTrans.position;
 
-        if (Vector3.Distance(transform.position, PlayerPos) >= MinDist)
+        if (Vector3.Distance(myPos, playerPos) >= MinDist)
         {
-
-         transform.position = Vector3.MoveTowards(transform.position, PlayerPos, MoveSpeed * Time.deltaTime);
-         myAnimator.SetBool("Movement", true);
-
+         transform.position = Vector3.MoveTowards(myPos, playerPos, moveSpeed * Time.deltaTime);
+         myAnimator.SetBool("walking", true);
         }
-        else if (Vector3.Distance(transform.position, PlayerPos) <= MinDist)
+        else if (Vector3.Distance(myPos, playerPos) <= MinDist)
         {
-            myAnimator.SetBool("Movement", false);
-        }
-        if (Input.GetKey(KeyCode.A))
-        {
-
-            if (mySpriteRenderer != null)
-            {
-                mySpriteRenderer.flipX = true;
-            }
+            myAnimator.SetBool("walking", false);
         }
 
-        else if (Input.GetKey(KeyCode.D))
+        if (myPos.x < playerPos.x)
         {
-            if (mySpriteRenderer != null)
-            {
-                mySpriteRenderer.flipX = false;
-            }
+            facing = 0;
+        } else if (myPos.x > playerPos.x)
+        {
+            facing = 2;
+        } else
+        {
+            facing = 3;
         }
     }
 }

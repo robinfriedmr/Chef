@@ -67,11 +67,6 @@ public class Movement : MonoBehaviour {
                myAnimator.SetBool("walking", false);
             }
             
-            
-            //Debug.Log(_charController.velocity.magnitude 
-            //    + ", walking is " + myAnimator.GetBool("walking")
-            //    + ", facing is " + myAnimator.GetInteger("facing"));
-
         } else {
             myAnimator.SetBool("walking", false);
             myAnimator.SetInteger("facing", 3);
