@@ -5,52 +5,54 @@ using UnityEngine;
 public class Follow : MonoBehaviour
 {
     public GameObject player;
-    Transform pTrans;
 
     int moveSpeed = 10;
-    public float MinDist;
+    public float minDist;
 
     Animator myAnimator;
-    Transform myTrans;
+    public float allowance;
     int facing;
 
-    // Use this for initialization
     void Start()
     {
-        pTrans = player.GetComponent<Transform>();
-
         myAnimator = GetComponent<Animator>();
-        myTrans = GetComponent<Transform>();
         facing = 3;
 
         Physics.IgnoreLayerCollision(8, 10);
     }
 
-    // Update is called once per frame
     void LateUpdate() // Changed from Update to LateUpdate
     {
-        Vector3 myPos = myTrans.position;
-        Vector3 playerPos = pTrans.position;
+        Vector3 myPos = transform.position;
+        Vector3 playerPos = player.transform.position;
 
-        if (Vector3.Distance(myPos, playerPos) >= MinDist)
+        // MOVING -- Currently jittery due to rapid alternation between walking and not.
+        if (Vector3.Distance(myPos, playerPos) > minDist) // + allowance)
         {
          transform.position = Vector3.MoveTowards(myPos, playerPos, moveSpeed * Time.deltaTime);
          myAnimator.SetBool("walking", true);
         }
-        else if (Vector3.Distance(myPos, playerPos) <= MinDist)
+        else if (Vector3.Distance(myPos, playerPos) <= minDist)
         {
             myAnimator.SetBool("walking", false);
         }
 
-        if (myPos.x < playerPos.x)
+        // FACING
+        if (myPos.x < playerPos.x - allowance)
         {
-            facing = 0;
-        } else if (myPos.x > playerPos.x)
+            myAnimator.SetInteger("facing", 0);
+        } else if (myPos.x > playerPos.x + allowance)
         {
-            facing = 2;
-        } else
+            myAnimator.SetInteger("facing", 2);
+        } else if (Mathf.Abs(myPos.x - playerPos.x) < allowance)
         {
-            facing = 3;
+            if (myPos.z - minDist + allowance > playerPos.z)
+            {
+                myAnimator.SetInteger("facing", 3);
+            } else if (myPos.z + minDist - allowance < playerPos.z)
+            {
+                myAnimator.SetInteger("facing", 1);
+            }
         }
     }
 }

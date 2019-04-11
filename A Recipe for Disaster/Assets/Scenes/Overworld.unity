@@ -123,7 +123,6 @@ GameObject:
   - component: {fileID: 150409456}
   - component: {fileID: 150409455}
   - component: {fileID: 150409454}
-  - component: {fileID: 150409453}
   - component: {fileID: 150409457}
   m_Layer: 0
   m_Name: Ground
@@ -132,20 +131,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!64 &150409453
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 150409452}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Convex: 0
-  m_CookingOptions: 14
-  m_SkinWidth: 0.01
-  m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!23 &150409454
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -724,9 +709,9 @@ GameObject:
   m_Component:
   - component: {fileID: 1363497306}
   - component: {fileID: 1363497305}
-  - component: {fileID: 1363497304}
-  - component: {fileID: 1363497303}
   - component: {fileID: 1363497302}
+  - component: {fileID: 1363497303}
+  - component: {fileID: 1363497304}
   - component: {fileID: 1363497301}
   m_Layer: 10
   m_Name: Partner
@@ -747,7 +732,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 238916062}
-  MinDist: 2
+  minDist: 2
+  allowance: 0.5
 --- !u!95 &1363497302
 Animator:
   serializedVersion: 3
@@ -787,7 +773,7 @@ Rigidbody:
   m_GameObject: {fileID: 1363497300}
   serializedVersion: 2
   m_Mass: 1
-  m_Drag: 0
+  m_Drag: 500
   m_AngularDrag: 0.05
   m_UseGravity: 1
   m_IsKinematic: 0
