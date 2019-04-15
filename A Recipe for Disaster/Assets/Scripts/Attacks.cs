@@ -232,16 +232,16 @@ public class Attacks : MonoBehaviour {
         Debug.Log("The onion attacks!");
 
         chooseAttack = Random.Range(1, 2); // choose an attack
-        if (attacker.level >= 2 && chooseAttack == 2)
+        if (chooseAttack == 2)
         {
             Debug.Log("Attack type: 2");
             if (attacker.magic >= 2)
             {
-                dmg = attacker.level + attacker.power;
+                dmg = 2 + attacker.power;
                 sfx = "defense debuff";
 
                 attacker.magic -= 2;
-                float recoil = (attacker.level + attacker.power) / 2;
+                float recoil = (2 + attacker.power) / 2;
                 attacker.HP -= Mathf.FloorToInt(recoil);
             }
             else
