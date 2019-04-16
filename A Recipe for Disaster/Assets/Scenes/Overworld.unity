@@ -855,9 +855,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   HP: 20
   defense: 2
-  power: 2
-  magic: 8
-  speed: 3
+  power: 3
+  magic: 5
+  speed: 4
 --- !u!1001 &1433081009
 Prefab:
   m_ObjectHideFlags: 0
