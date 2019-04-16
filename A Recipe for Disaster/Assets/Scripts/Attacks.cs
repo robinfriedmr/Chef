@@ -103,6 +103,8 @@ public class Attacks : MonoBehaviour {
     {
         //for Partner
         Debug.Log("Delivery girl moves!");
+
+        ResetAttacks();
     }
 
     void ChefAttacks (CombatantStats chef) {

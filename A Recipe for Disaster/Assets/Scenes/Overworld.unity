@@ -713,6 +713,7 @@ GameObject:
   - component: {fileID: 1363497303}
   - component: {fileID: 1363497304}
   - component: {fileID: 1363497301}
+  - component: {fileID: 1363497307}
   m_Layer: 10
   m_Name: Partner
   m_TagString: Ally
@@ -841,6 +842,22 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1363497307
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1363497300}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: db9c9abe2f1d24ee3b60c2d1fcf084fd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  HP: 20
+  defense: 2
+  power: 2
+  magic: 8
+  speed: 3
 --- !u!1001 &1433081009
 Prefab:
   m_ObjectHideFlags: 0
@@ -921,6 +938,11 @@ Prefab:
       propertyPath: m_Constraints
       value: 116
       objectReference: {fileID: 0}
+    - target: {fileID: 114971008443488318, guid: 7002def3750854748a6fb9c348c4339a,
+        type: 2}
+      propertyPath: partner
+      value: 
+      objectReference: {fileID: 1363497300}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7002def3750854748a6fb9c348c4339a, type: 2}
   m_IsPrefabAsset: 0

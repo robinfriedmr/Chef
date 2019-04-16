@@ -19,7 +19,8 @@ public class BattleReady : MonoBehaviour {
     CombatantStats myStats;
     int mySpeed;
 
-    CombatantStats partnerStats; //*** Later implementation.
+    public GameObject partner;
+    CombatantStats partnerStats;
     int partnerSpeed;
 
     GameObject enemyEncounter;
@@ -30,6 +31,7 @@ public class BattleReady : MonoBehaviour {
     public List<GameObject> order;
 
     Vector3 battlingPlayer;
+    Vector3 battlingPartner;
     Vector3 battlingEnemy;
 
     public Camera overworldCam;
@@ -44,12 +46,15 @@ public class BattleReady : MonoBehaviour {
     }
 
     void Start () {
-        battlingPlayer = new Vector3(-3f, -39.2f, 1f); // May need experimentation as sprites change.
+        // Positions may need experimentation as sprites change.
+        battlingPlayer = new Vector3(-3f, -39.2f, 1f); 
+        battlingPartner = new Vector3(-4.5f, -39.2f, 0f);
         battlingEnemy = new Vector3(3f, -39f, 1f);
 
         myStats = GetComponent<CombatantStats>();
         mySpeed = myStats.speed;
-        if (partnerStats != null) {
+        if (partner != null) {
+            partnerStats = partner.GetComponent<CombatantStats>();
             partnerSpeed = partnerStats.speed;
         }
 
@@ -69,12 +74,7 @@ public class BattleReady : MonoBehaviour {
     void PrepareForBattle (Collision collision) {
         enemyEncounter = collision.gameObject;  
 
-        // Keep the enemy and player GameObjects when loading battle scene!
-        DontDestroyOnLoad(enemyEncounter); //***
-        DontDestroyOnLoad(this.gameObject); //***
-
-        // Let the enemy array persist, but set everyone (except the enemyEncounter) as inactive
-        DontDestroyOnLoad(_pd.gameObject);
+        // Set everyone (except the enemyEncounter) as inactive via PersistentData script.
         _pd.BeforeSwitch(enemyEncounter);
 
         // Identify enemy speed stat. 
@@ -116,9 +116,9 @@ public class BattleReady : MonoBehaviour {
     void OrderTurns() {
         //Add GameObjects to combatants list.
         combatants.Add(this.gameObject);
-        if (partnerStats != null) {
-            Debug.Log("partnerStats is not null; adding its gameObject to list.");
-            combatants.Add(partnerStats.gameObject);
+        if (partner != null) {
+            Debug.Log("partner is not null; adding gameObject to list.");
+            combatants.Add(partner);
         } else {
             //Debug.Log("There is no partnerStats value; no partner gameObject added to list.");
         }
@@ -137,16 +137,18 @@ public class BattleReady : MonoBehaviour {
     }
 
     void BattlePosition (GameObject enemy) {
-        // Place Player
-        this.GetComponent<Transform>().position = battlingPlayer;
-        
+        // Place Player & Partner
+        //this.GetComponent<Transform>().position = battlingPlayer;
+        this.transform.position = battlingPlayer;
+
+        partner.GetComponent<Transform>().position = battlingPartner;
+        // Place Enemy
+        enemy.GetComponent<Transform>().position = battlingEnemy;
+
         //*** Yes we need this. Because the player totally rocketed off into space.
         Rigidbody myBody = this.GetComponent<Rigidbody>();
         myBody.constraints = RigidbodyConstraints.FreezeAll;
         //***
-
-        // Place Enemy
-        enemy.GetComponent<Transform>().position = battlingEnemy;
     }
 
     IEnumerator LoadBattleScene(GameObject enemyException)
@@ -165,6 +167,8 @@ public class BattleReady : MonoBehaviour {
 
     public void OverworldPosition () {
         this.transform.position = overworldPos;
+        partner.transform.position = overworldPos;
+
         battleCam.enabled = false;
         overworldCam.enabled = true;
 
