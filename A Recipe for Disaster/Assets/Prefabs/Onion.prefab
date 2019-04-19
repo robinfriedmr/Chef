@@ -80,11 +80,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: db9c9abe2f1d24ee3b60c2d1fcf084fd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  level: 1
   HP: 7
+  dmgBuff: 1
+  defDebuff: 0
+  maxHP: 7
   defense: 1
   power: 2
-  magic: 2
+  magic: 4
   speed: 2
 --- !u!212 &212211495691541302
 SpriteRenderer:

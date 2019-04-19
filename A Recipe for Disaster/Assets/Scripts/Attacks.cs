@@ -4,7 +4,8 @@ using System.Linq;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class Attacks : MonoBehaviour {
+public class Attacks : MonoBehaviour
+{
 
     public PersistentData _pd;
     WhoseTurn _wt; //WhoseTurn needs indexNo++ after a turn.
@@ -16,7 +17,10 @@ public class Attacks : MonoBehaviour {
     int chooseTarget; //For random target choice of enemies.
 
     int dmg; //Raw damage of a move, before calculation.
-    string sfx; //Special effect(s). Not yet implemented.
+    int heal; //Heal points.
+    string spfx; //Special effect(s).
+    int dmgBuff;
+
     GameObject target; //Refers to the GameObject targeted by an attack
     CombatantStats targetStats; //and this to the target's stats.
 
@@ -26,13 +30,14 @@ public class Attacks : MonoBehaviour {
 
     }
 
-    void CalculateDamage (int raw, CombatantStats attacker, CombatantStats targetStats) {
+    void CalculateDamage(int raw, CombatantStats attacker, CombatantStats targetStats)
+    {
         // Method A - Inspired by Pokemon Go.
-        int finDmg = Mathf.FloorToInt(0.5f * raw * (attacker.power / targetStats.defense)) + 1; // Minimum hit is 1. Defense CANNOT be 0!
+        //int finDmg = attacker.dmgBuff * Mathf.FloorToInt(0.5f * raw * (attacker.power / (targetStats.defense - targetStats.defDebuff))) + 1; // Minimum hit is 1. Defense CANNOT be 0!
 
         // Method B - Abby's idea
-        //int finDmg = raw - targetStats.defense;
-        //finDmg = (finDmg < 0) ? 0 : finDmg; // Minimum hit is 0.
+        int finDmg = raw - targetStats.defense;
+        finDmg = (finDmg < 0) ? 0 : finDmg; // Minimum hit is 0.
 
         Debug.Log(targetStats.gameObject.name + " is hit for " + finDmg); //***
         targetStats.HP -= finDmg; // Subtract damage from target's HP.
@@ -46,10 +51,12 @@ public class Attacks : MonoBehaviour {
             if (targetStats.gameObject.tag == "Enemy")
             {
                 enemies.Remove(targetStats.gameObject);
-            } else if (targetStats.gameObject.tag == "Ally") 
+            }
+            else if (targetStats.gameObject.tag == "Ally")
             {
                 allies.Remove(targetStats.gameObject);
-            } else
+            }
+            else
             {
                 Debug.Log("Error trying to remove " + targetStats.gameObject.name + " from its list! Check tag: " + targetStats.gameObject.tag);
             }
@@ -57,20 +64,44 @@ public class Attacks : MonoBehaviour {
             _pd = FindObjectOfType<PersistentData>().GetComponent<PersistentData>();
             _pd.enemyList.Remove(targetStats.gameObject);
 
-            Destroy(targetStats.gameObject);
+            if (targetStats.gameObject.tag == "Ally") {
+                targetStats.gameObject.SetActive(false); // Don't destroy allies
+            } else {
+                Destroy(targetStats.gameObject);
+            }
             Debug.Log(targetStats.gameObject.name + " defeated!");
         }
     }
 
-    void ApplySFX (string sfx, CombatantStats targetStats)
+    void HealMove(int heal, CombatantStats target)
     {
-        if (sfx == "defense debuff")
+        Debug.Log(targetStats.gameObject.name + " is healed for " + heal); //***
+        target.HP += heal;
+
+        if (target.HP > target.maxHP)
         {
-            targetStats.defense -= 1; //*** MAKE THIS A TEMPORARY DEBUFF! WITH 10% CHANCE OF HAPPENING.
+            target.HP = target.maxHP;
+        }
+        else
+        {
+            target.HP -= 0;
         }
     }
 
-    public void EnemyAttacks (GameObject enemy)
+    void ApplySpFX(string spfx, CombatantStats targetStats)
+    {
+        if (spfx == "2xD")
+        {
+            targetStats.dmgBuff = 2;
+            Debug.Log("Target " + targetStats.name + "has 2* damage buff (" + targetStats.dmgBuff + ")");
+        }
+        if (spfx == "defDebuff")
+        {
+            targetStats.defDebuff = 1; //*** MAKE THIS A TEMPORARY DEBUFF! WITH 10% CHANCE OF HAPPENING.
+        }
+    }
+
+    public void EnemyAttacks(GameObject enemy)
     {
         if (enemy.name.Contains("Beet"))
         {
@@ -83,17 +114,20 @@ public class Attacks : MonoBehaviour {
         else if (enemy.name.Contains("Onion"))
         {
             OnionAttacks(enemy.GetComponent<CombatantStats>());
-        } else
+        }
+        else
         {
             Debug.Log("Enemy name not understood.");
         }
     }
 
-    public void AllyAttacks(GameObject ally) {
+    public void AllyAttacks(GameObject ally)
+    {
         if (ally.name == "PlayerCharacter")
         {
             ChefAttacks(ally.GetComponent<CombatantStats>());
-        } else
+        }
+        else
         {
             DeliveryMoves(ally.GetComponent<CombatantStats>());
         }
@@ -101,37 +135,135 @@ public class Attacks : MonoBehaviour {
 
     void DeliveryMoves(CombatantStats dG)
     {
-        //for Partner
-        Debug.Log("Delivery girl moves!");
-
-        ResetAttacks();
-    }
-
-    void ChefAttacks (CombatantStats chef) {
         if (Input.GetKeyDown(KeyCode.Alpha1))
         {
-            Debug.Log("Attack type: 1");
+            Debug.Log("Attack type: Smack");
             dmg = 3;
+            heal = 0;
+            spfx = null;
         }
 
-        if (Input.GetKeyDown(KeyCode.Alpha2)) {
-            Debug.Log("Attack type: 2");
-            if (chef.magic >= 3) {
-                dmg = 3 + chef.power;
+        if (Input.GetKeyDown(KeyCode.Alpha2))
+        {
+            Debug.Log("Attack type: Healing Meal");
+            if (dG.magic >= 2)
+            {
+                dmg = 0;
+                heal = 5;
+                spfx = null;
 
-                chef.magic -= 3;
-            } else {
+                dG.magic -= 2;
+            }
+            else
+            {
                 Debug.Log("Not enough magic left!");
             }
         }
 
-        if (dmg != 0) {
-            if (Input.GetKeyDown(KeyCode.Alpha8)) {
+        if (Input.GetKeyDown(KeyCode.Alpha3))
+        {
+            Debug.Log("Attack type: On the Go");
+            if (dG.magic >= 2)
+            {
+                dmg = 0;
+                heal = 0;
+                spfx = "2xD";
+
+                dG.magic -= 2;
+            }
+            else
+            {
+                Debug.Log("Not enough magic left!");
+            }
+        }
+
+        if (dmg != 0 || heal != 0 || spfx != null)
+        {
+            // Ally targets
+            if (Input.GetKeyDown(KeyCode.Alpha5))
+            {
+                target = allies.ElementAt<GameObject>(0);
+            }
+            if (Input.GetKeyDown(KeyCode.Alpha6))
+            {
+                target = allies.ElementAt<GameObject>(1);
+            }
+
+            // Enemy targets
+            if (Input.GetKeyDown(KeyCode.Alpha8))
+            {
                 target = enemies.ElementAt<GameObject>(0);
             }
             if (Input.GetKeyDown(KeyCode.Alpha9))
             {
-                if (enemies.ElementAt<GameObject>(1) != null) {
+                if (enemies.ElementAt<GameObject>(1) != null)
+                {
+                    target = enemies.ElementAt<GameObject>(1);
+                }
+            }
+            if (Input.GetKeyDown(KeyCode.Alpha0))
+            {
+                if (enemies.ElementAt<GameObject>(2) != null)
+                {
+                    target = enemies.ElementAt<GameObject>(2);
+                }
+            }
+        }
+
+        if (target != null)
+        {
+            Debug.Log("The target is " + target.name); //***
+
+            if (spfx != null)
+            {
+                ApplySpFX(spfx, target.GetComponent<CombatantStats>());
+            }
+
+            if (dmg != 0)
+            {
+                CalculateDamage(dmg, dG, target.GetComponent<CombatantStats>());
+            }
+            else if (heal != 0)
+            {
+                HealMove(heal, target.GetComponent<CombatantStats>());
+            }
+            ResetAttacks();
+        }
+    }
+
+    void ChefAttacks(CombatantStats chef)
+    {
+        if (Input.GetKeyDown(KeyCode.Alpha1))
+        {
+            Debug.Log("Attack type: Punch");
+            dmg = 5;
+        }
+
+        if (Input.GetKeyDown(KeyCode.Alpha2))
+        {
+            Debug.Log("Attack type: Flaming Punch");
+            if (chef.magic >= 2)
+            {
+                dmg = 8;
+
+                chef.magic -= 2;
+            }
+            else
+            {
+                Debug.Log("Not enough magic left!");
+            }
+        }
+
+        if (dmg != 0)
+        {
+            if (Input.GetKeyDown(KeyCode.Alpha8))
+            {
+                target = enemies.ElementAt<GameObject>(0);
+            }
+            if (Input.GetKeyDown(KeyCode.Alpha9))
+            {
+                if (enemies.ElementAt<GameObject>(1) != null)
+                {
                     target = enemies.ElementAt<GameObject>(1);
                 }
             }
@@ -143,7 +275,8 @@ public class Attacks : MonoBehaviour {
                 }
             }
 
-            if (target != null) {
+            if (target != null)
+            {
                 Debug.Log("The target is " + target.name); //***
                 CalculateDamage(dmg, chef, target.GetComponent<CombatantStats>());
                 ResetAttacks();
@@ -151,38 +284,26 @@ public class Attacks : MonoBehaviour {
         }
     }
 
-    void ResetAttacks ()
+    void ResetAttacks()
     {
         dmg = 0;
-        sfx = null;
+        heal = 0;
+        spfx = null;
         target = null;
         _wt.indexNo++;
     }
 
-    void BeetAttacks (CombatantStats attacker) {
+    void BeetAttacks(CombatantStats attacker)
+    {
         Debug.Log("The beet attacks!");
 
-        chooseAttack = Random.Range(1, 2); // choose an attack
         if (chooseAttack == 1)
         {
-            Debug.Log("Attack type: 1");
+            Debug.Log("Attack type: Bash");
             dmg = 4;
-        } else if (chooseAttack == 2)
-        {
-            Debug.Log("Attack type: 2");
-            if (attacker.magic >= 1) {
-                dmg = 3 + attacker.power;
-
-                attacker.magic -= 1;
-            } else
-            {
-                Debug.Log("Not enough magic left!");
-                chooseAttack = 1;
-                Debug.Log("New choice is " + chooseAttack);
-            }
         }
 
-        chooseTarget = Random.Range(0, allies.Count() - 1); // Choose a target
+        chooseTarget = Random.Range(0, allies.Count()); // Choose a target
         target = allies.ElementAt<GameObject>(chooseTarget);
         if (target != null)
         {
@@ -200,14 +321,15 @@ public class Attacks : MonoBehaviour {
 
         if (chooseAttack == 1)
         {
-            Debug.Log("Attack type: 1");
+            Debug.Log("Attack type: Drill");
             dmg = 3;
-        } else if (chooseAttack == 2)
+        }
+        else if (chooseAttack == 2)
         {
-            Debug.Log("Attack type: 2");
+            Debug.Log("Attack type: Deadly Drill");
             if (attacker.magic >= 2)
             {
-                dmg = 4 + attacker.power;
+                dmg = 6;
 
                 attacker.magic -= 2;
             }
@@ -219,7 +341,7 @@ public class Attacks : MonoBehaviour {
             }
         }
 
-        chooseTarget = Random.Range(0, allies.Count() - 1); // Choose a target
+        chooseTarget = Random.Range(0, allies.Count()); // Choose a target
         target = allies.ElementAt<GameObject>(chooseTarget);
         if (target != null)
         {
@@ -230,21 +352,30 @@ public class Attacks : MonoBehaviour {
     }
 
     void OnionAttacks(CombatantStats attacker)
-    { 
+    {
         Debug.Log("The onion attacks!");
 
         chooseAttack = Random.Range(1, 2); // choose an attack
-        if (chooseAttack == 2)
+        if (chooseAttack == 1)
         {
-            Debug.Log("Attack type: 2");
+            Debug.Log("Attack type: Smack");
+            dmg = 3;
+        }
+        else if (chooseAttack == 2)
+        {
+            Debug.Log("Attack type: Peel");
             if (attacker.magic >= 2)
             {
                 dmg = 2 + attacker.power;
-                sfx = "defense debuff";
+
+                float chance = Random.value;
+                if (chance <= 0.1)
+                {
+                    spfx = "defDebuff";
+                }
 
                 attacker.magic -= 2;
-                float recoil = (2 + attacker.power) / 2;
-                attacker.HP -= Mathf.FloorToInt(recoil);
+                attacker.HP -= 1;
             }
             else
             {
@@ -253,25 +384,19 @@ public class Attacks : MonoBehaviour {
                 Debug.Log("New choice is " + chooseAttack);
             }
         }
-        else if (chooseAttack == 1)
-        {
-            Debug.Log("Attack type: 1");
-            dmg = 3;
-        } /* else {
-            Debug.Log("Error. Choice 1 or 2 not chosen for some reason.");
-        } */
 
-        chooseTarget = Random.Range(0, allies.Count() - 1); // Choose a target
+        chooseTarget = Random.Range(0, allies.Count()); // Choose a target
         target = allies.ElementAt<GameObject>(chooseTarget);
         targetStats = target.GetComponent<CombatantStats>();
         if (target != null)
         {
             Debug.Log("The target is " + target.name); //***
-            CalculateDamage(dmg, attacker, targetStats);
-            if (sfx != null)
+            if (spfx != null)
             {
-                ApplySFX(sfx, target.GetComponent<CombatantStats>());
+                Debug.Log("Applying SpFX");
+                ApplySpFX(spfx, targetStats);
             }
+            CalculateDamage(dmg, attacker, targetStats);
             ResetAttacks();
         }
     }
