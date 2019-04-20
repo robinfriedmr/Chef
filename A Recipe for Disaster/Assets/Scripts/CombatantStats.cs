@@ -4,10 +4,14 @@ using UnityEngine;
 
 public class CombatantStats : MonoBehaviour
 {
-    public int HP;
+    public int maxHP;
     public int defense;
     public int power;
     public int magic;
     public int speed;
-//    public int luck;
+
+    public int HP;
+    public int dmgBuff;
+    public int defDebuff;
+
 }

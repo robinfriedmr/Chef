@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657868, g: 0.49641263, b: 0.57481706, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657898, g: 0.49641275, b: 0.5748174, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -853,7 +853,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: db9c9abe2f1d24ee3b60c2d1fcf084fd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  maxHP: 20
   HP: 20
+  dmgBuff: 1
+  defDebuff: 0
   defense: 2
   power: 3
   magic: 5
@@ -943,6 +946,26 @@ Prefab:
       propertyPath: partner
       value: 
       objectReference: {fileID: 1363497300}
+    - target: {fileID: 114715017873328118, guid: 7002def3750854748a6fb9c348c4339a,
+        type: 2}
+      propertyPath: HP
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114715017873328118, guid: 7002def3750854748a6fb9c348c4339a,
+        type: 2}
+      propertyPath: power
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 114715017873328118, guid: 7002def3750854748a6fb9c348c4339a,
+        type: 2}
+      propertyPath: dmgBuff
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114715017873328118, guid: 7002def3750854748a6fb9c348c4339a,
+        type: 2}
+      propertyPath: maxHP
+      value: 25
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7002def3750854748a6fb9c348c4339a, type: 2}
   m_IsPrefabAsset: 0
