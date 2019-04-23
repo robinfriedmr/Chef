@@ -47,9 +47,9 @@ public class BattleReady : MonoBehaviour {
 
     void Start () {
         // Positions may need experimentation as sprites change.
-        battlingPlayer = new Vector3(-3f, -39.2f, 1f); 
-        battlingPartner = new Vector3(-4.5f, -39.2f, 0f);
-        battlingEnemy = new Vector3(3f, -39f, 1f);
+        battlingPlayer = new Vector3(-3f, 2f, 1f); 
+        battlingPartner = new Vector3(-4.5f, 2f, 0f);
+        battlingEnemy = new Vector3(3f, -2f, 1f);
 
         myStats = GetComponent<CombatantStats>();
         mySpeed = myStats.speed;
@@ -153,9 +153,7 @@ public class BattleReady : MonoBehaviour {
 
     IEnumerator LoadBattleScene(GameObject enemyException)
     {
-        //yield return null;
-
-        AsyncOperation asyncLoad = SceneManager.LoadSceneAsync("BattleScene", LoadSceneMode.Additive);
+        AsyncOperation asyncLoad = SceneManager.LoadSceneAsync("ModeledBattleScene", LoadSceneMode.Additive);
         asyncLoad.allowSceneActivation = true;
 
         // Wait until the asynchronous scene fully loads

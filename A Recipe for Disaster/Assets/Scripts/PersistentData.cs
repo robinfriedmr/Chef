@@ -9,6 +9,8 @@ public class PersistentData : MonoBehaviour {
     public GameObject carrot;
     public GameObject onion;
 
+    public GameObject environment;
+
 	private void Awake()
 	{
         // Instantiate enemies in places specified
@@ -20,6 +22,7 @@ public class PersistentData : MonoBehaviour {
 	
     public void BeforeSwitch (GameObject except) {
 
+        // Set overworld enemies as inactive
         foreach (GameObject enemy in enemyList) {
             if (enemy != null)
             {
@@ -27,6 +30,9 @@ public class PersistentData : MonoBehaviour {
             } 
         }
         except.SetActive(true);
+
+        // Set environment as inactive
+        environment.SetActive(false);
     }
 
     public void Reactivate()
