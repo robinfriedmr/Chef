@@ -47,10 +47,10 @@ public class Follow : MonoBehaviour
         {
             if (myPos.z - minDist + allowance > playerPos.z)
             {
-                myAnimator.SetInteger("facing", 3);
+                myAnimator.SetInteger("facing", 1);
             } else if (myPos.z + minDist - allowance < playerPos.z)
             {
-                myAnimator.SetInteger("facing", 1);
+                myAnimator.SetInteger("facing", 3);
             }
         }
     }

@@ -32,7 +32,7 @@ public class Movement : MonoBehaviour {
             float deltaX = Input.GetAxis("Horizontal") * speed;
             float deltaZ = Input.GetAxis("Vertical") * speed;
             Vector3 movement = new Vector3(deltaX, 0, deltaZ);
-            movement = Vector3.ClampMagnitude(movement, speed);
+            movement = Vector3.ClampMagnitude(movement, speed) * -1;
 
             movement *= Time.deltaTime;
             movement = transform.TransformDirection(movement); // what does this do?
@@ -41,7 +41,7 @@ public class Movement : MonoBehaviour {
             // This code may need to be refined.
             if (Input.GetAxis("Horizontal") > 0)
             {
-                myAnimator.SetInteger("facing", 0);
+                myAnimator.SetInteger("facing", 2);
             }
             else if (Input.GetAxis("Vertical") > 0)
             {
@@ -49,7 +49,7 @@ public class Movement : MonoBehaviour {
             }
             else if (Input.GetAxis("Horizontal") < 0)
             {
-                myAnimator.SetInteger("facing", 2);
+                myAnimator.SetInteger("facing", 0);
             }
             else if (Input.GetAxis("Vertical") < 0)
             {
