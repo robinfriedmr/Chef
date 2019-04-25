@@ -21,6 +21,10 @@ public class Attacks : MonoBehaviour
     string spfx; //Special effect(s).
     int dmgBuff;
 
+    // Sound effects
+    public AudioClip flamePunchClip;
+    public AudioSource flamePunchSource;
+
     GameObject target; //Refers to the GameObject targeted by an attack
     CombatantStats targetStats; //and this to the target's stats.
 
@@ -241,6 +245,7 @@ public class Attacks : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Alpha2))
         {
+            flamePunchSource.PlayOneShot(flamePunchClip); // Flame Punch sound effect plays
             Debug.Log("Attack type: Flaming Punch");
             if (chef.magic >= 2)
             {
