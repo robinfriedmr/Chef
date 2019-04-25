@@ -16,23 +16,23 @@ public class BattleReady : MonoBehaviour {
     public List<GameObject> enemies;
     public List<GameObject> allies;
 
-    CombatantStats myStats;
-    int mySpeed;
+//    CombatantStats myStats;
+//    int mySpeed;
 
     public GameObject partner;
-    CombatantStats partnerStats;
-    int partnerSpeed;
+//    CombatantStats partnerStats;
+//    int partnerSpeed;
 
     GameObject enemyEncounter;
-    CombatantStats enemyStats;
-    int enemySpeed;
+//    CombatantStats enemyStats;
+//    int enemySpeed;
 
     public IOrderedEnumerable<GameObject> attackOrder;
     public List<GameObject> order;
 
-    Vector3 battlingPlayer;
-    Vector3 battlingPartner;
-    Vector3 battlingEnemy;
+    public Vector3 battlingPlayer;
+    public Vector3 battlingPartner;
+    public Vector3 battlingEnemy;
 
     public Camera overworldCam;
     public Camera battleCam;
@@ -47,18 +47,21 @@ public class BattleReady : MonoBehaviour {
 
     void Start () {
         // Positions may need experimentation as sprites change.
-        battlingPlayer = new Vector3(-3f, 2f, 1f); 
-        battlingPartner = new Vector3(-4.5f, 2f, 0f);
-        battlingEnemy = new Vector3(3f, -2f, 1f);
+        //battlingPlayer = new Vector3(-3f, 2f, 1f); 
+        //battlingPartner = new Vector3(-4.5f, 2f, 0f);
+        //battlingEnemy = new Vector3(3f, -2f, 1f);
 
-        myStats = GetComponent<CombatantStats>();
+/*        myStats = GetComponent<CombatantStats>();
         mySpeed = myStats.speed;
-        if (partner != null) {
+        Debug.Log(mySpeed + " is my speed.");
+
+ */
+
+/*        if (partner != null) {
             partnerStats = partner.GetComponent<CombatantStats>();
             partnerSpeed = partnerStats.speed;
         }
-
-        Debug.Log(mySpeed + " is my speed.");
+*/
     }
 
 	void OnCollisionEnter(Collision collision)
@@ -78,9 +81,9 @@ public class BattleReady : MonoBehaviour {
         _pd.BeforeSwitch(enemyEncounter);
 
         // Identify enemy speed stat. 
-        enemyStats = enemyEncounter.GetComponent<CombatantStats>();
-        enemySpeed = enemyStats.speed;
-        Debug.Log(enemySpeed + " is enemy speed.");
+//        enemyStats = enemyEncounter.GetComponent<CombatantStats>();
+//        enemySpeed = enemyStats.speed;
+//        Debug.Log(enemySpeed + " is enemy speed.");
 
         // Add GameObjects to the combatants list, then order it.
         OrderTurns(); 
@@ -119,8 +122,6 @@ public class BattleReady : MonoBehaviour {
         if (partner != null) {
             Debug.Log("partner is not null; adding gameObject to list.");
             combatants.Add(partner);
-        } else {
-            //Debug.Log("There is no partnerStats value; no partner gameObject added to list.");
         }
         combatants.Add(enemyEncounter);
     
