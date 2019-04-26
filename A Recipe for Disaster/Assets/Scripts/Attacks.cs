@@ -340,7 +340,7 @@ public class Attacks : MonoBehaviour
                 Debug.Log("New choice is " + chooseAttack);
             }
         }
-
+        Debug.Log("allies.Count() is " + allies.Count()); //******
         chooseTarget = Random.Range(0, allies.Count()); // Choose a target
         target = allies.ElementAt<GameObject>(chooseTarget);
         if (target != null)

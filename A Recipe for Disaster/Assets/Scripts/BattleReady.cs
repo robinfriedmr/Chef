@@ -8,24 +8,21 @@ public class BattleReady : MonoBehaviour {
 
     public PersistentData _pd;
 
-    Vector3 overworldPos;
-
     public bool ready;
 
     public List<GameObject> combatants = new List<GameObject>();
     public List<GameObject> enemies;
     public List<GameObject> allies;
 
-//    CombatantStats myStats;
-//    int mySpeed;
+    public Rigidbody myBody;
+    public Movement myMovement;
+    public Animator myAnimator;
 
     public GameObject partner;
-//    CombatantStats partnerStats;
-//    int partnerSpeed;
+    public Follow partnerFollow;
+    public Animator partnerAnimator;
 
     GameObject enemyEncounter;
-//    CombatantStats enemyStats;
-//    int enemySpeed;
 
     public IOrderedEnumerable<GameObject> attackOrder;
     public List<GameObject> order;
@@ -36,7 +33,9 @@ public class BattleReady : MonoBehaviour {
 
     public Camera overworldCam;
     public Camera battleCam;
-    public AudioSource overworldMusic;
+//    public AudioSource overworldMusic;
+    public GameObject environment;
+    Vector3 overworldPos;
 
     void Awake()
     {
@@ -45,26 +44,12 @@ public class BattleReady : MonoBehaviour {
         overworldCam.enabled = true;
     }
 
-    void Start () {
-        // Positions may need experimentation as sprites change.
-        //battlingPlayer = new Vector3(-3f, 2f, 1f); 
-        //battlingPartner = new Vector3(-4.5f, 2f, 0f);
-        //battlingEnemy = new Vector3(3f, -2f, 1f);
-
-/*        myStats = GetComponent<CombatantStats>();
-        mySpeed = myStats.speed;
-        Debug.Log(mySpeed + " is my speed.");
-
- */
-
-/*        if (partner != null) {
-            partnerStats = partner.GetComponent<CombatantStats>();
-            partnerSpeed = partnerStats.speed;
-        }
-*/
+    private void Start()
+    {
+        
     }
 
-	void OnCollisionEnter(Collision collision)
+    void OnCollisionEnter(Collision collision)
 	{
         if (ready == true) {
             if (collision.gameObject.tag == "Enemy" && this.gameObject.tag == "Ally")
@@ -79,11 +64,6 @@ public class BattleReady : MonoBehaviour {
 
         // Set everyone (except the enemyEncounter) as inactive via PersistentData script.
         _pd.BeforeSwitch(enemyEncounter);
-
-        // Identify enemy speed stat. 
-//        enemyStats = enemyEncounter.GetComponent<CombatantStats>();
-//        enemySpeed = enemyStats.speed;
-//        Debug.Log(enemySpeed + " is enemy speed.");
 
         // Add GameObjects to the combatants list, then order it.
         OrderTurns(); 
@@ -103,7 +83,7 @@ public class BattleReady : MonoBehaviour {
         battleCam.enabled = true;
 
         // Disable overworld theme.
-        overworldMusic.enabled = false;
+        environment.SetActive(false);
 
         // Switch scenes on collision.
         string sceneName = SceneManager.GetActiveScene().name;
@@ -138,18 +118,19 @@ public class BattleReady : MonoBehaviour {
     }
 
     void BattlePosition (GameObject enemy) {
-        // Place Player & Partner
-        //this.GetComponent<Transform>().position = battlingPlayer;
+        partnerAnimator.SetBool("walking", false);
+        partnerAnimator.SetInteger("facing", 3);
+        partnerFollow.enabled = false;
+
+        // Place Player, Partner, Enemy
         this.transform.position = battlingPlayer;
+        partner.transform.position = battlingPartner;
+        enemy.transform.position = battlingEnemy;
 
-        partner.GetComponent<Transform>().position = battlingPartner;
-        // Place Enemy
-        enemy.GetComponent<Transform>().position = battlingEnemy;
-
-        //*** Yes we need this. Because the player totally rocketed off into space.
-        Rigidbody myBody = this.GetComponent<Rigidbody>();
-        myBody.constraints = RigidbodyConstraints.FreezeAll;
-        //***
+        myBody.constraints = RigidbodyConstraints.FreezeAll; //*** (The player totally rocketed off into space without this.)
+        myAnimator.SetBool("walking", false);
+        myAnimator.SetInteger("facing", 3);
+        myMovement.enabled = false;
     }
 
     IEnumerator LoadBattleScene(GameObject enemyException)
@@ -164,14 +145,14 @@ public class BattleReady : MonoBehaviour {
         }
     }
 
-    public void OverworldPosition () {
+    public void RestoreOverworld () {
         this.transform.position = overworldPos;
-        partner.transform.position = overworldPos;
+        partner.transform.position = overworldPos + new Vector3(-1, 0, -1);
 
         battleCam.enabled = false;
         overworldCam.enabled = true;
 
-        // Re-enable overworld theme.
-        overworldMusic.enabled = true;
+        // Re-enable overworld environment, including sounds.
+        environment.SetActive(true);
     }
 }

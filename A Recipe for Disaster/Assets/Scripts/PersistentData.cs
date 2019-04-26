@@ -14,9 +14,9 @@ public class PersistentData : MonoBehaviour {
 	private void Awake()
 	{
         // Instantiate enemies in places specified
-        enemyList.Add(Instantiate(carrot, new Vector3(2.15f, 1f, 2.66f), Quaternion.identity) as GameObject);
-        enemyList.Add(Instantiate(beet, new Vector3(-2.15f, 1.12f, 1.63f), Quaternion.identity) as GameObject);
-        enemyList.Add(Instantiate(onion, new Vector3(-2.84f, 0.78f, -4.11f), Quaternion.identity) as GameObject);
+        enemyList.Add(Instantiate(carrot, new Vector3(0f, 5f, -25.66f), Quaternion.identity) as GameObject);
+        enemyList.Add(Instantiate(beet, new Vector3(2f, 5f, -16.63f), Quaternion.identity) as GameObject);
+        enemyList.Add(Instantiate(onion, new Vector3(5f, 5f, -28.11f), Quaternion.identity) as GameObject);
 
     }
 	
@@ -35,7 +35,7 @@ public class PersistentData : MonoBehaviour {
         environment.SetActive(false);
     }
 
-    public void Reactivate()
+    public void ReactivateEnemies()
     {
         foreach (GameObject enemy in enemyList)
         {

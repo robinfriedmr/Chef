@@ -37,10 +37,10 @@ public class WhoseTurn : MonoBehaviour {
 
                 //reload overworld
                 _pd = FindObjectOfType<PersistentData>().GetComponent<PersistentData>();
-                _pd.Reactivate();
+                _pd.ReactivateEnemies();
 
-                _br.OverworldPosition();
-                SceneManager.UnloadSceneAsync("BattleScene");
+                _br.RestoreOverworld();
+                SceneManager.UnloadSceneAsync("ModeledBattleScene");
             } else if (indexNo < order.Count)
             {
                 Fight(indexNo);

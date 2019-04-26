@@ -5729,6 +5729,22 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 1422462143574244, guid: 7002def3750854748a6fb9c348c4339a,
     type: 2}
   m_PrefabInternal: {fileID: 1433081009}
+--- !u!54 &238916063 stripped
+Rigidbody:
+  m_CorrespondingSourceObject: {fileID: 54626782260033110, guid: 7002def3750854748a6fb9c348c4339a,
+    type: 2}
+  m_PrefabInternal: {fileID: 1433081009}
+--- !u!95 &238916069 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 95513331303124360, guid: 7002def3750854748a6fb9c348c4339a,
+    type: 2}
+  m_PrefabInternal: {fileID: 1433081009}
+--- !u!114 &238916070 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 114561447017528850, guid: 7002def3750854748a6fb9c348c4339a,
+    type: 2}
+  m_PrefabInternal: {fileID: 1433081009}
+  m_Script: {fileID: 11500000, guid: 3802dd2e5f5363f4499783206769b2cf, type: 3}
 --- !u!1001 &247120781
 Prefab:
   m_ObjectHideFlags: 0
@@ -28331,7 +28347,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1101400035}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 1.16, y: 4, z: -6.276}
+  m_LocalPosition: {x: 0, y: 2, z: -5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1651918727}
@@ -35993,7 +36009,7 @@ Prefab:
     - target: {fileID: 114715017873328118, guid: 7002def3750854748a6fb9c348c4339a,
         type: 2}
       propertyPath: HP
-      value: 1
+      value: 25
       objectReference: {fileID: 0}
     - target: {fileID: 114715017873328118, guid: 7002def3750854748a6fb9c348c4339a,
         type: 2}
@@ -36038,6 +36054,81 @@ Prefab:
       propertyPath: speed
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 114971008443488318, guid: 7002def3750854748a6fb9c348c4339a,
+        type: 2}
+      propertyPath: battlingPlayer.y
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 114971008443488318, guid: 7002def3750854748a6fb9c348c4339a,
+        type: 2}
+      propertyPath: battlingPlayer.z
+      value: -3
+      objectReference: {fileID: 0}
+    - target: {fileID: 114971008443488318, guid: 7002def3750854748a6fb9c348c4339a,
+        type: 2}
+      propertyPath: battlingPartner.x
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114971008443488318, guid: 7002def3750854748a6fb9c348c4339a,
+        type: 2}
+      propertyPath: battlingPartner.y
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 114971008443488318, guid: 7002def3750854748a6fb9c348c4339a,
+        type: 2}
+      propertyPath: battlingPartner.z
+      value: -3.75
+      objectReference: {fileID: 0}
+    - target: {fileID: 114971008443488318, guid: 7002def3750854748a6fb9c348c4339a,
+        type: 2}
+      propertyPath: battlingEnemy.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114971008443488318, guid: 7002def3750854748a6fb9c348c4339a,
+        type: 2}
+      propertyPath: battlingEnemy.y
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 114971008443488318, guid: 7002def3750854748a6fb9c348c4339a,
+        type: 2}
+      propertyPath: battlingEnemy.z
+      value: -3
+      objectReference: {fileID: 0}
+    - target: {fileID: 114971008443488318, guid: 7002def3750854748a6fb9c348c4339a,
+        type: 2}
+      propertyPath: partnerFollow
+      value: 
+      objectReference: {fileID: 1363497301}
+    - target: {fileID: 114971008443488318, guid: 7002def3750854748a6fb9c348c4339a,
+        type: 2}
+      propertyPath: partnerAnimator
+      value: 
+      objectReference: {fileID: 1363497302}
+    - target: {fileID: 114971008443488318, guid: 7002def3750854748a6fb9c348c4339a,
+        type: 2}
+      propertyPath: battlingPlayer.x
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114971008443488318, guid: 7002def3750854748a6fb9c348c4339a,
+        type: 2}
+      propertyPath: myBody
+      value: 
+      objectReference: {fileID: 238916063}
+    - target: {fileID: 114971008443488318, guid: 7002def3750854748a6fb9c348c4339a,
+        type: 2}
+      propertyPath: myMovement
+      value: 
+      objectReference: {fileID: 238916070}
+    - target: {fileID: 114971008443488318, guid: 7002def3750854748a6fb9c348c4339a,
+        type: 2}
+      propertyPath: myAnimator
+      value: 
+      objectReference: {fileID: 238916069}
+    - target: {fileID: 114971008443488318, guid: 7002def3750854748a6fb9c348c4339a,
+        type: 2}
+      propertyPath: environment
+      value: 
+      objectReference: {fileID: 1860432228}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7002def3750854748a6fb9c348c4339a, type: 2}
   m_IsPrefabAsset: 0
