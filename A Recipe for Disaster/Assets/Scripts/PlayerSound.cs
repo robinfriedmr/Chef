@@ -9,8 +9,8 @@ public class PlayerSound : MonoBehaviour {
 
 	void Step ()
     {
-        audioS.volume = Random.Range(0.8f, 1f); // experminet if desired
-        audioS.pitch = Random.Range(0.8f, 1.1f); // experminet if desired
+        audioS.volume = Random.Range(0.8f, 1f); // experiment if desired
+        audioS.pitch = Random.Range(1.1f, 1.4f); // experiment if desired
         audioS.PlayOneShot(footStep);
     }
 }
