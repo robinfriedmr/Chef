@@ -25,8 +25,14 @@ public class Attacks : MonoBehaviour
     public AudioClip flamePunchClip;
     public AudioSource flamePunchSource;
 
+    public AudioClip normalPunchkClip;
+    public AudioSource normalPunchSource;
+
     public AudioClip aquaSmackClip;
     public AudioSource aquaSmackSource;
+
+    public AudioClip healingMealClip;
+    public AudioSource healingMealSource;
 
     GameObject target; //Refers to the GameObject targeted by an attack
     CombatantStats targetStats; //and this to the target's stats.
@@ -153,6 +159,7 @@ public class Attacks : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Alpha2))
         {
+            healingMealSource.PlayOneShot(healingMealClip); // Healing Meal sound effect plays
             Debug.Log("Attack type: Healing Meal");
             if (dG.magic >= 2)
             {
@@ -243,6 +250,7 @@ public class Attacks : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Alpha1))
         {
+            normalPunchSource.PlayOneShot(normalPunchkClip); // The normal punch sound effect plays
             Debug.Log("Attack type: Punch");
             dmg = 5;
         }
