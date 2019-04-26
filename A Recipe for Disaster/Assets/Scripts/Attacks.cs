@@ -159,10 +159,10 @@ public class Attacks : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Alpha2))
         {
-            healingMealSource.PlayOneShot(healingMealClip); // Healing Meal sound effect plays
             Debug.Log("Attack type: Healing Meal");
             if (dG.magic >= 2)
             {
+                healingMealSource.PlayOneShot(healingMealClip); // Healing Meal sound effect plays
                 dmg = 0;
                 heal = 5;
                 spfx = null;
@@ -257,10 +257,10 @@ public class Attacks : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Alpha2))
         {
-            flamePunchSource.PlayOneShot(flamePunchClip); // Flame Punch sound effect plays
             Debug.Log("Attack type: Flaming Punch");
             if (chef.magic >= 2)
             {
+                flamePunchSource.PlayOneShot(flamePunchClip); // Flame Punch sound effect plays
                 dmg = 8;
 
                 chef.magic -= 2;
