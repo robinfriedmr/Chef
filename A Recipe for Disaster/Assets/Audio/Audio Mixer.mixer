@@ -39,6 +39,7 @@ AudioMixerController:
     - dca27ad3ade02e94bb19162d647736b4
     - 016010b4d7929824a8317991604b941f
     - 432401039c678400c9342030b1c500fa
+    - b6b95fdec96653348ba33b73236fb0ee
     name: Battle
   m_CurrentViewIndex: 2
   m_TargetSnapshot: {fileID: 24500006}
@@ -86,6 +87,7 @@ AudioMixerSnapshotController:
   m_FloatValues:
     8d9597300f6211d428c9cc942dd8e4ca: 0
     0a49f2b10dee57d4e8b9ec97a7a47f2a: -19.255655
+    431bb0945514f44f0b184138f5d949a2: -3.5090408
     a4ebbdf55e48c4a4a8b810fec9eb5304: -10000
     5ff92a3994fe24843af15988606e3abf: -20.610773
     5783ef8a7de0bf2458ba957860a305ab: -0.27209902
@@ -123,6 +125,23 @@ AudioMixerGroupController:
   m_Pitch: e2dfda9acee898b49bcd6d0994974bfa
   m_Effects:
   - {fileID: 244928903574701816}
+  m_UserColorIndex: 0
+  m_Mute: 0
+  m_Solo: 0
+  m_BypassEffects: 0
+--- !u!243 &243225688224460288
+AudioMixerGroupController:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_Name: Aqua Slap
+  m_AudioMixer: {fileID: 24100000}
+  m_GroupID: b6b95fdec96653348ba33b73236fb0ee
+  m_Children: []
+  m_Volume: 771b95879a1611149820556a28801609
+  m_Pitch: 06b28efc2ea80a84db955c1d3aa21f4e
+  m_Effects:
+  - {fileID: 244799847960218012}
   m_UserColorIndex: 0
   m_Mute: 0
   m_Solo: 0
@@ -172,6 +191,7 @@ AudioMixerGroupController:
   m_Children:
   - {fileID: 243214380639827334}
   - {fileID: 243969021591317536}
+  - {fileID: 243225688224460288}
   m_Volume: 6659c58a08845814a84ff26ba79dedb7
   m_Pitch: 2790367865908b24e826a44c32464bd5
   m_Effects:
@@ -333,6 +353,19 @@ AudioMixerEffectController:
   m_EffectID: 9c287ea7094129e45ae6b296d663236f
   m_EffectName: Attenuation
   m_MixLevel: 5df32d2068d0e5a41805e8731b88b488
+  m_Parameters: []
+  m_SendTarget: {fileID: 0}
+  m_EnableWetMix: 0
+  m_Bypass: 0
+--- !u!244 &244799847960218012
+AudioMixerEffectController:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_Name: 
+  m_EffectID: 2a754da42016c4842ace64e3877fd802
+  m_EffectName: Attenuation
+  m_MixLevel: 24bd21792e1f19a408cd67f5893f768e
   m_Parameters: []
   m_SendTarget: {fileID: 0}
   m_EnableWetMix: 0

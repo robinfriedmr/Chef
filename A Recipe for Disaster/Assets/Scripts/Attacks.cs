@@ -25,6 +25,9 @@ public class Attacks : MonoBehaviour
     public AudioClip flamePunchClip;
     public AudioSource flamePunchSource;
 
+    public AudioClip aquaSmackClip;
+    public AudioSource aquaSmackSource;
+
     GameObject target; //Refers to the GameObject targeted by an attack
     CombatantStats targetStats; //and this to the target's stats.
 
@@ -141,6 +144,7 @@ public class Attacks : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Alpha1))
         {
+            aquaSmackSource.PlayOneShot(aquaSmackClip); // Smack sound effect plays
             Debug.Log("Attack type: Smack");
             dmg = 3;
             heal = 0;
