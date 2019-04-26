@@ -39,18 +39,18 @@ public class Follow : MonoBehaviour
         // FACING
         if (myPos.x < playerPos.x - allowance)
         {
-            myAnimator.SetInteger("facing", 2);
+            myAnimator.SetInteger("facing", 0);
         } else if (myPos.x > playerPos.x + allowance)
         {
-            myAnimator.SetInteger("facing", 0);
+            myAnimator.SetInteger("facing", 2);
         } else if (Mathf.Abs(myPos.x - playerPos.x) < allowance)
         {
             if (myPos.z - minDist + allowance > playerPos.z)
             {
-                myAnimator.SetInteger("facing", 1);
+                myAnimator.SetInteger("facing", 3);
             } else if (myPos.z + minDist - allowance < playerPos.z)
             {
-                myAnimator.SetInteger("facing", 3);
+                myAnimator.SetInteger("facing", 1);
             }
         }
     }
