@@ -21,13 +21,25 @@ public class Attacks : MonoBehaviour
     string spfx; //Special effect(s).
     int dmgBuff;
 
+    // Sound effects
+    public AudioClip flamePunchClip;
+    public AudioSource flamePunchSource;
+
+    public AudioClip normalPunchClip;
+    public AudioSource normalPunchSource;
+
+    public AudioClip aquaSmackClip;
+    public AudioSource aquaSmackSource;
+
+    public AudioClip healingMealClip;
+    public AudioSource healingMealSource;
+
     GameObject target; //Refers to the GameObject targeted by an attack
     CombatantStats targetStats; //and this to the target's stats.
 
     private void Start()
     {
         _wt = GetComponent<WhoseTurn>();
-
     }
 
     void CalculateDamage(int raw, CombatantStats attacker, CombatantStats targetStats)
@@ -138,6 +150,7 @@ public class Attacks : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Alpha1))
         {
+            aquaSmackSource.PlayOneShot(aquaSmackClip); // Smack sound effect plays
             Debug.Log("Attack type: Smack");
             dmg = 3;
             heal = 0;
@@ -149,6 +162,7 @@ public class Attacks : MonoBehaviour
             Debug.Log("Attack type: Healing Meal");
             if (dG.magic >= 2)
             {
+                healingMealSource.PlayOneShot(healingMealClip); // Healing Meal SFX
                 dmg = 0;
                 heal = 5;
                 spfx = null;
@@ -166,6 +180,7 @@ public class Attacks : MonoBehaviour
             Debug.Log("Attack type: On the Go");
             if (dG.magic >= 2)
             {
+                //SFX HERE ***
                 dmg = 0;
                 heal = 0;
                 spfx = "2xD";
@@ -236,6 +251,7 @@ public class Attacks : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Alpha1))
         {
+            normalPunchSource.PlayOneShot(normalPunchClip); // The normal punch sound 
             Debug.Log("Attack type: Punch");
             dmg = 5;
         }
@@ -245,6 +261,7 @@ public class Attacks : MonoBehaviour
             Debug.Log("Attack type: Flaming Punch");
             if (chef.magic >= 2)
             {
+                flamePunchSource.PlayOneShot(flamePunchClip); // Flame Punch sound effect plays
                 dmg = 8;
 
                 chef.magic -= 2;

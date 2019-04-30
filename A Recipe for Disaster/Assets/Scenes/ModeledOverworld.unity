@@ -12715,7 +12715,7 @@ Light:
   m_SpotAngle: 30
   m_CookieSize: 10
   m_Shadows:
-    m_Type: 2
+    m_Type: 1
     m_Resolution: -1
     m_CustomResolution: -1
     m_Strength: 1
@@ -36385,7 +36385,7 @@ Prefab:
     - target: {fileID: 114971008443488318, guid: 7002def3750854748a6fb9c348c4339a,
         type: 2}
       propertyPath: battlingPlayer.y
-      value: 2
+      value: 1.66
       objectReference: {fileID: 0}
     - target: {fileID: 114971008443488318, guid: 7002def3750854748a6fb9c348c4339a,
         type: 2}
@@ -36400,7 +36400,7 @@ Prefab:
     - target: {fileID: 114971008443488318, guid: 7002def3750854748a6fb9c348c4339a,
         type: 2}
       propertyPath: battlingPartner.y
-      value: 2
+      value: 1.675
       objectReference: {fileID: 0}
     - target: {fileID: 114971008443488318, guid: 7002def3750854748a6fb9c348c4339a,
         type: 2}
@@ -36415,7 +36415,7 @@ Prefab:
     - target: {fileID: 114971008443488318, guid: 7002def3750854748a6fb9c348c4339a,
         type: 2}
       propertyPath: battlingEnemy.y
-      value: 2
+      value: 1.5
       objectReference: {fileID: 0}
     - target: {fileID: 114971008443488318, guid: 7002def3750854748a6fb9c348c4339a,
         type: 2}
@@ -46223,7 +46223,7 @@ Light:
   m_SpotAngle: 30
   m_CookieSize: 10
   m_Shadows:
-    m_Type: 0
+    m_Type: 1
     m_Resolution: -1
     m_CustomResolution: -1
     m_Strength: 1

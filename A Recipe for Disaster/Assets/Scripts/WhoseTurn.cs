@@ -26,9 +26,11 @@ public class WhoseTurn : MonoBehaviour {
         if (battleStarted == true) // If battleStarted is false...
         {
             // Check for defeat first
-            EndBattle();
-
-            if (indexNo < order.Count)
+            if (_attacks.enemies.Count == 0 || _attacks.allies.Count == 0)
+            {
+                EndBattle();
+            }
+            else if (indexNo < order.Count)
             {
                 Fight(indexNo);
             }
@@ -55,9 +57,6 @@ public class WhoseTurn : MonoBehaviour {
     void Fight(int i)
     {
         turnTaker = order.ElementAt<GameObject>(i);
-        //Debug.Log("Hello from the Fight() in WhoseTurn. " +
-        //    "The name of the element at indexNo is " +
-        //    turnTaker);
 
         if (turnTaker.tag == "Ally")
         {
@@ -67,23 +66,20 @@ public class WhoseTurn : MonoBehaviour {
         }
     }
 
-    void EndBattle()
+    void EndBattle() 
     {
-        if (_attacks.enemies.Count == 0 || _attacks.allies.Count == 0)
-        {
-            //end battle
-            _br.ready = true;
-            battleStarted = false;
-            order.Clear();
-            _br.combatants.Clear();
-            Debug.Log("Battle ends.");
+        //end battle
+        _br.ready = true;
+        battleStarted = false;
+        order.Clear();
+        _br.combatants.Clear();
+        Debug.Log("Battle ends.");
 
-            //reload overworld
-            _pd = FindObjectOfType<PersistentData>().GetComponent<PersistentData>();
-            _pd.ReactivateEnemies();
+        //reload overworld
+        _pd = FindObjectOfType<PersistentData>().GetComponent<PersistentData>();
+        _pd.ReactivateEnemies();
 
-            _br.RestoreOverworld();
-            SceneManager.UnloadSceneAsync("ModeledBattleScene");
-        }
+        _br.RestoreOverworld();
+        SceneManager.UnloadSceneAsync("ModeledBattleScene");
     }
 }
