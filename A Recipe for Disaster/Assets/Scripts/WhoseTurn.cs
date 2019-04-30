@@ -26,22 +26,9 @@ public class WhoseTurn : MonoBehaviour {
         if (battleStarted == true) // If battleStarted is false...
         {
             // Check for defeat first
-            if (_attacks.enemies.Count == 0 || _attacks.allies.Count == 0) 
-            {
-                //end battle
-                _br.ready = true;
-                battleStarted = false;
-                order.Clear();
-                _br.combatants.Clear();
-                Debug.Log("Battle ends.");
+            EndBattle();
 
-                //reload overworld
-                _pd = FindObjectOfType<PersistentData>().GetComponent<PersistentData>();
-                _pd.ReactivateEnemies();
-
-                _br.RestoreOverworld();
-                SceneManager.UnloadSceneAsync("ModeledBattleScene");
-            } else if (indexNo < order.Count)
+            if (indexNo < order.Count)
             {
                 Fight(indexNo);
             }
@@ -77,6 +64,26 @@ public class WhoseTurn : MonoBehaviour {
             _attacks.AllyAttacks(turnTaker);
         } else if (turnTaker.tag == "Enemy"){
             _attacks.EnemyAttacks(turnTaker);
+        }
+    }
+
+    void EndBattle()
+    {
+        if (_attacks.enemies.Count == 0 || _attacks.allies.Count == 0)
+        {
+            //end battle
+            _br.ready = true;
+            battleStarted = false;
+            order.Clear();
+            _br.combatants.Clear();
+            Debug.Log("Battle ends.");
+
+            //reload overworld
+            _pd = FindObjectOfType<PersistentData>().GetComponent<PersistentData>();
+            _pd.ReactivateEnemies();
+
+            _br.RestoreOverworld();
+            SceneManager.UnloadSceneAsync("ModeledBattleScene");
         }
     }
 }

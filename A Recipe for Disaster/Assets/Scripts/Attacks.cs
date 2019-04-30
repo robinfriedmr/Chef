@@ -45,21 +45,7 @@ public class Attacks : MonoBehaviour
 
         if (targetStats.HP <= 0)
         {
-            //Remove target from list of combatants, list of allies/enemies
-            _wt.order.Remove(targetStats.gameObject);
-
-            if (targetStats.gameObject.tag == "Enemy")
-            {
-                enemies.Remove(targetStats.gameObject);
-            }
-            else if (targetStats.gameObject.tag == "Ally")
-            {
-                allies.Remove(targetStats.gameObject);
-            }
-            else
-            {
-                Debug.Log("Error trying to remove " + targetStats.gameObject.name + " from its list! Check tag: " + targetStats.gameObject.tag);
-            }
+            EndBattle();
 
             _pd = FindObjectOfType<PersistentData>().GetComponent<PersistentData>();
             _pd.enemyList.Remove(targetStats.gameObject);
@@ -71,6 +57,17 @@ public class Attacks : MonoBehaviour
             }
             Debug.Log(targetStats.gameObject.name + " defeated!");
         }
+    }
+
+    void EndBattle() {
+
+
+        //Remove target from list of combatants, list of allies/enemies
+        _wt.order.Clear();
+        enemies.Clear();
+        allies.Clear();
+
+        Debug.Log("Battle ends!");
     }
 
     void HealMove(int heal, CombatantStats target)
@@ -130,6 +127,10 @@ public class Attacks : MonoBehaviour
         else
         {
             DeliveryMoves(ally.GetComponent<CombatantStats>());
+        }
+
+        if (Input.GetKeyDown(KeyCode.Escape)) {
+            EndBattle();
         }
     }
 

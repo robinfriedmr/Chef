@@ -22,7 +22,6 @@ GameObject:
   - component: {fileID: 212782166019553166}
   - component: {fileID: 65396489602087240}
   - component: {fileID: 114433131573071842}
-  - component: {fileID: 114036335932720794}
   m_Layer: 0
   m_Name: Beet
   m_TagString: Enemy
@@ -37,8 +36,8 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1236331521496016}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -2.15, y: 1.12, z: 1.63}
-  m_LocalScale: {x: 0.2, y: 0.2, z: 1}
+  m_LocalPosition: {x: -2.15, y: 5.6, z: 1.63}
+  m_LocalScale: {x: 0.1, y: 0.1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -55,20 +54,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 10, y: 11, z: 0.2}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &114036335932720794
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1236331521496016}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: de05c863f4a78d84791eb9a80a51912f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _pd: {fileID: 0}
-  enemies: []
-  allies: []
 --- !u!114 &114433131573071842
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -80,14 +65,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: db9c9abe2f1d24ee3b60c2d1fcf084fd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  HP: 8
-  dmgBuff: 1
-  defDebuff: 0
   maxHP: 8
   defense: 2
   power: 3
   magic: 0
   speed: 1
+  HP: 8
+  dmgBuff: 1
+  defDebuff: 0
 --- !u!212 &212782166019553166
 SpriteRenderer:
   m_ObjectHideFlags: 1

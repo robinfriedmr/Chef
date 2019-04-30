@@ -36,6 +36,8 @@ public class BattleReady : MonoBehaviour {
 //    public AudioSource overworldMusic;
     public GameObject environment;
     Vector3 overworldPos;
+    Vector3 monPos;
+    public Vector3 standBack;
 
     void Awake()
     {
@@ -75,6 +77,7 @@ public class BattleReady : MonoBehaviour {
 
         // Save position of player.
         overworldPos = this.transform.position;
+        monPos = enemyEncounter.transform.position;
 
         // Move the player and enemy into position.
         BattlePosition(enemyEncounter);
@@ -146,9 +149,18 @@ public class BattleReady : MonoBehaviour {
     }
 
     public void RestoreOverworld () {
-        this.transform.position = overworldPos;
-        partner.transform.position = overworldPos + new Vector3(-1, 0, -1);
+        // Place characters on map.
+        this.transform.position = overworldPos + standBack;
+        partner.transform.position = overworldPos + new Vector3(-.75f, 0f, -.75f);
+        if (enemyEncounter != null) {
+            enemyEncounter.transform.position = monPos;
+        }
 
+        // Restore movement.
+        myMovement.enabled = true;
+        partnerFollow.enabled = true;
+
+        // Change cameras.
         battleCam.enabled = false;
         overworldCam.enabled = true;
 

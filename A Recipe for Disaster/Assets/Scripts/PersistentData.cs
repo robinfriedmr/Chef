@@ -1,9 +1,11 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class PersistentData : MonoBehaviour {
 
+    public GameObject[] enemyArray;
     public List<GameObject> enemyList;
     public GameObject beet;
     public GameObject carrot;
@@ -11,13 +13,10 @@ public class PersistentData : MonoBehaviour {
 
     public GameObject environment;
 
-	private void Awake()
+	private void Start ()
 	{
-        // Instantiate enemies in places specified
-        enemyList.Add(Instantiate(carrot, new Vector3(0f, 5f, -25.66f), Quaternion.identity) as GameObject);
-        enemyList.Add(Instantiate(beet, new Vector3(2f, 5f, -16.63f), Quaternion.identity) as GameObject);
-        enemyList.Add(Instantiate(onion, new Vector3(5f, 5f, -28.11f), Quaternion.identity) as GameObject);
-
+        enemyArray = GameObject.FindGameObjectsWithTag("Enemy");
+        enemyList = enemyArray.ToList<GameObject>();
     }
 	
     public void BeforeSwitch (GameObject except) {
