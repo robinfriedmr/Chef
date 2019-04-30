@@ -66,16 +66,21 @@ public class WhoseTurn : MonoBehaviour {
         }
     }
 
-    void EndBattle() 
+    public void EndBattle() 
     {
-        //end battle
+        // Clear lists.
+        order.Clear();
+        _attacks.allies.Clear();
+        _attacks.enemies.Clear();
+        _br.combatants.Clear();
+
+        // Reset readiness.
         _br.ready = true;
         battleStarted = false;
-        order.Clear();
-        _br.combatants.Clear();
+
         Debug.Log("Battle ends.");
 
-        //reload overworld
+        // Reload overworld.
         _pd = FindObjectOfType<PersistentData>().GetComponent<PersistentData>();
         _pd.ReactivateEnemies();
 

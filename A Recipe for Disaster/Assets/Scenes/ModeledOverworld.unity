@@ -36457,6 +36457,11 @@ Prefab:
       propertyPath: environment
       value: 
       objectReference: {fileID: 1860432228}
+    - target: {fileID: 114971008443488318, guid: 7002def3750854748a6fb9c348c4339a,
+        type: 2}
+      propertyPath: standBack.z
+      value: -1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7002def3750854748a6fb9c348c4339a, type: 2}
   m_IsPrefabAsset: 0
