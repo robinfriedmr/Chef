@@ -2349,6 +2349,11 @@ Prefab:
       propertyPath: m_Name
       value: Slot (7)
       objectReference: {fileID: 0}
+    - target: {fileID: 114682356272426764, guid: e049b43514d930e43bcddbd7b55e0357,
+        type: 2}
+      propertyPath: item
+      value: 
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e049b43514d930e43bcddbd7b55e0357, type: 2}
   m_IsPrefabAsset: 0
@@ -3910,6 +3915,11 @@ Prefab:
     - target: {fileID: 1060142319432192, guid: e049b43514d930e43bcddbd7b55e0357, type: 2}
       propertyPath: m_Name
       value: Slot (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 114682356272426764, guid: e049b43514d930e43bcddbd7b55e0357,
+        type: 2}
+      propertyPath: item
+      value: 
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e049b43514d930e43bcddbd7b55e0357, type: 2}
@@ -8005,6 +8015,11 @@ Prefab:
       propertyPath: m_Name
       value: Slot (12)
       objectReference: {fileID: 0}
+    - target: {fileID: 114682356272426764, guid: e049b43514d930e43bcddbd7b55e0357,
+        type: 2}
+      propertyPath: item
+      value: 
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e049b43514d930e43bcddbd7b55e0357, type: 2}
   m_IsPrefabAsset: 0
@@ -10537,6 +10552,11 @@ Prefab:
     - target: {fileID: 1060142319432192, guid: e049b43514d930e43bcddbd7b55e0357, type: 2}
       propertyPath: m_Name
       value: Slot (4)
+      objectReference: {fileID: 0}
+    - target: {fileID: 114682356272426764, guid: e049b43514d930e43bcddbd7b55e0357,
+        type: 2}
+      propertyPath: item
+      value: 
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e049b43514d930e43bcddbd7b55e0357, type: 2}
@@ -21422,7 +21442,7 @@ GameObject:
   m_Component:
   - component: {fileID: 864861126}
   m_Layer: 0
-  m_Name: InventorySystem
+  m_Name: Inventory System
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -22899,6 +22919,11 @@ Prefab:
         type: 2}
       propertyPath: m_Pivot.y
       value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 114682356272426764, guid: e049b43514d930e43bcddbd7b55e0357,
+        type: 2}
+      propertyPath: item
+      value: 
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e049b43514d930e43bcddbd7b55e0357, type: 2}
@@ -25146,6 +25171,11 @@ Prefab:
       propertyPath: m_Name
       value: Slot (8)
       objectReference: {fileID: 0}
+    - target: {fileID: 114682356272426764, guid: e049b43514d930e43bcddbd7b55e0357,
+        type: 2}
+      propertyPath: item
+      value: 
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e049b43514d930e43bcddbd7b55e0357, type: 2}
   m_IsPrefabAsset: 0
@@ -26874,6 +26904,11 @@ Prefab:
       propertyPath: m_Name
       value: Slot (10)
       objectReference: {fileID: 0}
+    - target: {fileID: 114682356272426764, guid: e049b43514d930e43bcddbd7b55e0357,
+        type: 2}
+      propertyPath: item
+      value: 
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e049b43514d930e43bcddbd7b55e0357, type: 2}
   m_IsPrefabAsset: 0
@@ -27236,6 +27271,11 @@ Prefab:
     - target: {fileID: 1060142319432192, guid: e049b43514d930e43bcddbd7b55e0357, type: 2}
       propertyPath: m_Name
       value: Slot (9)
+      objectReference: {fileID: 0}
+    - target: {fileID: 114682356272426764, guid: e049b43514d930e43bcddbd7b55e0357,
+        type: 2}
+      propertyPath: item
+      value: 
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e049b43514d930e43bcddbd7b55e0357, type: 2}
@@ -28604,6 +28644,11 @@ Prefab:
     - target: {fileID: 1060142319432192, guid: e049b43514d930e43bcddbd7b55e0357, type: 2}
       propertyPath: m_Name
       value: Slot (5)
+      objectReference: {fileID: 0}
+    - target: {fileID: 114682356272426764, guid: e049b43514d930e43bcddbd7b55e0357,
+        type: 2}
+      propertyPath: item
+      value: 
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e049b43514d930e43bcddbd7b55e0357, type: 2}
@@ -34427,6 +34472,11 @@ Prefab:
       propertyPath: m_Name
       value: Slot (11)
       objectReference: {fileID: 0}
+    - target: {fileID: 114682356272426764, guid: e049b43514d930e43bcddbd7b55e0357,
+        type: 2}
+      propertyPath: item
+      value: 
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e049b43514d930e43bcddbd7b55e0357, type: 2}
   m_IsPrefabAsset: 0
@@ -35454,6 +35504,11 @@ Prefab:
     - target: {fileID: 1060142319432192, guid: e049b43514d930e43bcddbd7b55e0357, type: 2}
       propertyPath: m_Name
       value: Slot (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 114682356272426764, guid: e049b43514d930e43bcddbd7b55e0357,
+        type: 2}
+      propertyPath: item
+      value: 
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e049b43514d930e43bcddbd7b55e0357, type: 2}
@@ -42336,7 +42391,8 @@ Prefab:
         type: 2}
       propertyPath: item
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 11400000, guid: 0d2b74395ee914548a22aa2901b938ad,
+        type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e049b43514d930e43bcddbd7b55e0357, type: 2}
   m_IsPrefabAsset: 0
@@ -44034,6 +44090,11 @@ Prefab:
       propertyPath: m_Name
       value: Slot (3)
       objectReference: {fileID: 0}
+    - target: {fileID: 114682356272426764, guid: e049b43514d930e43bcddbd7b55e0357,
+        type: 2}
+      propertyPath: item
+      value: 
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e049b43514d930e43bcddbd7b55e0357, type: 2}
   m_IsPrefabAsset: 0
@@ -44131,7 +44192,7 @@ GameObject:
   - component: {fileID: 1719198819}
   - component: {fileID: 1719198818}
   m_Layer: 5
-  m_Name: InventoryPanel
+  m_Name: Inventory Panel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -48252,6 +48313,11 @@ Prefab:
       propertyPath: m_Name
       value: Slot (13)
       objectReference: {fileID: 0}
+    - target: {fileID: 114682356272426764, guid: e049b43514d930e43bcddbd7b55e0357,
+        type: 2}
+      propertyPath: item
+      value: 
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e049b43514d930e43bcddbd7b55e0357, type: 2}
   m_IsPrefabAsset: 0
@@ -51620,7 +51686,7 @@ GameObject:
   - component: {fileID: 2070724150}
   - component: {fileID: 2070724154}
   m_Layer: 5
-  m_Name: Canvas
+  m_Name: Inventory Canvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -51716,7 +51782,7 @@ MonoBehaviour:
   player: {fileID: 0}
   inventoryPanel: {fileID: 1719198816}
   list:
-  - {fileID: 11400000, guid: 0d2b74395ee914548a22aa2901b938ad, type: 2}
+  - {fileID: 0}
 --- !u!1001 &2070931175
 Prefab:
   m_ObjectHideFlags: 0

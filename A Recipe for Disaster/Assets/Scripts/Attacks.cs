@@ -73,7 +73,7 @@ public class Attacks : MonoBehaviour
 
     void HealMove(int heal, CombatantStats target)
     {
-        Debug.Log(targetStats.gameObject.name + " is healed for " + heal); //***
+        Debug.Log(target.gameObject.name + " is healed for " + heal); //***
         target.HP += heal;
 
         if (target.HP > target.maxHP)

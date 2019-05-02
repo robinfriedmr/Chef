@@ -10,13 +10,18 @@ public class Inventory : MonoBehaviour {
 
     public static Inventory instance;
 
+    void Start()
+    {
+        instance = this;
+        //UpdatePanelSlots();
+    }
 
-    void updatePanelSlots()
+    void UpdatePanelSlots()
     {
         int index = 0;
         foreach(Transform child in inventoryPanel.transform)
         {
-            inventorySlotController slot = child.GetComponent<inventorySlotController>();
+            InventorySlotController slot = child.GetComponent<InventorySlotController>();
 
             if (index < list.Count)
             {
@@ -37,22 +42,13 @@ public class Inventory : MonoBehaviour {
         if (list.Count < 15)
         {
             list.Add(item);
+            UpdatePanelSlots();
         }
     }
 
     public void Remove(Item item)
     {
         list.Remove(item);
+        UpdatePanelSlots();
     }
-    // Use this for initialization
-	void Start ()
-    {
-        instance = this;
-        updatePanelSlots();
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
 }

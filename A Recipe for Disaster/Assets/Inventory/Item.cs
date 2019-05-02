@@ -5,10 +5,5 @@ using UnityEngine;
 public class Item : ScriptableObject {
     public string itemName;
     public Sprite icon;
-	
-    public virtual void use()
-    {
-
-    }
-
+    public GameObject target;
 }

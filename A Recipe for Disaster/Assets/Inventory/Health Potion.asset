@@ -13,3 +13,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemName: Health Potion
   icon: {fileID: 21300000, guid: 42a2d571c4b306047b5f16e36b6f614d, type: 3}
+  target: {fileID: 0}
+  restore: 5
+  targetStats: {fileID: 0}

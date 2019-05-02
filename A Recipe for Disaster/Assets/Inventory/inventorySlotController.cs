@@ -3,9 +3,18 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class inventorySlotController : MonoBehaviour {
+public class InventorySlotController : MonoBehaviour {
 
+    Inventory inventory;
+    GameObject player;
     public Item item;
+
+    private void Start()
+    {
+        inventory = GameObject.Find("Inventory Canvas").GetComponent<Inventory>();
+        player = GameObject.Find("PlayerCharacter");
+        // Is there a better way to do this? ^
+    }
 
     public void Update()
     {
@@ -30,11 +39,21 @@ public class inventorySlotController : MonoBehaviour {
         }
     }
 	
-    public void use()
+    public void Use()
     {
         if (item)
         {
             Debug.Log("You clicked:" + item.itemName);
+
+            if (item is Heal)
+            {
+                item.target = player;
+                Heal healing = item as Heal;
+                healing.RestoreHealth();
+                Debug.Log("New HP is: " + healing.targetStats.HP);
+            }
+
+            inventory.Remove(item);
         }
     }
 }
