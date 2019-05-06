@@ -37,16 +37,29 @@ public class Attacks : MonoBehaviour
     GameObject target; //Refers to the GameObject targeted by an attack
     CombatantStats targetStats; //and this to the target's stats.
 
+    bool moving;
     public IEnumerator hurt;
     public IEnumerator attacking;
+    IEnumerator advance;
 
     private void Start()
     {
         _wt = GetComponent<WhoseTurn>();
+        moving = false;
+        advance = Advance();
+    }
+
+    IEnumerator Advance()
+    {
+        yield return new WaitForSeconds(1.0f);
+        moving = false;
+        _wt.indexNo++;
     }
 
     void CalculateDamage(int raw, CombatantStats attacker, CombatantStats targetStats)
     {
+        moving = true;
+
         // Method A - Inspired by Pokemon Go.
         //int finDmg = attacker.dmgBuff * Mathf.FloorToInt(0.5f * raw * (attacker.power / (targetStats.defense - targetStats.defDebuff))) + 1; // Minimum hit is 1. Defense CANNOT be 0!
 
@@ -72,9 +85,12 @@ public class Attacks : MonoBehaviour
             _pd = FindObjectOfType<PersistentData>().GetComponent<PersistentData>();
             _pd.enemyList.Remove(targetStats.gameObject);
 
-            if (targetStats.gameObject.tag == "Ally") {
+            if (targetStats.gameObject.tag == "Ally")
+            {
                 targetStats.gameObject.SetActive(false); // Don't destroy allies
-            } else {
+            }
+            else
+            {
                 Destroy(targetStats.gameObject);
             }
             Debug.Log(targetStats.gameObject.name + " defeated!");
@@ -83,8 +99,10 @@ public class Attacks : MonoBehaviour
 
     void HealMove(int heal, CombatantStats target)
     {
-        Debug.Log(target.gameObject.name + " is healed for " + heal); //***
+        moving = true;
+
         target.HP += heal;
+        Debug.Log(target.gameObject.name + " is healed. New HP: " + target.HP); //***
 
         if (target.HP > target.maxHP)
         {
@@ -111,37 +129,43 @@ public class Attacks : MonoBehaviour
 
     public void EnemyAttacks(GameObject enemy)
     {
-        if (enemy.name.Contains("Beet"))
-        {
-            BeetAttacks(enemy.GetComponent<CombatantStats>());
-        }
-        else if (enemy.name.Contains("Carrot"))
-        {
-            CarrotAttacks(enemy.GetComponent<CombatantStats>());
-        }
-        else if (enemy.name.Contains("Onion"))
-        {
-            OnionAttacks(enemy.GetComponent<CombatantStats>());
-        }
-        else
-        {
-            Debug.Log("Enemy name not understood.");
+        if (!moving) {
+            if (enemy.name.Contains("Beet"))
+            {
+                BeetAttacks(enemy.GetComponent<CombatantStats>());
+            }
+            else if (enemy.name.Contains("Carrot"))
+            {
+                CarrotAttacks(enemy.GetComponent<CombatantStats>());
+            }
+            else if (enemy.name.Contains("Onion"))
+            {
+                OnionAttacks(enemy.GetComponent<CombatantStats>());
+            }
+            else
+            {
+                Debug.Log("Enemy name not understood.");
+            }
         }
     }
 
     public void AllyAttacks(GameObject ally)
     {
-        if (ally.name == "PlayerCharacter")
+        if (!moving)
         {
-            ChefAttacks(ally.GetComponent<CombatantStats>());
-        }
-        else
-        {
-            DeliveryMoves(ally.GetComponent<CombatantStats>());
-        }
+            if (ally.name == "PlayerCharacter")
+            {
+                ChefAttacks(ally.GetComponent<CombatantStats>());
+            }
+            else
+            {
+                DeliveryMoves(ally.GetComponent<CombatantStats>());
+            }
 
-        if (Input.GetKeyDown(KeyCode.Escape)) {
-            _wt.EndBattle();
+            if (Input.GetKeyDown(KeyCode.Escape))
+            {
+                _wt.EndBattle();
+            }
         }
     }
 
@@ -307,7 +331,7 @@ public class Attacks : MonoBehaviour
         heal = 0;
         spfx = null;
         target = null;
-        _wt.indexNo++;
+        StartCoroutine(advance);
     }
 
     void BeetAttacks(CombatantStats attacker)

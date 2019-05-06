@@ -29,11 +29,12 @@ public class BattleReady : MonoBehaviour {
 
     public Vector3 battlingPlayer;
     public Vector3 battlingPartner;
-    public Vector3 battlingEnemy;
+    public Vector3 battlingC; // Carrot
+    public Vector3 battlingB; // Beet
+    public Vector3 battlingO; // Onion
 
     public Camera overworldCam;
     public Camera battleCam;
-//    public AudioSource overworldMusic;
     public GameObject environment;
     Vector3 overworldPos;
     Vector3 monPos;
@@ -44,11 +45,6 @@ public class BattleReady : MonoBehaviour {
         ready = true;
         battleCam.enabled = false;
         overworldCam.enabled = true;
-    }
-
-    private void Start()
-    {
-        
     }
 
     void OnCollisionEnter(Collision collision)
@@ -83,6 +79,7 @@ public class BattleReady : MonoBehaviour {
         BattlePosition(enemyEncounter);
         // Move camera, too.
         overworldCam.enabled = false;
+        overworldCam.GetComponent<CamFollow>().enabled = false;
         battleCam.enabled = true;
 
         // Disable overworld theme.
@@ -121,19 +118,21 @@ public class BattleReady : MonoBehaviour {
     }
 
     void BattlePosition (GameObject enemy) {
-        partnerAnimator.SetBool("walking", false);
-        partnerAnimator.SetInteger("facing", 3);
-        partnerFollow.enabled = false;
-
         // Place Player, Partner, Enemy
         this.transform.position = battlingPlayer;
         partner.transform.position = battlingPartner;
-        enemy.transform.position = battlingEnemy;
+        if (enemy.name.Contains("Carrot")) { enemy.transform.position = battlingC; }
+        else if (enemy.name.Contains("Beet")) {enemy.transform.position = battlingB;}
+        else { enemy.transform.position = battlingO; }
 
         myBody.constraints = RigidbodyConstraints.FreezeAll; //*** (The player totally rocketed off into space without this.)
         myAnimator.SetBool("walking", false);
         myAnimator.SetInteger("facing", 3);
         myMovement.enabled = false;
+
+        partnerAnimator.SetBool("walking", false);
+        partnerAnimator.SetInteger("facing", 3);
+        partnerFollow.enabled = false;
     }
 
     IEnumerator LoadBattleScene(GameObject enemyException)
@@ -163,6 +162,7 @@ public class BattleReady : MonoBehaviour {
         // Change cameras.
         battleCam.enabled = false;
         overworldCam.enabled = true;
+        overworldCam.GetComponent<CamFollow>().enabled = true;
 
         // Re-enable overworld environment, including sounds.
         environment.SetActive(true);

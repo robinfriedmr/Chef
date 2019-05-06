@@ -36636,7 +36636,7 @@ Prefab:
     - target: {fileID: 114971008443488318, guid: 7002def3750854748a6fb9c348c4339a,
         type: 2}
       propertyPath: battlingEnemy.y
-      value: 1.5
+      value: 1.65
       objectReference: {fileID: 0}
     - target: {fileID: 114971008443488318, guid: 7002def3750854748a6fb9c348c4339a,
         type: 2}
@@ -36686,6 +36686,66 @@ Prefab:
     - target: {fileID: 1342672728257446, guid: 7002def3750854748a6fb9c348c4339a, type: 2}
       propertyPath: m_Name
       value: Chefstep
+      objectReference: {fileID: 0}
+    - target: {fileID: 114971008443488318, guid: 7002def3750854748a6fb9c348c4339a,
+        type: 2}
+      propertyPath: battlingO.y
+      value: 1.79
+      objectReference: {fileID: 0}
+    - target: {fileID: 114971008443488318, guid: 7002def3750854748a6fb9c348c4339a,
+        type: 2}
+      propertyPath: battlingCoB.y
+      value: 1.65
+      objectReference: {fileID: 0}
+    - target: {fileID: 114971008443488318, guid: 7002def3750854748a6fb9c348c4339a,
+        type: 2}
+      propertyPath: battlingCoB.z
+      value: -3
+      objectReference: {fileID: 0}
+    - target: {fileID: 114971008443488318, guid: 7002def3750854748a6fb9c348c4339a,
+        type: 2}
+      propertyPath: battlingO.z
+      value: -3
+      objectReference: {fileID: 0}
+    - target: {fileID: 114971008443488318, guid: 7002def3750854748a6fb9c348c4339a,
+        type: 2}
+      propertyPath: battlingCoB.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114971008443488318, guid: 7002def3750854748a6fb9c348c4339a,
+        type: 2}
+      propertyPath: battlingO.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114971008443488318, guid: 7002def3750854748a6fb9c348c4339a,
+        type: 2}
+      propertyPath: battlingC.y
+      value: 1.65
+      objectReference: {fileID: 0}
+    - target: {fileID: 114971008443488318, guid: 7002def3750854748a6fb9c348c4339a,
+        type: 2}
+      propertyPath: battlingB.y
+      value: 1.9
+      objectReference: {fileID: 0}
+    - target: {fileID: 114971008443488318, guid: 7002def3750854748a6fb9c348c4339a,
+        type: 2}
+      propertyPath: battlingC.z
+      value: -3
+      objectReference: {fileID: 0}
+    - target: {fileID: 114971008443488318, guid: 7002def3750854748a6fb9c348c4339a,
+        type: 2}
+      propertyPath: battlingB.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114971008443488318, guid: 7002def3750854748a6fb9c348c4339a,
+        type: 2}
+      propertyPath: battlingB.z
+      value: -3
+      objectReference: {fileID: 0}
+    - target: {fileID: 114971008443488318, guid: 7002def3750854748a6fb9c348c4339a,
+        type: 2}
+      propertyPath: battlingC.x
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7002def3750854748a6fb9c348c4339a, type: 2}
@@ -48491,6 +48551,11 @@ Prefab:
     - target: {fileID: 1236331521496016, guid: 78c289eb0f52d42c7b2b7a29358f63bc, type: 2}
       propertyPath: m_Name
       value: Beet (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 114433131573071842, guid: 78c289eb0f52d42c7b2b7a29358f63bc,
+        type: 2}
+      propertyPath: power
+      value: 4
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 78c289eb0f52d42c7b2b7a29358f63bc, type: 2}

@@ -68,6 +68,17 @@ public class WhoseTurn : MonoBehaviour {
 
     public void EndBattle() 
     {
+        // Clear animations from remaining combatants.
+        foreach (GameObject combatant in order)
+        {
+            Animator animator = combatant.GetComponent<Animator>();
+            animator.SetBool("attacking", false);
+            animator.SetBool("hurt", false);
+
+            CombatantStats stats = combatant.GetComponent<CombatantStats>();
+            stats.dmgBuff = 1;
+        }
+
         // Clear lists.
         order.Clear();
         _attacks.allies.Clear();

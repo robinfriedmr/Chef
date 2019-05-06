@@ -18,6 +18,7 @@ public class AnimatedBattle : MonoBehaviour {
         controller.SetBool("hurt", true);
         yield return new WaitForSeconds(aniTime);
         controller.SetBool("hurt", false);
+        Debug.Log("Hurt has run."); //***
     }
 
     public IEnumerator Attacking()
@@ -25,5 +26,6 @@ public class AnimatedBattle : MonoBehaviour {
         controller.SetBool("attacking", true);
         yield return new WaitForSeconds(aniTime);
         controller.SetBool("attacking", false);
+        Debug.Log("Attacking has run."); //***
     }
 }
