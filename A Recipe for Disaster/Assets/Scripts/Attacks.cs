@@ -37,6 +37,9 @@ public class Attacks : MonoBehaviour
     GameObject target; //Refers to the GameObject targeted by an attack
     CombatantStats targetStats; //and this to the target's stats.
 
+    public IEnumerator hurt;
+    public IEnumerator attacking;
+
     private void Start()
     {
         _wt = GetComponent<WhoseTurn>();
@@ -51,6 +54,13 @@ public class Attacks : MonoBehaviour
         int finDmg = raw - targetStats.defense;
         finDmg = (finDmg < 0) ? 0 : finDmg; // Minimum hit is 0.
 
+        // Animate battle
+        attacking = attacker.gameObject.GetComponent<AnimatedBattle>().Attacking();
+        StartCoroutine(attacking);
+        hurt = targetStats.gameObject.GetComponent<AnimatedBattle>().Hurt();
+        StartCoroutine(hurt);
+
+        // Do damage
         Debug.Log(targetStats.gameObject.name + " is hit for " + finDmg); //***
         targetStats.HP -= finDmg; // Subtract damage from target's HP.
         Debug.Log("HP is " + targetStats.HP); //***

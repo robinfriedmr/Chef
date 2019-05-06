@@ -38,6 +38,7 @@ GameObject:
   - component: {fileID: 212756552187818134}
   - component: {fileID: 114561447017528850}
   - component: {fileID: 95513331303124360}
+  - component: {fileID: 114016250600982476}
   - component: {fileID: 114146350784747266}
   - component: {fileID: 114971008443488318}
   - component: {fileID: 114715017873328118}
@@ -206,6 +207,18 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &114016250600982476
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1422462143574244}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 41f6813aebfeef94b87665f5d189299d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  aniTime: 1
 --- !u!114 &114146350784747266
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -244,14 +257,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: db9c9abe2f1d24ee3b60c2d1fcf084fd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  level: 1
-  HP: 10
+  maxHP: 0
   defense: 2
   power: 3
   magic: 2
   speed: 1
-  luck: 0
-  exp: 0
+  HP: 10
+  dmgBuff: 0
+  defDebuff: 0
 --- !u!114 &114971008443488318
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -263,11 +276,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9dc52a5c3f648405dad950e00645cf1d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _pd: {fileID: 0}
   ready: 0
   combatants: []
   enemies: []
   allies: []
+  myBody: {fileID: 0}
+  myMovement: {fileID: 0}
+  myAnimator: {fileID: 0}
+  partner: {fileID: 0}
+  partnerFollow: {fileID: 0}
+  partnerAnimator: {fileID: 0}
   order: []
+  battlingPlayer: {x: 0, y: 0, z: 0}
+  battlingPartner: {x: 0, y: 0, z: 0}
+  battlingEnemy: {x: 0, y: 0, z: 0}
+  overworldCam: {fileID: 0}
+  battleCam: {fileID: 0}
+  environment: {fileID: 0}
+  standBack: {x: 0, y: 0, z: 0}
 --- !u!136 &136711991995170984
 CapsuleCollider:
   m_ObjectHideFlags: 1

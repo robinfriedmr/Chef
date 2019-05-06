@@ -22,6 +22,8 @@ GameObject:
   - component: {fileID: 212782166019553166}
   - component: {fileID: 65396489602087240}
   - component: {fileID: 114433131573071842}
+  - component: {fileID: 95019717536196000}
+  - component: {fileID: 114251350611086696}
   m_Layer: 0
   m_Name: Beet
   m_TagString: Enemy
@@ -36,7 +38,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1236331521496016}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -2.15, y: 5.6, z: 1.63}
+  m_LocalPosition: {x: 12.25, y: 5.6, z: -32.206093}
   m_LocalScale: {x: 0.1, y: 0.1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -54,6 +56,36 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 10, y: 11, z: 0.2}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!95 &95019717536196000
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1236331521496016}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 32584e126d270c14f900c60fada8ab50, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &114251350611086696
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1236331521496016}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 41f6813aebfeef94b87665f5d189299d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  aniTime: 1
 --- !u!114 &114433131573071842
 MonoBehaviour:
   m_ObjectHideFlags: 1

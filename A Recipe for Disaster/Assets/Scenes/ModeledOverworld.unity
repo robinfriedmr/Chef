@@ -21762,6 +21762,7 @@ GameObject:
   - component: {fileID: 886989903}
   - component: {fileID: 886989902}
   - component: {fileID: 886989901}
+  - component: {fileID: 886989904}
   - component: {fileID: 886989900}
   - component: {fileID: 886989899}
   m_Layer: 0
@@ -21879,6 +21880,18 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 13
   m_LocalEulerAnglesHint: {x: 0, y: -25, z: 0}
+--- !u!114 &886989904
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 886989898}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 41f6813aebfeef94b87665f5d189299d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  aniTime: 1
 --- !u!1001 &888941008
 Prefab:
   m_ObjectHideFlags: 0
@@ -35145,6 +35158,7 @@ GameObject:
   - component: {fileID: 1363497306}
   - component: {fileID: 1363497305}
   - component: {fileID: 1363497302}
+  - component: {fileID: 1363497309}
   - component: {fileID: 1363497303}
   - component: {fileID: 1363497304}
   - component: {fileID: 1363497301}
@@ -35311,6 +35325,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   aquaStep: {fileID: 8300000, guid: 121fe636c0413034baa96e3fe09fb766, type: 3}
   audioS: {fileID: 952534797}
+--- !u!114 &1363497309
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1363497300}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 41f6813aebfeef94b87665f5d189299d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  aniTime: 1
 --- !u!1001 &1367092989
 Prefab:
   m_ObjectHideFlags: 0

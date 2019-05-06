@@ -24,6 +24,7 @@ GameObject:
   - component: {fileID: 114957382428801494}
   - component: {fileID: 114125223944006736}
   - component: {fileID: 95523916537673766}
+  - component: {fileID: 114898999717568272}
   m_Layer: 0
   m_Name: Carrot
   m_TagString: Enemy
@@ -88,6 +89,26 @@ MonoBehaviour:
   _pd: {fileID: 0}
   enemies: []
   allies: []
+  flamePunchClip: {fileID: 0}
+  flamePunchSource: {fileID: 0}
+  normalPunchClip: {fileID: 0}
+  normalPunchSource: {fileID: 0}
+  aquaSmackClip: {fileID: 0}
+  aquaSmackSource: {fileID: 0}
+  healingMealClip: {fileID: 0}
+  healingMealSource: {fileID: 0}
+--- !u!114 &114898999717568272
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1996097661399390}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 41f6813aebfeef94b87665f5d189299d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  aniTime: 1
 --- !u!114 &114957382428801494
 MonoBehaviour:
   m_ObjectHideFlags: 1
