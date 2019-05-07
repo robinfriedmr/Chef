@@ -46,7 +46,6 @@ public class Attacks : MonoBehaviour
     {
         _wt = GetComponent<WhoseTurn>();
         moving = false;
-        advance = Advance();
     }
 
     IEnumerator Advance()
@@ -64,7 +63,7 @@ public class Attacks : MonoBehaviour
         //int finDmg = attacker.dmgBuff * Mathf.FloorToInt(0.5f * raw * (attacker.power / (targetStats.defense - targetStats.defDebuff))) + 1; // Minimum hit is 1. Defense CANNOT be 0!
 
         // Method B - Abby's idea
-        int finDmg = raw - targetStats.defense;
+        int finDmg = raw - targetStats.defense - targetStats.defDebuff;
         finDmg = (finDmg < 0) ? 0 : finDmg; // Minimum hit is 0.
 
         // Animate battle
@@ -325,12 +324,13 @@ public class Attacks : MonoBehaviour
         }
     }
 
-    void ResetAttacks()
+    public void ResetAttacks()
     {
         dmg = 0;
         heal = 0;
         spfx = null;
         target = null;
+        advance = Advance();
         StartCoroutine(advance);
     }
 
@@ -381,7 +381,7 @@ public class Attacks : MonoBehaviour
                 Debug.Log("New choice is " + chooseAttack);
             }
         }
-        Debug.Log("allies.Count() is " + allies.Count()); //******
+        
         chooseTarget = Random.Range(0, allies.Count()); // Choose a target
         target = allies.ElementAt<GameObject>(chooseTarget);
         if (target != null)

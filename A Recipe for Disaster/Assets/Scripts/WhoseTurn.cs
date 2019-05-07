@@ -68,6 +68,8 @@ public class WhoseTurn : MonoBehaviour {
 
     public void EndBattle() 
     {
+        _attacks.ResetAttacks(); // Doesn't pause before doing all of these things.
+
         // Clear animations from remaining combatants.
         foreach (GameObject combatant in order)
         {
@@ -77,6 +79,7 @@ public class WhoseTurn : MonoBehaviour {
 
             CombatantStats stats = combatant.GetComponent<CombatantStats>();
             stats.dmgBuff = 1;
+            stats.defDebuff = 0;
         }
 
         // Clear lists.
