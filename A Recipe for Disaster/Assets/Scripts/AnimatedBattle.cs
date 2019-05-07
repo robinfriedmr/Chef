@@ -6,17 +6,22 @@ public class AnimatedBattle : MonoBehaviour {
 
     public float aniTime = 1.0f;
     Animator controller;
+    SpriteRenderer _sr;
 
     public void Start()
     {
         controller = this.GetComponent<Animator>();
+        _sr = this.GetComponent<SpriteRenderer>();
     }
 
 
     public IEnumerator Hurt()
     {
         controller.SetBool("hurt", true);
+        _sr.color = new Vector4(1, 0.7f, 0.7f, 1);
         yield return new WaitForSeconds(aniTime);
+        _sr.color = new Vector4(1, 1, 1, 1);
+
         controller.SetBool("hurt", false);
         Debug.Log("Hurt has run."); //***
     }
