@@ -13066,6 +13066,21 @@ Prefab:
       propertyPath: m_Name
       value: Onion (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 212211495691541302, guid: 7798900f817034b639efc5a11bc18db5,
+        type: 2}
+      propertyPath: m_Color.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 212211495691541302, guid: 7798900f817034b639efc5a11bc18db5,
+        type: 2}
+      propertyPath: m_Color.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 212211495691541302, guid: 7798900f817034b639efc5a11bc18db5,
+        type: 2}
+      propertyPath: m_Color.b
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7798900f817034b639efc5a11bc18db5, type: 2}
   m_IsPrefabAsset: 0

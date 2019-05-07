@@ -35,7 +35,7 @@ public class Attacks : MonoBehaviour
     public AudioSource healingMealSource;
 
     GameObject target; //Refers to the GameObject targeted by an attack
-    CombatantStats targetStats; //and this to the target's stats.
+    public CombatantStats targetStats; //and this to the target's stats.
 
     bool moving;
     public IEnumerator hurt;
@@ -70,7 +70,10 @@ public class Attacks : MonoBehaviour
         attacking = attacker.gameObject.GetComponent<AnimatedBattle>().Attacking();
         StartCoroutine(attacking);
         hurt = targetStats.gameObject.GetComponent<AnimatedBattle>().Hurt();
-        StartCoroutine(hurt);
+        if (hurt != null)
+        {
+            StartCoroutine(hurt);
+        }
 
         // Do damage
         Debug.Log(targetStats.gameObject.name + " is hit for " + finDmg); //***
@@ -79,20 +82,8 @@ public class Attacks : MonoBehaviour
 
         if (targetStats.HP <= 0)
         {
-            _wt.EndBattle();
-
-            _pd = FindObjectOfType<PersistentData>().GetComponent<PersistentData>();
-            _pd.enemyList.Remove(targetStats.gameObject);
-
-            if (targetStats.gameObject.tag == "Ally")
-            {
-                targetStats.gameObject.SetActive(false); // Don't destroy allies
-            }
-            else
-            {
-                Destroy(targetStats.gameObject);
-            }
-            Debug.Log(targetStats.gameObject.name + " defeated!");
+            GameObject target = targetStats.gameObject;
+            _wt.EndBattle(target);
         }
     }
 
@@ -128,7 +119,8 @@ public class Attacks : MonoBehaviour
 
     public void EnemyAttacks(GameObject enemy)
     {
-        if (!moving) {
+        if (!moving)
+        {
             if (enemy.name.Contains("Beet"))
             {
                 BeetAttacks(enemy.GetComponent<CombatantStats>());
@@ -163,7 +155,7 @@ public class Attacks : MonoBehaviour
 
             if (Input.GetKeyDown(KeyCode.Escape))
             {
-                _wt.EndBattle();
+                _wt.EndBattle(null);
             }
         }
     }
@@ -172,7 +164,6 @@ public class Attacks : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Alpha1))
         {
-            aquaSmackSource.PlayOneShot(aquaSmackClip); // Smack sound effect plays
             Debug.Log("Attack type: Smack");
             dmg = 3;
             heal = 0;
@@ -184,7 +175,6 @@ public class Attacks : MonoBehaviour
             Debug.Log("Attack type: Healing Meal");
             if (dG.magic >= 2)
             {
-                healingMealSource.PlayOneShot(healingMealClip); // Healing Meal SFX
                 dmg = 0;
                 heal = 5;
                 spfx = null;
@@ -254,15 +244,18 @@ public class Attacks : MonoBehaviour
 
             if (spfx != null)
             {
+                // xxxSource.PlayOneShot(xxxClip);
                 ApplySpFX(spfx, target.GetComponent<CombatantStats>());
             }
 
             if (dmg != 0)
             {
+                aquaSmackSource.PlayOneShot(aquaSmackClip); // Smack sound effect plays
                 CalculateDamage(dmg, dG, target.GetComponent<CombatantStats>());
             }
             else if (heal != 0)
             {
+                healingMealSource.PlayOneShot(healingMealClip); // Healing Meal SFX
                 HealMove(heal, target.GetComponent<CombatantStats>());
             }
             ResetAttacks();
@@ -273,7 +266,6 @@ public class Attacks : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Alpha1))
         {
-            normalPunchSource.PlayOneShot(normalPunchClip); // The normal punch sound 
             Debug.Log("Attack type: Punch");
             dmg = 5;
         }
@@ -283,7 +275,6 @@ public class Attacks : MonoBehaviour
             Debug.Log("Attack type: Flaming Punch");
             if (chef.magic >= 2)
             {
-                flamePunchSource.PlayOneShot(flamePunchClip); // Flame Punch sound effect plays
                 dmg = 8;
 
                 chef.magic -= 2;
@@ -299,12 +290,28 @@ public class Attacks : MonoBehaviour
             if (Input.GetKeyDown(KeyCode.Alpha8))
             {
                 target = enemies.ElementAt<GameObject>(0);
+                if (dmg < 8)
+                {
+                    normalPunchSource.PlayOneShot(normalPunchClip); // The normal punch sound 
+                }
+                else
+                {
+                    flamePunchSource.PlayOneShot(flamePunchClip); // Flame Punch sound effect plays  
+                }
             }
             if (Input.GetKeyDown(KeyCode.Alpha9))
             {
                 if (enemies.ElementAt<GameObject>(1) != null)
                 {
                     target = enemies.ElementAt<GameObject>(1);
+                    if (dmg < 8)
+                    {
+                        normalPunchSource.PlayOneShot(normalPunchClip); // The normal punch sound 
+                    }
+                    else
+                    {
+                        flamePunchSource.PlayOneShot(flamePunchClip); // Flame Punch sound effect plays  
+                    }
                 }
             }
             if (Input.GetKeyDown(KeyCode.Alpha0))
@@ -312,6 +319,14 @@ public class Attacks : MonoBehaviour
                 if (enemies.ElementAt<GameObject>(2) != null)
                 {
                     target = enemies.ElementAt<GameObject>(2);
+                    if (dmg < 8)
+                    {
+                        normalPunchSource.PlayOneShot(normalPunchClip); // The normal punch sound 
+                    }
+                    else
+                    {
+                        flamePunchSource.PlayOneShot(flamePunchClip); // Flame Punch sound effect plays  
+                    }
                 }
             }
 
@@ -381,7 +396,7 @@ public class Attacks : MonoBehaviour
                 Debug.Log("New choice is " + chooseAttack);
             }
         }
-        
+
         chooseTarget = Random.Range(0, allies.Count()); // Choose a target
         target = allies.ElementAt<GameObject>(chooseTarget);
         if (target != null)

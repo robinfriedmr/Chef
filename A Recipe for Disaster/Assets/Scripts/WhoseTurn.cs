@@ -4,7 +4,8 @@ using System.Linq;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class WhoseTurn : MonoBehaviour {
+public class WhoseTurn : MonoBehaviour
+{
 
     PersistentData _pd;
     BattleReady _br;
@@ -14,10 +15,14 @@ public class WhoseTurn : MonoBehaviour {
     public int indexNo;
     GameObject turnTaker;
 
+    IEnumerator endPause;
+    public bool battleEnded;
+
     private void Start()
     {
         _attacks = GetComponent<Attacks>();
         indexNo = 0;
+        battleEnded = false;
     }
 
     private void Update()
@@ -28,7 +33,7 @@ public class WhoseTurn : MonoBehaviour {
             // Check for defeat first
             if (_attacks.enemies.Count == 0 || _attacks.allies.Count == 0)
             {
-                EndBattle();
+                EndBattle(null);
             }
             else if (indexNo < order.Count)
             {
@@ -40,9 +45,10 @@ public class WhoseTurn : MonoBehaviour {
                 indexNo = 0;
             }
 
-        } else
+        }
+        else
         {
-                //Initialization
+            //Initialization
             _br = GameObject.FindGameObjectWithTag("Ally").GetComponent<BattleReady>();
             order = _br.order;
 
@@ -51,7 +57,7 @@ public class WhoseTurn : MonoBehaviour {
 
             indexNo = 0;
             battleStarted = true;
-        }   
+        }
     }
 
     void Fight(int i)
@@ -61,14 +67,17 @@ public class WhoseTurn : MonoBehaviour {
         if (turnTaker.tag == "Ally")
         {
             _attacks.AllyAttacks(turnTaker);
-        } else if (turnTaker.tag == "Enemy"){
+        }
+        else if (turnTaker.tag == "Enemy")
+        {
             _attacks.EnemyAttacks(turnTaker);
         }
     }
 
-    public void EndBattle() 
+    public IEnumerator EndPause(GameObject target)
     {
-        _attacks.ResetAttacks(); // Doesn't pause before doing all of these things.
+        battleEnded = false;
+        yield return new WaitForSeconds(1.0f);
 
         // Clear animations from remaining combatants.
         foreach (GameObject combatant in order)
@@ -88,11 +97,30 @@ public class WhoseTurn : MonoBehaviour {
         _attacks.enemies.Clear();
         _br.combatants.Clear();
 
+        battleEnded = true;
+
         // Reset readiness.
         _br.ready = true;
         battleStarted = false;
 
         Debug.Log("Battle ends.");
+
+        //_pd = FindObjectOfType<PersistentData>().GetComponent<PersistentData>();
+        //_pd.enemyList.Remove(_attacks.targetStats.gameObject);
+
+        // Kill the target.
+        if (target != null)
+        {
+            if (target.tag == "Ally")
+            {
+                target.SetActive(false); // Don't destroy allies
+            }
+            else
+            {
+                Destroy(target);
+            }
+            Debug.Log(target.name + " defeated!");
+        }
 
         // Reload overworld.
         _pd = FindObjectOfType<PersistentData>().GetComponent<PersistentData>();
@@ -100,5 +128,13 @@ public class WhoseTurn : MonoBehaviour {
 
         _br.RestoreOverworld();
         SceneManager.UnloadSceneAsync("ModeledBattleScene");
+
+    }
+
+    public void EndBattle(GameObject target)
+    {
+        // If the coroutine is running, don't do these things / If coroutine is done, do these things
+        endPause = EndPause(target);
+        StartCoroutine(endPause);
     }
 }
