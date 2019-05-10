@@ -34,6 +34,9 @@ public class Attacks : MonoBehaviour
     public AudioClip healingMealClip;
     public AudioSource healingMealSource;
 
+    public AudioClip OnTheGoClip;
+    public AudioSource OnTheGoSource;
+
     GameObject target; //Refers to the GameObject targeted by an attack
     public CombatantStats targetStats; //and this to the target's stats.
 
@@ -175,6 +178,7 @@ public class Attacks : MonoBehaviour
             Debug.Log("Attack type: Healing Meal");
             if (dG.magic >= 2)
             {
+                healingMealSource.PlayOneShot(healingMealClip); // Healing Meal SFX
                 dmg = 0;
                 heal = 5;
                 spfx = null;
@@ -193,6 +197,8 @@ public class Attacks : MonoBehaviour
             if (dG.magic >= 2)
             {
                 //SFX HERE ***
+                OnTheGoSource.PlayOneShot(OnTheGoClip); //On the Go Buff SFX
+                HealMove(heal, target.GetComponent<CombatantStats>());
                 dmg = 0;
                 heal = 0;
                 spfx = "2xD";
