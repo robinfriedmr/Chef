@@ -15,6 +15,8 @@ public class PowerSlide : MonoBehaviour
     public float MinMedDamageHeight;
     public float MinMinDamageHeight;
     public float MaxMinDamageHeight;
+    public CanvasGroup PowerBar;
+    public Transform transform;
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.Space))
@@ -55,12 +57,14 @@ public class PowerSlide : MonoBehaviour
         yield return new WaitForSeconds(1);
 
         //Game object will turn off
-        GameObject.Find("Slider").SetActive(false);
-        GameObject.Find("PowerBar").SetActive(false);
-        GameObject.Find("PowerBar (1)").SetActive(false);
-        GameObject.Find("PowerBar (2)").SetActive(false);
-        GameObject.Find("PowerBar (3)").SetActive(false);
+        ToggleCanvasGroupActive();
+        stopped = false;
 
+    }
+    public void ToggleCanvasGroupActive()
+    {
+        // This will set the canvas group to active if it is inactive OR set it to inactive if it is active
+        PowerBar.gameObject.SetActive(!PowerBar.gameObject.activeSelf);
     }
 
 
