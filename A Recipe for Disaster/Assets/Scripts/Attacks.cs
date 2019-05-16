@@ -42,10 +42,18 @@ public class Attacks : MonoBehaviour
     public IEnumerator attacking;
     IEnumerator advance;
 
+    public GameObject chefAttackMenu;
+    int chefAttackChoice;
+    public GameObject dGMoveMenu;
+    int dGMoveChoice;
+
     private void Start()
     {
         _wt = GetComponent<WhoseTurn>();
         moving = false;
+
+        chefAttackMenu.SetActive(false);
+        dGMoveMenu.SetActive(false);
     }
 
     IEnumerator Advance()
@@ -160,9 +168,23 @@ public class Attacks : MonoBehaviour
         }
     }
 
+    void Smack() {
+        dGMoveChoice = 1;
+    }
+
+    void HealingMeal() {
+        dGMoveChoice = 2;
+    }
+
+    void OnTheGo() {
+        dGMoveChoice = 3;
+    }
+
     void DeliveryMoves(CombatantStats dG)
     {
-        if (Input.GetKeyDown(KeyCode.Alpha1))
+        dGMoveMenu.SetActive(true);
+
+        if (dGMoveChoice == 1)
         {
             Debug.Log("Attack type: Smack");
             dmg = 3;
@@ -170,7 +192,7 @@ public class Attacks : MonoBehaviour
             spfx = null;
         }
 
-        if (Input.GetKeyDown(KeyCode.Alpha2))
+        if (dGMoveChoice == 2)
         {
             Debug.Log("Attack type: Healing Meal");
             if (dG.magic >= 2)
@@ -187,7 +209,7 @@ public class Attacks : MonoBehaviour
             }
         }
 
-        if (Input.GetKeyDown(KeyCode.Alpha3))
+        if (dGMoveChoice == 3)
         {
             Debug.Log("Attack type: On the Go");
             if (dG.magic >= 2)
@@ -262,15 +284,25 @@ public class Attacks : MonoBehaviour
         }
     }
 
+    void Punch() {
+        chefAttackChoice = 1;
+    }
+
+    void FlamingPunch() {
+        chefAttackChoice = 2;
+    }
+
     void ChefAttacks(CombatantStats chef)
     {
-        if (Input.GetKeyDown(KeyCode.Alpha1))
+        chefAttackMenu.SetActive(true);
+
+        if (chefAttackChoice == 1)
         {
             Debug.Log("Attack type: Punch");
             dmg = 5;
         }
 
-        if (Input.GetKeyDown(KeyCode.Alpha2))
+        if (chefAttackChoice == 2)
         {
             Debug.Log("Attack type: Flaming Punch");
             if (chef.magic >= 2)

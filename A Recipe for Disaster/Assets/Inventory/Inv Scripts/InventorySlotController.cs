@@ -18,10 +18,10 @@ public class InventorySlotController : MonoBehaviour {
 
     public void Update()
     {
-        updateInfo();
+        UpdateInfo();
     }
 
-    public void updateInfo()
+    public void UpdateInfo()
     {
         Text displayText = transform.Find("Text").GetComponent<Text>();
         Image displayImage = transform.Find("Image").GetComponent<Image>();

@@ -32,7 +32,7 @@ public class Inventory : MonoBehaviour {
                 slot.item = null;
             }
 
-            slot.updateInfo();
+            slot.UpdateInfo();
             index++;
         }
     }
