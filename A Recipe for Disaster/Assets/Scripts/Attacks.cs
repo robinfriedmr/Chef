@@ -154,10 +154,12 @@ public class Attacks : MonoBehaviour
         {
             if (ally.name == "PlayerCharacter")
             {
+                chefAttackMenu.SetActive(true);
                 ChefAttacks(ally.GetComponent<CombatantStats>());
             }
             else
             {
+                dGMoveMenu.SetActive(true);
                 DeliveryMoves(ally.GetComponent<CombatantStats>());
             }
 
@@ -168,15 +170,15 @@ public class Attacks : MonoBehaviour
         }
     }
 
-    void Smack() {
+    public void Smack() {
         dGMoveChoice = 1;
     }
 
-    void HealingMeal() {
+    public void HealingMeal() {
         dGMoveChoice = 2;
     }
 
-    void OnTheGo() {
+    public void OnTheGo() {
         dGMoveChoice = 3;
     }
 
@@ -214,7 +216,6 @@ public class Attacks : MonoBehaviour
             Debug.Log("Attack type: On the Go");
             if (dG.magic >= 2)
             {
-                //SFX HERE ***
                 dmg = 0;
                 heal = 0;
                 spfx = "2xD";
@@ -280,19 +281,20 @@ public class Attacks : MonoBehaviour
                 healingMealSource.PlayOneShot(healingMealClip); // Healing Meal SFX
                 HealMove(heal, target.GetComponent<CombatantStats>());
             }
+            dGMoveMenu.SetActive(false);
             ResetAttacks();
         }
     }
 
-    void Punch() {
+    public void Punch() {
         chefAttackChoice = 1;
     }
 
-    void FlamingPunch() {
+    public void FlamingPunch() {
         chefAttackChoice = 2;
     }
 
-    void ChefAttacks(CombatantStats chef)
+    public void ChefAttacks(CombatantStats chef)
     {
         chefAttackMenu.SetActive(true);
 
@@ -366,6 +368,7 @@ public class Attacks : MonoBehaviour
             {
                 Debug.Log("The target is " + target.name); //***
                 CalculateDamage(dmg, chef, target.GetComponent<CombatantStats>());
+                chefAttackMenu.SetActive(false);
                 ResetAttacks();
             }
         }
@@ -373,6 +376,8 @@ public class Attacks : MonoBehaviour
 
     public void ResetAttacks()
     {
+        dGMoveChoice = 0;
+        chefAttackChoice = 0;
         dmg = 0;
         heal = 0;
         spfx = null;
