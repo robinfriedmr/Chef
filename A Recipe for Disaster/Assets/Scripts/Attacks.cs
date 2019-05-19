@@ -119,8 +119,6 @@ public class Attacks : MonoBehaviour
         moving = true;
 
         target.HP += heal;
-        Debug.Log(target.gameObject.name + " is healed. New HP: " + target.HP); //***
-
         if (target.HP > target.maxHP)
         {
             target.HP = target.maxHP;
@@ -129,6 +127,7 @@ public class Attacks : MonoBehaviour
         {
             target.HP -= 0;
         }
+        Debug.Log(target.gameObject.name + " is healed. New HP: " + target.HP); //***
     }
 
     void ApplySpFX(string spfx, CombatantStats targetStats)
