@@ -46,6 +46,9 @@ public class Attacks : MonoBehaviour
     int chefAttackChoice;
     public GameObject dGMoveMenu;
     int dGMoveChoice;
+    bool moveSelected;
+    Ray ray;
+    RaycastHit hit;
 
     private void Start()
     {
@@ -61,6 +64,22 @@ public class Attacks : MonoBehaviour
         yield return new WaitForSeconds(1.0f);
         moving = false;
         _wt.indexNo++;
+    }
+
+    void TargetSelection()
+    {
+        if (Input.GetMouseButtonDown(0))
+        {
+            ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            if (Physics.Raycast(ray, out hit))
+            {
+                GameObject hitGO = hit.transform.gameObject;
+                if (_wt.order.Contains(hitGO))
+                {
+                    target = hitGO;
+                }
+            }
+        }
     }
 
     void CalculateDamage(int raw, CombatantStats attacker, CombatantStats targetStats)
@@ -170,15 +189,18 @@ public class Attacks : MonoBehaviour
         }
     }
 
-    public void Smack() {
+    public void Smack()
+    {
         dGMoveChoice = 1;
     }
 
-    public void HealingMeal() {
+    public void HealingMeal()
+    {
         dGMoveChoice = 2;
     }
 
-    public void OnTheGo() {
+    public void OnTheGo()
+    {
         dGMoveChoice = 3;
     }
 
@@ -186,15 +208,16 @@ public class Attacks : MonoBehaviour
     {
         dGMoveMenu.SetActive(true);
 
-        if (dGMoveChoice == 1)
+        if (dGMoveChoice == 1 && moveSelected == false)
         {
             Debug.Log("Attack type: Smack");
             dmg = 3;
             heal = 0;
             spfx = null;
+            moveSelected = true;
         }
 
-        if (dGMoveChoice == 2)
+        if (dGMoveChoice == 2 && moveSelected == false)
         {
             Debug.Log("Attack type: Healing Meal");
             if (dG.magic >= 2)
@@ -204,6 +227,7 @@ public class Attacks : MonoBehaviour
                 spfx = null;
 
                 dG.magic -= 2;
+                moveSelected = true;
             }
             else
             {
@@ -211,7 +235,7 @@ public class Attacks : MonoBehaviour
             }
         }
 
-        if (dGMoveChoice == 3)
+        if (dGMoveChoice == 3 && moveSelected == false)
         {
             Debug.Log("Attack type: On the Go");
             if (dG.magic >= 2)
@@ -221,6 +245,7 @@ public class Attacks : MonoBehaviour
                 spfx = "2xD";
 
                 dG.magic -= 2;
+                moveSelected = true;
             }
             else
             {
@@ -230,35 +255,7 @@ public class Attacks : MonoBehaviour
 
         if (dmg != 0 || heal != 0 || spfx != null)
         {
-            // Ally targets
-            if (Input.GetKeyDown(KeyCode.Alpha5))
-            {
-                target = allies.ElementAt<GameObject>(0);
-            }
-            if (Input.GetKeyDown(KeyCode.Alpha6))
-            {
-                target = allies.ElementAt<GameObject>(1);
-            }
-
-            // Enemy targets
-            if (Input.GetKeyDown(KeyCode.Alpha8))
-            {
-                target = enemies.ElementAt<GameObject>(0);
-            }
-            if (Input.GetKeyDown(KeyCode.Alpha9))
-            {
-                if (enemies.ElementAt<GameObject>(1) != null)
-                {
-                    target = enemies.ElementAt<GameObject>(1);
-                }
-            }
-            if (Input.GetKeyDown(KeyCode.Alpha0))
-            {
-                if (enemies.ElementAt<GameObject>(2) != null)
-                {
-                    target = enemies.ElementAt<GameObject>(2);
-                }
-            }
+            TargetSelection();
         }
 
         if (target != null)
@@ -286,11 +283,13 @@ public class Attacks : MonoBehaviour
         }
     }
 
-    public void Punch() {
+    public void Punch()
+    {
         chefAttackChoice = 1;
     }
 
-    public void FlamingPunch() {
+    public void FlamingPunch()
+    {
         chefAttackChoice = 2;
     }
 
@@ -298,13 +297,15 @@ public class Attacks : MonoBehaviour
     {
         chefAttackMenu.SetActive(true);
 
-        if (chefAttackChoice == 1)
+        if (chefAttackChoice == 1 && moveSelected == false)
         {
             Debug.Log("Attack type: Punch");
             dmg = 5;
+
+            moveSelected = true;
         }
 
-        if (chefAttackChoice == 2)
+        if (chefAttackChoice == 2 && moveSelected == false)
         {
             Debug.Log("Attack type: Flaming Punch");
             if (chef.magic >= 2)
@@ -312,6 +313,7 @@ public class Attacks : MonoBehaviour
                 dmg = 8;
 
                 chef.magic -= 2;
+                moveSelected = true;
             }
             else
             {
@@ -321,9 +323,12 @@ public class Attacks : MonoBehaviour
 
         if (dmg != 0)
         {
-            if (Input.GetKeyDown(KeyCode.Alpha8))
+            TargetSelection();
+
+            if (target != null)
             {
-                target = enemies.ElementAt<GameObject>(0);
+                Debug.Log("The target is " + target.name); //***
+
                 if (dmg < 8)
                 {
                     normalPunchSource.PlayOneShot(normalPunchClip); // The normal punch sound 
@@ -332,41 +337,7 @@ public class Attacks : MonoBehaviour
                 {
                     flamePunchSource.PlayOneShot(flamePunchClip); // Flame Punch sound effect plays  
                 }
-            }
-            if (Input.GetKeyDown(KeyCode.Alpha9))
-            {
-                if (enemies.ElementAt<GameObject>(1) != null)
-                {
-                    target = enemies.ElementAt<GameObject>(1);
-                    if (dmg < 8)
-                    {
-                        normalPunchSource.PlayOneShot(normalPunchClip); // The normal punch sound 
-                    }
-                    else
-                    {
-                        flamePunchSource.PlayOneShot(flamePunchClip); // Flame Punch sound effect plays  
-                    }
-                }
-            }
-            if (Input.GetKeyDown(KeyCode.Alpha0))
-            {
-                if (enemies.ElementAt<GameObject>(2) != null)
-                {
-                    target = enemies.ElementAt<GameObject>(2);
-                    if (dmg < 8)
-                    {
-                        normalPunchSource.PlayOneShot(normalPunchClip); // The normal punch sound 
-                    }
-                    else
-                    {
-                        flamePunchSource.PlayOneShot(flamePunchClip); // Flame Punch sound effect plays  
-                    }
-                }
-            }
 
-            if (target != null)
-            {
-                Debug.Log("The target is " + target.name); //***
                 CalculateDamage(dmg, chef, target.GetComponent<CombatantStats>());
                 chefAttackMenu.SetActive(false);
                 ResetAttacks();
@@ -378,6 +349,7 @@ public class Attacks : MonoBehaviour
     {
         dGMoveChoice = 0;
         chefAttackChoice = 0;
+        moveSelected = false;
         dmg = 0;
         heal = 0;
         spfx = null;
