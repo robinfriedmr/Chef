@@ -10,6 +10,8 @@ public class Attacks : MonoBehaviour
     public PersistentData _pd;
     WhoseTurn _wt; //WhoseTurn needs indexNo++ after a turn.
 
+    TurnTakerStats[] turnTakerStats;
+
     public List<GameObject> enemies; //Public list populated by BattleReady.
     public List<GameObject> allies; //Public list populated by BattleReady.
 
@@ -69,6 +71,8 @@ public class Attacks : MonoBehaviour
         dGMoveMenu.SetActive(false);
 
         moveOffset = new Vector3(0.75f, 0, -0.1f);
+
+        turnTakerStats = Object.FindObjectsOfType<TurnTakerStats>();
     }
 
     IEnumerator Advance()
@@ -76,6 +80,15 @@ public class Attacks : MonoBehaviour
         yield return new WaitForSeconds(1.5f);
         Destroy(GameObject.FindGameObjectWithTag("Move"));
         moving = false;
+
+        //HELLO
+        /*
+        foreach (TurnTakerStats stats in turnTakerStats)
+        {
+            stats.UpdateDisplay();
+        }
+        */
+
         _wt.indexNo++;
     }
 
@@ -295,8 +308,8 @@ public class Attacks : MonoBehaviour
                 GameObject healMeal = Instantiate(bP, (dG.transform.position + moveOffset), Quaternion.identity);
                 healMeal.GetComponent<Animator>().SetBool("openNow", true);
             }
-            dGMoveMenu.SetActive(false);
             ResetAttacks();
+            dGMoveMenu.SetActive(false);
         }
     }
 

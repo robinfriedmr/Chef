@@ -11,7 +11,7 @@ public class InventorySlotController : MonoBehaviour {
 
     private void Start()
     {
-        inventory = GameObject.Find("Inventory Canvas").GetComponent<Inventory>();
+        inventory = GameObject.Find("Canvas").GetComponent<Inventory>();
         player = GameObject.Find("PlayerCharacter");
         // Is there a better way to do this? ^
     }
@@ -49,8 +49,13 @@ public class InventorySlotController : MonoBehaviour {
             {
                 item.target = player;
                 Heal healing = item as Heal;
-                healing.RestoreHealth();
-                Debug.Log("New HP is: " + healing.targetStats.HP);
+                if (item.itemName == "Mana Potion") {
+                    healing.RestoreMana();
+                    Debug.Log("New Mana is: " + healing.targetStats.magic);
+                } else {
+                    healing.RestoreHealth();
+                    Debug.Log("New HP is: " + healing.targetStats.HP);
+                }
             }
 
             inventory.Remove(item);

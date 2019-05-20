@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[CreateAssetMenu (fileName = "new Heal", menuName = "Item/Heal")]
 public class Heal : Item
 {
     public int restore = 5;
@@ -15,5 +16,11 @@ public class Heal : Item
         {
             targetStats.HP = targetStats.maxHP;
         }
+    }
+
+    public void RestoreMana()
+    {
+        targetStats = target.GetComponent<CombatantStats>();
+        targetStats.magic += restore;
     }
 }

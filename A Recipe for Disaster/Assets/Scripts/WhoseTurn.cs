@@ -92,6 +92,8 @@ public class WhoseTurn : MonoBehaviour
         }
         Destroy(GameObject.FindGameObjectWithTag("Move"));
 
+
+
         // Clear lists.
         order.Clear();
         _attacks.allies.Clear();
