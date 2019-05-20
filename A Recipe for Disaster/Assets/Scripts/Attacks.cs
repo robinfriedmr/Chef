@@ -34,6 +34,9 @@ public class Attacks : MonoBehaviour
     public AudioClip healingMealClip;
     public AudioSource healingMealSource;
 
+    public AudioClip spfxClip;
+    public AudioSource spfxSource;
+
     GameObject target; //Refers to the GameObject targeted by an attack
     public CombatantStats targetStats; //and this to the target's stats.
 
@@ -276,7 +279,7 @@ public class Attacks : MonoBehaviour
 
             if (spfx != null)
             {
-                // xxxSource.PlayOneShot(xxxClip);
+                spfxSource.PlayOneShot(spfxClip); // Buff: On the Go SFX plays
                 ApplySpFX(spfx, target.GetComponent<CombatantStats>());
             }
 
