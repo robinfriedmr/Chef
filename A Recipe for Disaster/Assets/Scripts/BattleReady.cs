@@ -4,7 +4,8 @@ using System.Linq;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class BattleReady : MonoBehaviour {
+public class BattleReady : MonoBehaviour
+{
 
     public PersistentData _pd;
 
@@ -49,8 +50,9 @@ public class BattleReady : MonoBehaviour {
     }
 
     void OnCollisionEnter(Collision collision)
-	{
-        if (ready == true) {
+    {
+        if (ready == true)
+        {
             if (collision.gameObject.tag == "Enemy" && this.gameObject.tag == "Ally")
             {
                 PrepareForBattle(collision);
@@ -58,14 +60,15 @@ public class BattleReady : MonoBehaviour {
         }
     }
 
-    void PrepareForBattle (Collision collision) {
-        enemyEncounter = collision.gameObject;  
+    void PrepareForBattle(Collision collision)
+    {
+        enemyEncounter = collision.gameObject;
 
         // Set everyone (except the enemyEncounter) as inactive via PersistentData script.
         _pd.BeforeSwitch(enemyEncounter);
 
         // Add GameObjects to the combatants list, then order it.
-        OrderTurns(); 
+        OrderTurns();
 
         // Create separate lists from "combatants" for enemies and allies.
         enemies = order.FindAll(combatant => combatant.tag.Equals("Enemy"));
@@ -97,35 +100,40 @@ public class BattleReady : MonoBehaviour {
         ready = false; //...we don't need to be ready to enter it.)
     }
 
-    void OrderTurns() {
+    void OrderTurns()
+    {
         //Add GameObjects to combatants list.
         combatants.Add(this.gameObject);
-        if (partner != null) {
+        if (partner != null)
+        {
             Debug.Log("partner is not null; adding gameObject to list.");
             combatants.Add(partner);
         }
         combatants.Add(enemyEncounter);
-    
+
         attackOrder = from combatant in combatants
-                  orderby combatant.GetComponent<CombatantStats>().speed descending
-                  select combatant;
+                      orderby combatant.GetComponent<CombatantStats>().speed descending
+                      select combatant;
         order = attackOrder.ToList(); // IOrderedEnumerator --> List
-        
+
         for (var i = 0; i < order.Count; i++) //***
         {
-            Debug.Log("The combatant is " + order.ElementAt<GameObject>(i).name + 
+            Debug.Log("The combatant is " + order.ElementAt<GameObject>(i).name +
                 ", and its speed is " + order.ElementAt<GameObject>(i).GetComponent<CombatantStats>().speed);
         } //*** 
     }
 
-    void BattlePosition (GameObject enemy) {
+    void BattlePosition(GameObject enemy)
+    {
         // Place Player, Partner, Enemy
         this.transform.position = battlingPlayer;
         partner.transform.position = battlingPartner;
         if (enemy.name.Contains("Carrot")) { enemy.transform.position = battlingC; }
         else if (enemy.name.Contains("Beet")) { enemy.transform.position = battlingB; }
-        else if (enemy.name.Contains("onion")) { enemy.transform.position = battlingO; }
-        else { enemy.transform.position = battlingBoss;
+        else if (enemy.name.Contains("Onion")) { enemy.transform.position = battlingO; }
+        else
+        {
+            enemy.transform.position = battlingBoss;
             Quaternion newRota = new Quaternion(0, 0, 0, 1);
             enemy.transform.rotation = newRota;
         }
@@ -152,11 +160,13 @@ public class BattleReady : MonoBehaviour {
         }
     }
 
-    public void RestoreOverworld () {
+    public void RestoreOverworld()
+    {
         // Place characters on map.
         this.transform.position = overworldPos + standBack;
         partner.transform.position = overworldPos + new Vector3(-.75f, 0f, -.75f);
-        if (enemyEncounter != null) {
+        if (enemyEncounter != null)
+        {
             enemyEncounter.transform.position = monPos;
         }
 

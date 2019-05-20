@@ -501,7 +501,7 @@ public class Attacks : MonoBehaviour
         }
     }
 
-    void BossAttacks(CombatantStats) {
+    void BossAttacks(CombatantStats attacker) {
         chooseAttack = Random.Range(0, 1); // choose an attack
         if (chooseAttack == 0)
         {
