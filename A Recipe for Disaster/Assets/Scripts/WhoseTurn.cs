@@ -77,7 +77,7 @@ public class WhoseTurn : MonoBehaviour
     public IEnumerator EndPause(GameObject target)
     {
         battleEnded = false;
-        yield return new WaitForSeconds(1.0f);
+        yield return new WaitForSeconds(1.5f);
 
         // Clear animations from remaining combatants.
         foreach (GameObject combatant in order)
@@ -90,6 +90,7 @@ public class WhoseTurn : MonoBehaviour
             stats.dmgBuff = 1;
             stats.defDebuff = 0;
         }
+        Destroy(GameObject.FindGameObjectWithTag("Move"));
 
         // Clear lists.
         order.Clear();
@@ -104,9 +105,6 @@ public class WhoseTurn : MonoBehaviour
         battleStarted = false;
 
         Debug.Log("Battle ends.");
-
-        //_pd = FindObjectOfType<PersistentData>().GetComponent<PersistentData>();
-        //_pd.enemyList.Remove(_attacks.targetStats.gameObject);
 
         // Kill the target.
         if (target != null)
@@ -133,7 +131,6 @@ public class WhoseTurn : MonoBehaviour
 
     public void EndBattle(GameObject target)
     {
-        // If the coroutine is running, don't do these things / If coroutine is done, do these things
         endPause = EndPause(target);
         StartCoroutine(endPause);
     }

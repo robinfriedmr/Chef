@@ -1893,6 +1893,9 @@ MonoBehaviour:
   targetStats: {fileID: 0}
   chefAttackMenu: {fileID: 110862692}
   dGMoveMenu: {fileID: 805391499}
+  bP: {fileID: 1403967199514330, guid: d6ba7b93e2cc97149975fdc65c9b6991, type: 2}
+  punch: {fileID: 1073358363480812, guid: dc988dd0edbb6fe43a20e2d9af044f6a, type: 2}
+  fB: {fileID: 1630783969033826, guid: b01d2193ab3ee1849a16db6efdb8c8e9, type: 2}
 --- !u!4 &320465157
 Transform:
   m_ObjectHideFlags: 0

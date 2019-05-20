@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class AnimatedBattle : MonoBehaviour {
 
-    public float aniTime = 1.0f;
+    public float aniTime = 1.5f;
     Animator controller;
     SpriteRenderer _sr;
 

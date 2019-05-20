@@ -40,6 +40,7 @@ public class Attacks : MonoBehaviour
     bool moving;
     public IEnumerator hurt;
     public IEnumerator attacking;
+    public IEnumerator healed;
     IEnumerator advance;
 
     public GameObject chefAttackMenu;
@@ -50,6 +51,11 @@ public class Attacks : MonoBehaviour
     Ray ray;
     RaycastHit hit;
 
+    Vector3 moveOffset;
+    public GameObject bP;
+    public GameObject punch;
+    public GameObject fB;
+
     private void Start()
     {
         _wt = GetComponent<WhoseTurn>();
@@ -57,11 +63,14 @@ public class Attacks : MonoBehaviour
 
         chefAttackMenu.SetActive(false);
         dGMoveMenu.SetActive(false);
+
+        moveOffset = new Vector3(0.5f, 0, -0.1f);
     }
 
     IEnumerator Advance()
     {
-        yield return new WaitForSeconds(1.0f);
+        yield return new WaitForSeconds(1.5f);
+        Destroy(GameObject.FindGameObjectWithTag("Move"));
         moving = false;
         _wt.indexNo++;
     }
@@ -117,6 +126,9 @@ public class Attacks : MonoBehaviour
     void HealMove(int heal, CombatantStats target)
     {
         moving = true;
+
+        healed = target.gameObject.GetComponent<AnimatedBattle>().Healed();
+        StartCoroutine(healed);
 
         target.HP += heal;
         if (target.HP > target.maxHP)
@@ -276,6 +288,8 @@ public class Attacks : MonoBehaviour
             {
                 healingMealSource.PlayOneShot(healingMealClip); // Healing Meal SFX
                 HealMove(heal, target.GetComponent<CombatantStats>());
+                GameObject healMeal = Instantiate(bP, (dG.transform.position + moveOffset), Quaternion.identity);
+                healMeal.GetComponent<Animator>().SetBool("openNow", true);
             }
             dGMoveMenu.SetActive(false);
             ResetAttacks();
@@ -330,11 +344,15 @@ public class Attacks : MonoBehaviour
 
                 if (dmg < 8)
                 {
-                    normalPunchSource.PlayOneShot(normalPunchClip); // The normal punch sound 
+                    normalPunchSource.PlayOneShot(normalPunchClip); // The normal punch sound
+                    GameObject flyingPunch = Instantiate(punch, (chef.transform.position + moveOffset), Quaternion.identity);
+                    flyingPunch.GetComponent<Animator>().SetBool("impact", false);
+
                 }
                 else
                 {
                     flamePunchSource.PlayOneShot(flamePunchClip); // Flame Punch sound effect plays  
+                    GameObject flame = Instantiate(fB, (chef.transform.position + moveOffset), Quaternion.identity);
                 }
 
                 CalculateDamage(dmg, chef, target.GetComponent<CombatantStats>());
@@ -353,6 +371,7 @@ public class Attacks : MonoBehaviour
         heal = 0;
         spfx = null;
         target = null;
+
         advance = Advance();
         StartCoroutine(advance);
     }

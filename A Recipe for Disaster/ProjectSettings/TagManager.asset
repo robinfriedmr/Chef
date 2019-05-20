@@ -6,6 +6,8 @@ TagManager:
   tags:
   - Enemy
   - Ally
+  - PowerBar
+  - Move
   layers:
   - Default
   - TransparentFX
