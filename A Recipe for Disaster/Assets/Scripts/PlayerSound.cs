@@ -7,10 +7,20 @@ public class PlayerSound : MonoBehaviour {
     public AudioClip footStep;
     public AudioSource audioS;
 
-	void Step ()
+    public AudioClip hurt;
+    public AudioSource audioS2;
+
+    void Step ()
     {
         audioS.volume = Random.Range(0.8f, 1f); // experiment if desired
         audioS.pitch = Random.Range(1.1f, 1.4f); // experiment if desired
         audioS.PlayOneShot(footStep);
+    }
+
+    void ChefHurt ()
+    {
+        audioS2.volume = Random.Range(0.8f, 1f); // experiment if desired
+        audioS2.pitch = Random.Range(1.1f, 1.4f); // experiment if desired
+        audioS2.PlayOneShot(hurt);
     }
 }
