@@ -188,9 +188,11 @@ public class Attacks : MonoBehaviour
             {
                 OnionAttacks(enemy.GetComponent<CombatantStats>());
             }
-            else
+            else if (enemy.name.Contains("MandrakeBoss"))
             {
-                Debug.Log("Enemy name not understood.");
+                BossAttacks(enemy.GetComponent<CombatantStats>());
+            } else {
+                Debug.Log("What");
             }
         }
     }
@@ -496,6 +498,15 @@ public class Attacks : MonoBehaviour
             }
             CalculateDamage(dmg, attacker, targetStats);
             ResetAttacks();
+        }
+    }
+
+    void BossAttacks(CombatantStats) {
+        chooseAttack = Random.Range(0, 1); // choose an attack
+        if (chooseAttack == 0)
+        {
+            Debug.Log("Attack type: Smack");
+            dmg = 3;
         }
     }
 }

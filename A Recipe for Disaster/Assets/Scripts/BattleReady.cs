@@ -32,6 +32,7 @@ public class BattleReady : MonoBehaviour {
     public Vector3 battlingC; // Carrot
     public Vector3 battlingB; // Beet
     public Vector3 battlingO; // Onion
+    public Vector3 battlingBoss; // The Mandrake
 
     public Camera overworldCam;
     public Camera battleCam;
@@ -122,8 +123,12 @@ public class BattleReady : MonoBehaviour {
         this.transform.position = battlingPlayer;
         partner.transform.position = battlingPartner;
         if (enemy.name.Contains("Carrot")) { enemy.transform.position = battlingC; }
-        else if (enemy.name.Contains("Beet")) {enemy.transform.position = battlingB;}
-        else { enemy.transform.position = battlingO; }
+        else if (enemy.name.Contains("Beet")) { enemy.transform.position = battlingB; }
+        else if (enemy.name.Contains("onion")) { enemy.transform.position = battlingO; }
+        else { enemy.transform.position = battlingBoss;
+            Quaternion newRota = new Quaternion(0, 0, 0, 1);
+            enemy.transform.rotation = newRota;
+        }
 
         myBody.constraints = RigidbodyConstraints.FreezeAll; //*** (The player totally rocketed off into space without this.)
         myAnimator.SetBool("walking", false);
