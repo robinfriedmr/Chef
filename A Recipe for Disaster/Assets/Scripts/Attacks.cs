@@ -55,6 +55,7 @@ public class Attacks : MonoBehaviour
     public GameObject bP;
     public GameObject punch;
     public GameObject fB;
+    public GameObject stinky;
 
     private void Start()
     {
@@ -64,7 +65,7 @@ public class Attacks : MonoBehaviour
         chefAttackMenu.SetActive(false);
         dGMoveMenu.SetActive(false);
 
-        moveOffset = new Vector3(0.5f, 0, -0.1f);
+        moveOffset = new Vector3(0.75f, 0, -0.1f);
     }
 
     IEnumerator Advance()
@@ -380,11 +381,8 @@ public class Attacks : MonoBehaviour
     {
         Debug.Log("The beet attacks!");
 
-        if (chooseAttack == 1)
-        {
-            Debug.Log("Attack type: Bash");
-            dmg = 4;
-        }
+        Debug.Log("Attack type: Bash");
+        dmg = 4;
 
         chooseTarget = Random.Range(0, allies.Count()); // Choose a target
         target = allies.ElementAt<GameObject>(chooseTarget);
@@ -400,14 +398,14 @@ public class Attacks : MonoBehaviour
     {
         Debug.Log("The carrot attacks!");
 
-        chooseAttack = Random.Range(1, 2); // choose an attack
+        chooseAttack = Random.Range(0, 2); // choose an attack
 
-        if (chooseAttack == 1)
+        if (chooseAttack == 0)
         {
             Debug.Log("Attack type: Drill");
             dmg = 3;
         }
-        else if (chooseAttack == 2)
+        else if (chooseAttack == 1)
         {
             Debug.Log("Attack type: Deadly Drill");
             if (attacker.magic >= 2)
@@ -419,7 +417,7 @@ public class Attacks : MonoBehaviour
             else
             {
                 Debug.Log("Not enough magic left!");
-                chooseAttack = 1;
+                chooseAttack = 0;
                 Debug.Log("New choice is " + chooseAttack);
             }
         }
@@ -438,13 +436,13 @@ public class Attacks : MonoBehaviour
     {
         Debug.Log("The onion attacks!");
 
-        chooseAttack = Random.Range(1, 2); // choose an attack
-        if (chooseAttack == 1)
+        chooseAttack = Random.Range(0, 2); // choose an attack
+        if (chooseAttack == 0)
         {
             Debug.Log("Attack type: Smack");
             dmg = 3;
         }
-        else if (chooseAttack == 2)
+        else if (chooseAttack == 1)
         {
             Debug.Log("Attack type: Peel");
             if (attacker.magic >= 2)
@@ -463,7 +461,7 @@ public class Attacks : MonoBehaviour
             else
             {
                 Debug.Log("Not enough magic left!");
-                chooseAttack = 1;
+                chooseAttack = 0;
                 Debug.Log("New choice is " + chooseAttack);
             }
         }
@@ -478,6 +476,7 @@ public class Attacks : MonoBehaviour
             {
                 Debug.Log("Applying SpFX");
                 ApplySpFX(spfx, targetStats);
+                GameObject stinkCloud = Instantiate(stinky, attacker.transform.position - moveOffset, Quaternion.identity);
             }
             CalculateDamage(dmg, attacker, targetStats);
             ResetAttacks();
