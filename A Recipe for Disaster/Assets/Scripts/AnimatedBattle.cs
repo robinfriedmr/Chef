@@ -26,6 +26,13 @@ public class AnimatedBattle : MonoBehaviour {
         Debug.Log("Hurt has run."); //***
     }
 
+    public IEnumerator Healed()
+    {
+        _sr.color = new Vector4(0.7f, 1f, 0.7f, 1f);
+        yield return new WaitForSeconds(aniTime);
+        _sr.color = new Vector4(1, 1, 1, 1);
+    }
+
     public IEnumerator Attacking()
     {
         controller.SetBool("attacking", true);
