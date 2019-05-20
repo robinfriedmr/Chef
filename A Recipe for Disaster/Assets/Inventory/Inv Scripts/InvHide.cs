@@ -20,9 +20,10 @@ public class InvHide : MonoBehaviour {
         }
         if (hidden)
             Hide();
+       // audioSource.PlayOneShot(CloseInventory);
         if (!hidden)
             Show();
-
+     //   audioSource.PlayOneShot(OpenInventory);
     }
 
 
@@ -35,6 +36,6 @@ public class InvHide : MonoBehaviour {
     void Show()
     {
         Inv.alpha = 1f;
-        Inv.blocksRaycasts = true;
+        Inv.blocksRaycasts = true;       
     }
 }

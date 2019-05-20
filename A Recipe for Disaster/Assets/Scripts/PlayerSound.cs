@@ -19,8 +19,6 @@ public class PlayerSound : MonoBehaviour {
 
     void ChefHurt ()
     {
-        audioS2.volume = Random.Range(0.8f, 1f); // experiment if desired
-        audioS2.pitch = Random.Range(1.1f, 1.4f); // experiment if desired
         audioS2.PlayOneShot(hurt);
     }
 }
